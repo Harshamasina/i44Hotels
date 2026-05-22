@@ -20,7 +20,7 @@ export function SiteFooter() {
                             className="h-16 w-auto"
                         />
                         <p className="text-sand-300 mt-4 text-sm">
-                            Comfortable, convenient stays along Interstate&nbsp;44 — for
+                            Comfortable, convenient stays along Interstate&nbsp;44 for
                             families, business travelers, and Fort Leonard Wood guests.
                         </p>
                     </div>

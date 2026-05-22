@@ -30,7 +30,7 @@ export default function HomePage() {
                 </a>
             </div>
             <p className="text-sand-500 mt-16 text-sm">
-                Site under construction — foundation in place (Phase 0).
+                Site under construction. Foundation in place (Phase 0).
             </p>
         </section>
     );

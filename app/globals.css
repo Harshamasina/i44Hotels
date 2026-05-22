@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 /*
- * I44 Hotels design tokens — single source of truth (CLAUDE.md §7).
+ * I44 Hotels design tokens - single source of truth (CLAUDE.md §7).
  * Tailwind v4 reads @theme to generate utilities (bg-navy-800, text-gold-500, etc.).
- * Never hard-code hex in components — use these tokens.
+ * Never hard-code hex in components - use these tokens.
  */
 @theme {
-    /* Brand fonts — wired to next/font CSS variables in app/layout.tsx */
+    /* Brand fonts - wired to next/font CSS variables in app/layout.tsx */
     --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
     --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 
-    /* Navy — primary (text, footer, trust) */
+    /* Navy - primary (text, footer, trust) */
     --color-navy-50: #eef2f8;
     --color-navy-100: #d5deec;
     --color-navy-200: #aec0da;
@@ -23,7 +23,7 @@
     --color-navy-900: #081838;
     --color-navy-950: #050f22;
 
-    /* Gold / bronze — accent ONLY (CTA, highlights, icons, dividers) */
+    /* Gold / bronze - accent ONLY (CTA, highlights, icons, dividers) */
     --color-gold-50: #fbf6ec;
     --color-gold-100: #f4e8cf;
     --color-gold-200: #e9d2a4;
@@ -35,7 +35,7 @@
     --color-gold-800: #6e4e29;
     --color-gold-900: #543c20;
 
-    /* Warm neutral — surfaces, text, borders (taupe, NOT cold gray) */
+    /* Warm neutral - surfaces, text, borders (taupe, NOT cold gray) */
     --color-sand-50: #fcfaf5;
     --color-sand-100: #f8efe0;
     --color-sand-200: #efe3ce;
@@ -47,7 +47,7 @@
     --color-sand-800: #2b2b2b;
     --color-sand-900: #1c1a16;
 
-    /* Semantic — muted, never neon (mainly form validation) */
+    /* Semantic - muted, never neon (mainly form validation) */
     --color-success: #4f7a5b;
     --color-success-bg: #e7f0e9;
     --color-error: #b23a36;
@@ -70,7 +70,7 @@ body {
     font-family: var(--font-sans);
 }
 
-/* Headings in the display serif, navy (large sizes only — see CLAUDE.md §7) */
+/* Headings in the display serif, navy (large sizes only - see CLAUDE.md §7) */
 h1,
 h2,
 h3 {

@@ -21,11 +21,11 @@ const hanken = Hanken_Grotesk({
 export const metadata: Metadata = {
     metadataBase: new URL("https://i44hotels.com"),
     title: {
-        default: "I44 Hotels — Comfortable Stays Along I-44",
+        default: "I44 Hotels | Comfortable Stays Along I-44",
         template: "%s | I44 Hotels",
     },
     description:
-        "Comfortable, convenient hotels along Interstate 44 — welcoming families, business travelers, and Fort Leonard Wood graduation guests. Book direct with I44 Hotels.",
+        "Comfortable, convenient hotels along Interstate 44 for families, business travelers, and Fort Leonard Wood graduation guests. Book direct with I44 Hotels.",
     icons: {
         icon: [
             { url: "/favicon.ico", sizes: "any" },

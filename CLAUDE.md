@@ -215,7 +215,8 @@ Warning #C08A2D / bg #FAF0DA   Info  #3A6098 / bg #E7EEF7
 
 ## 11. Conventions (apply once build starts)
 
-- **Indentation: 4 spaces, no tabs** — across all files (TS/TSX, CSS, JSON, MD). Enforced via `.editorconfig` (`indent_style = space`, `indent_size = 4`) + Prettier (`tabWidth: 4`). Set this up in Phase 0.
+- **Indentation: 4 spaces, no tabs** across all files (TS/TSX, CSS, JSON, MD). Enforced via `.editorconfig` (`indent_style = space`, `indent_size = 4`) + Prettier (`tabWidth: 4`). Set this up in Phase 0.
+- **No em dashes (—) or en dashes (–) in code or site copy** — this includes comments, JSX text, string literals, metadata, and all user-facing content. Use hyphens, commas, colons, or separate sentences instead. (Does not retroactively apply to the existing planning `.md` docs, but applies to anything written into the app.)
 - TypeScript everywhere; no `any` for content models.
 - Design tokens in Tailwind config — never hard-code hex values in components.
 - Reuse shared components (Button, Card, SectionHeading, Nav, Footer, BookingBar). One styling system only.
