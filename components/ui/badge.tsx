@@ -40,9 +40,11 @@ export function TierBadge({ tier }: { tier: Tier }) {
 }
 
 /** "Coming soon" pill for not-yet-open properties. */
-export function ComingSoonBadge() {
+export function ComingSoonBadge({ className }: { className?: string }) {
     return (
-        <Badge className="bg-gold-100 text-gold-700 tracking-wide uppercase">
+        <Badge
+            className={cn("bg-gold-100 text-gold-700 tracking-wide uppercase", className)}
+        >
             Coming soon
         </Badge>
     );

@@ -91,10 +91,23 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-336-5556",
         nearFLW: true,
+        // TODO: verify exact coords (geocoder could not resolve 14125 Hwy Z).
+        address: {
+            street: "14125 State Hwy Z",
+            zip: "65584",
+            lat: 37.829,
+            lng: -92.142,
+        },
         // TODO: confirm amenities from the Wyndham property page.
         amenities: ["breakfast", "coffee", "wifi", "parking", "petFriendly"],
         roomTypes: [], // TODO: add room types
-        photos: [], // TODO: add photography
+        photos: [
+            {
+                category: "exterior",
+                src: "/brand/flags/days_inn.avif",
+                alt: "Days Inn by Wyndham St. Robert exterior at dusk",
+            },
+        ],
     },
     {
         slug: "comfort-inn-st-robert",
@@ -108,6 +121,12 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-336-3553",
         nearFLW: true,
+        address: {
+            street: "103 Comfort Inn Drive",
+            zip: "65584",
+            lat: 37.823965,
+            lng: -92.148186,
+        },
         // TODO: confirm amenities from the Choice property page.
         amenities: [
             "breakfast",
@@ -119,7 +138,13 @@ export const properties: Property[] = [
             "petFriendly",
         ],
         roomTypes: [], // TODO
-        photos: [], // TODO
+        photos: [
+            {
+                category: "exterior",
+                src: "/brand/flags/comfort_inn_st_robert.webp",
+                alt: "Comfort Inn St. Robert / Fort Leonard Wood exterior",
+            },
+        ],
     },
     {
         slug: "comfort-inn-sullivan",
@@ -133,6 +158,12 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-468-7800",
         nearFLW: false,
+        address: {
+            street: "736 South Service Road",
+            zip: "63080",
+            lat: 38.2096659,
+            lng: -91.1725207,
+        },
         // TODO: confirm amenities from the Choice property page.
         amenities: [
             "breakfast",
@@ -144,7 +175,13 @@ export const properties: Property[] = [
             "petFriendly",
         ],
         roomTypes: [], // TODO
-        photos: [], // TODO
+        photos: [
+            {
+                category: "exterior",
+                src: "/brand/flags/comfort_inn_sulli.jpeg",
+                alt: "Comfort Inn Sullivan exterior at sunset",
+            },
+        ],
     },
     {
         slug: "hyatt-select-st-robert",
@@ -157,10 +194,22 @@ export const properties: Property[] = [
         city: "St. Robert",
         state: "MO",
         nearFLW: true,
+        address: {
+            street: "107 McKinnon St",
+            zip: "65584",
+            lat: 37.8258176,
+            lng: -92.1672888,
+        },
         // TODO: confirm amenities once the property opens.
         amenities: ["breakfast", "pool", "fitness", "coffee", "wifi", "parking"],
         roomTypes: [], // TODO
-        photos: [], // TODO
+        photos: [
+            {
+                category: "exterior",
+                src: "/brand/flags/hyatt_select.webp",
+                alt: "Hyatt Select St. Robert exterior at dusk",
+            },
+        ],
     },
 ];
 
@@ -203,6 +252,11 @@ const BRAND_LOGOS: Record<Brand, string> = {
 
 export function brandLogo(brand: Brand): string {
     return BRAND_LOGOS[brand];
+}
+
+/** Card/hero cover image: the first exterior shot, else the first photo, else none. */
+export function coverPhoto(p: Property): PropertyPhoto | undefined {
+    return p.photos.find((photo) => photo.category === "exterior") ?? p.photos[0];
 }
 
 /** Digits-only tel: href, e.g. "tel:5733365556". */

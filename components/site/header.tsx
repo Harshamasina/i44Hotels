@@ -107,7 +107,7 @@ export function SiteHeader() {
                                                     {p.shortName}
                                                 </span>
                                             </span>
-                                            <ComingSoonBadge />
+                                            <ComingSoonBadge className="shrink-0 px-2 py-0 text-[10px]" />
                                         </div>
                                     ),
                                 )}
@@ -183,7 +183,7 @@ export function SiteHeader() {
                             >
                                 <FlagBadge brand={p.brand} />
                                 <span className="flex-1">{p.shortName}</span>
-                                <ComingSoonBadge />
+                                <ComingSoonBadge className="shrink-0 px-2 py-0 text-[10px]" />
                             </div>
                         ),
                     )}
