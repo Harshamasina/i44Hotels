@@ -3,7 +3,7 @@
 > Project context, brand, architecture, and conventions for anyone (human or agent) working in this repo.
 > **Execution roadmap and working rules live in [AGENTS.md](./AGENTS.md).** Read both before building.
 
-> 🚧 **Status: BUILDING — Phase 0 complete** (scaffold, tokens, fonts, OpenNext adapter, favicons, placeholder layout; builds pass). See [AGENTS.md](./AGENTS.md) for live phase status. All foundational decisions are locked: **stack** (Next.js + TypeScript + Tailwind + shadcn/ui, hosted on **Cloudflare**, domain **i44hotels.com**, §4), **palette** (§7), **typography** (Fraunces + Hanken Grotesk, §7), **logos** (§7), **design references** (§7), **IA** (§6), and the **`Property` data model** (§5). The phased build plan is in [AGENTS.md](./AGENTS.md). No application code written yet — begin Phase 0 once the owner gives the explicit "start building" go.
+> 🚧 **Status: BUILDING — Phases 0 & 1 complete** (scaffold + design-system primitives, header/footer/nav, hero, `/styleguide`; builds pass). See [AGENTS.md](./AGENTS.md) for live phase status. All foundational decisions are locked: **stack** (Next.js + TypeScript + Tailwind + shadcn/ui, hosted on **Cloudflare**, domain **i44hotels.com**, §4), **palette** (§7), **typography** (Fraunces + Hanken Grotesk, §7), **logos** (§7), **design references** (§7), **IA** (§6), and the **`Property` data model** (§5). The phased build plan is in [AGENTS.md](./AGENTS.md). No application code written yet — begin Phase 0 once the owner gives the explicit "start building" go.
 
 ---
 

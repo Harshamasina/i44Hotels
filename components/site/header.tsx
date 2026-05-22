@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllProperties, brandLogo } from "@/lib/properties";
+import { getAllProperties } from "@/lib/properties";
+import { FlagBadge, ComingSoonBadge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 // Lean primary nav (CLAUDE.md §6). Hotels is a dropdown handled separately;
 // everything else (Amenities, Rooms, Gallery, Local Area) lives in the footer.
@@ -86,7 +89,7 @@ export function SiteHeader() {
                                             onClick={() => setHotelsOpen(false)}
                                             className="hover:bg-sand-50 flex items-center gap-3 px-4 py-2"
                                         >
-                                            <BrandLogo src={brandLogo(p.brand)} />
+                                            <FlagBadge brand={p.brand} />
                                             <span>
                                                 <span className="text-navy-800 block font-medium">
                                                     {p.shortName}
@@ -98,13 +101,13 @@ export function SiteHeader() {
                                             key={p.slug}
                                             className="flex items-center gap-3 px-4 py-2"
                                         >
-                                            <BrandLogo src={brandLogo(p.brand)} />
+                                            <FlagBadge brand={p.brand} />
                                             <span className="flex-1">
                                                 <span className="text-sand-600 block font-medium">
                                                     {p.shortName}
                                                 </span>
                                             </span>
-                                            <ComingSoonPill />
+                                            <ComingSoonBadge />
                                         </div>
                                     ),
                                 )}
@@ -135,7 +138,7 @@ export function SiteHeader() {
                     {/* Book Now: gold bg + navy text per accessibility rule (CLAUDE.md §7) */}
                     <Link
                         href="/hotels"
-                        className="bg-gold-500 text-navy-900 hover:bg-gold-400 hidden shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm transition-colors sm:inline-block"
+                        className={cn(buttonVariants(), "hidden shrink-0 sm:inline-flex")}
                     >
                         Book Now
                     </Link>
@@ -170,7 +173,7 @@ export function SiteHeader() {
                                 onClick={() => setMobileOpen(false)}
                                 className="text-navy-800 hover:bg-sand-100 flex items-center gap-3 rounded-md px-3 py-2"
                             >
-                                <BrandLogo src={brandLogo(p.brand)} />
+                                <FlagBadge brand={p.brand} />
                                 {p.shortName}
                             </Link>
                         ) : (
@@ -178,9 +181,9 @@ export function SiteHeader() {
                                 key={p.slug}
                                 className="text-sand-600 flex items-center gap-3 rounded-md px-3 py-2"
                             >
-                                <BrandLogo src={brandLogo(p.brand)} />
+                                <FlagBadge brand={p.brand} />
                                 <span className="flex-1">{p.shortName}</span>
-                                <ComingSoonPill />
+                                <ComingSoonBadge />
                             </div>
                         ),
                     )}
@@ -208,30 +211,13 @@ export function SiteHeader() {
                     <Link
                         href="/hotels"
                         onClick={() => setMobileOpen(false)}
-                        className="bg-gold-500 text-navy-900 mt-3 block rounded-full px-5 py-3 text-center font-semibold"
+                        className={cn(buttonVariants({ size: "lg" }), "mt-3 w-full")}
                     >
                         Book Now
                     </Link>
                 </nav>
             )}
         </header>
-    );
-}
-
-function BrandLogo({ src }: { src: string }) {
-    // Fixed box + object-contain normalizes the differently-shaped franchise flags.
-    return (
-        <span className="relative h-7 w-11 shrink-0">
-            <Image src={src} alt="" fill sizes="44px" className="object-contain" />
-        </span>
-    );
-}
-
-function ComingSoonPill() {
-    return (
-        <span className="bg-gold-100 text-gold-700 shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide whitespace-nowrap uppercase">
-            Coming soon
-        </span>
     );
 }
 

@@ -68,18 +68,27 @@
     --foreground: var(--color-sand-800);
 }
 
-body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-}
+/*
+ * Base element defaults live in Tailwind's `base` layer so utility classes
+ * (text-white, text-gold-300, etc.) reliably override them. Unlayered rules
+ * outrank layered utilities in the cascade, which would otherwise pin headings
+ * to navy even when a component sets a different color (e.g. the hero on a dark
+ * background).
+ */
+@layer base {
+    body {
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+    }
 
-/* Headings in the display serif, navy (large sizes only - see CLAUDE.md §7) */
-h1,
-h2,
-h3 {
-    font-family: var(--font-serif);
-    color: var(--color-navy-800);
+    /* Headings in the display serif, navy (large sizes only - see CLAUDE.md §7) */
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-serif);
+        color: var(--color-navy-800);
+    }
 }
 
 ::selection {

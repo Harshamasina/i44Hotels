@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProperties, telHref } from "@/lib/properties";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 // Footer acts as the full sitemap: it holds the links demoted from the lean
 // navbar (Amenities, Rooms, Gallery, Local Area) plus the property list.
@@ -38,10 +40,7 @@ export function SiteFooter() {
                             Comfortable, convenient stays along Interstate&nbsp;44 for
                             families, business travelers, and Fort Leonard Wood guests.
                         </p>
-                        <Link
-                            href="/hotels"
-                            className="bg-gold-500 text-navy-900 hover:bg-gold-400 mt-5 inline-block rounded-full px-5 py-2.5 text-sm font-semibold transition-colors"
-                        >
+                        <Link href="/hotels" className={cn(buttonVariants(), "mt-5")}>
                             Book Now
                         </Link>
                     </div>

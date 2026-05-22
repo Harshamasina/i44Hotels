@@ -3,9 +3,13 @@
 > The **phased execution plan** for building the I44 Hotels website, plus working rules for any agent (or human) doing the work.
 > Project context, brand, architecture, and the `Property` data model live in **[CLAUDE.md](./CLAUDE.md)** — read it first.
 
-> 🚧 **Current status: BUILDING — Phase 0 complete (pending first Cloudflare deploy).** Scaffold + toolchain done: Next.js 16 + TS + Tailwind v4 + design tokens + Fraunces/Hanken fonts + OpenNext Cloudflare adapter + favicons/manifest + 4-space Prettier/.editorconfig + placeholder header/footer/home. `npm run build` and `opennextjs-cloudflare build` both pass. **Remaining for Phase 0:** the first deploy needs the owner's Cloudflare auth (`wrangler login`, then `npm run deploy`). **Next up: Phase 1 (design system & components).**
+> 🚧 **Current status: BUILDING — Phases 0 & 1 complete.**
+> **Phase 0:** scaffold + toolchain (Next.js 16, Tailwind v4, tokens, Fraunces/Hanken, OpenNext Cloudflare adapter, favicons, 4-space Prettier). First Cloudflare deploy still needs owner auth (`wrangler login` → `npm run deploy`).
+> **Phase 1:** design system + components — primitives (Button, Card, Badge/TierBadge/FlagBadge/ComingSoonBadge, SectionHeading, Container, RouteDivider) in `components/ui`, lucide icon system, full Header (nav, dropdown w/ flag logos, animated mobile drawer), Footer, sticky mobile booking bar, and a `/styleguide` preview page. Header/hero/footer/FLW-band refactored to use the shared Button. `npm run build` passes (routes: /, /styleguide).
+> **Already started (out of order):** Phase 2 data layer (`lib/properties.ts` seeded with the 4 real properties + helpers) and Phase 3 homepage (Hero + TrustStrip + FlwBand live on `/`).
+> **Next up: Phase 2 — finish the content layer & data model** (full `Property` type: amenities, rooms, photos, addresses; `getNearestToFLW`, filters).
 >
-> Hard external dependencies still open: franchise booking/source URLs + addresses (Phase 2/5/11). Logos, fonts, palette, stack all resolved.
+> Hard external dependencies still open: franchise booking/source URLs + addresses (Phase 2/5/11).
 
 ---
 

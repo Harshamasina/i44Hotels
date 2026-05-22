@@ -112,3 +112,24 @@ export function telHref(phone?: string): string | undefined {
     if (!phone) return undefined;
     return `tel:${phone.replace(/[^0-9]/g, "")}`;
 }
+
+function slugifyCity(city: string): string {
+    return city
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+export type HeroDestination = { label: string; href: string };
+
+/**
+ * Destinations for the homepage hero finder, derived from the live properties:
+ * each distinct operating city, plus a "Near Fort Leonard Wood" shortcut.
+ * Links carry query params the Phase 4 /hotels page will read.
+ */
+export function getHeroDestinations(): HeroDestination[] {
+    const cities = Array.from(new Set(getOperatingProperties().map((p) => p.city))).map(
+        (city) => ({ label: city, href: `/hotels?city=${slugifyCity(city)}` }),
+    );
+    return [...cities, { label: "Near Fort Leonard Wood", href: "/hotels?near=flw" }];
+}
