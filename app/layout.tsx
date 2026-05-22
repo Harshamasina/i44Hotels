@@ -3,6 +3,7 @@ import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
+import { MobileBookingBar } from "@/components/site/mobile-booking-bar";
 
 // Display serif for headings (CLAUDE.md §7)
 const fraunces = Fraunces({
@@ -50,10 +51,11 @@ export default function RootLayout({
             lang="en"
             className={`${fraunces.variable} ${hanken.variable} h-full antialiased`}
         >
-            <body className="bg-sand-50 text-sand-800 flex min-h-full flex-col">
+            <body className="bg-sand-50 text-sand-800 flex min-h-full flex-col pb-14 md:pb-0">
                 <SiteHeader />
                 <main className="flex-1">{children}</main>
                 <SiteFooter />
+                <MobileBookingBar />
             </body>
         </html>
     );

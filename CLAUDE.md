@@ -101,7 +101,7 @@ type Property = {
 
 ## 6. Site structure (information architecture)
 
-Primary nav: **Home · Hotels · Amenities · Rooms · Military Travel · Groups & Extended Stay · Local Area · Offers · Gallery · Contact** — with a persistent **Book Now** (gold) top-right.
+Primary nav is **lean (5 links)**: **Hotels** (dropdown listing the properties + "View all hotels") · **Military Travel** · **Groups** · **Offers** · **Contact**, plus a persistent **Book Now** (gold) button. The remaining pages (Amenities, Rooms, Gallery, Local Area) are **demoted to the footer**, which acts as the full sitemap. Mobile: hamburger drawer holding the same links, plus a sticky bottom bar (Hotels · Contact · Book Now). Rationale: ~5 items keeps the bar scannable and conversion-focused; Amenities/Rooms are per-property anyway (§5).
 
 | Page | Notes |
 |------|-------|

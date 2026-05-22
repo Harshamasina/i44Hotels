@@ -1,73 +1,138 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getAllProperties, telHref } from "@/lib/properties";
 
-/**
- * Placeholder site footer (Phase 0).
- * Navy background; the cream-filled primary logo reads well on dark (CLAUDE.md §7).
- * Real addresses, phones, and link columns are wired from property data in later phases.
- */
+// Footer acts as the full sitemap: it holds the links demoted from the lean
+// navbar (Amenities, Rooms, Gallery, Local Area) plus the property list.
+const EXPLORE_LINKS = [
+    { href: "/amenities", label: "Amenities" },
+    { href: "/rooms", label: "Rooms" },
+    { href: "/gallery", label: "Gallery" },
+    { href: "/local-area", label: "Local Area" },
+];
+
+const PLAN_LINKS = [
+    { href: "/military-travel", label: "Military Travel" },
+    { href: "/groups", label: "Groups & Extended Stay" },
+    { href: "/offers", label: "Offers" },
+    { href: "/contact", label: "Contact" },
+];
+
 export function SiteFooter() {
+    const properties = getAllProperties();
+
     return (
         <footer className="bg-navy-800 text-sand-100">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-                <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-                    <div className="max-w-sm">
+            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
+                    {/* Brand block */}
+                    <div className="col-span-2 md:col-span-1">
                         <Image
                             src="/brand/i44-logo.png"
                             alt="I44 Hotels"
-                            width={176}
-                            height={127}
-                            className="h-16 w-auto"
+                            width={264}
+                            height={190}
+                            className="h-24 w-auto md:h-28"
                         />
-                        <p className="text-sand-300 mt-4 text-sm">
+                        <p className="text-sand-300 mt-4 max-w-xs text-sm">
                             Comfortable, convenient stays along Interstate&nbsp;44 for
                             families, business travelers, and Fort Leonard Wood guests.
                         </p>
+                        <Link
+                            href="/hotels"
+                            className="bg-gold-500 text-navy-900 hover:bg-gold-400 mt-5 inline-block rounded-full px-5 py-2.5 text-sm font-semibold transition-colors"
+                        >
+                            Book Now
+                        </Link>
                     </div>
 
-                    <nav aria-label="Footer" className="text-sm">
-                        <ul className="grid grid-cols-2 gap-x-10 gap-y-2">
-                            <li>
-                                <Link href="/hotels" className="hover:text-gold-400">
-                                    Hotels
+                    {/* Hotels */}
+                    <FooterColumn title="Hotels">
+                        {properties.map((p) =>
+                            p.status === "operating" ? (
+                                <li key={p.slug}>
+                                    <Link
+                                        href={`/hotels/${p.slug}`}
+                                        className="hover:text-gold-400"
+                                    >
+                                        {p.shortName}
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li key={p.slug} className="text-sand-400">
+                                    {p.shortName}{" "}
+                                    <span className="text-gold-400 text-xs">
+                                        (Coming soon)
+                                    </span>
+                                </li>
+                            ),
+                        )}
+                        <li>
+                            <Link
+                                href="/hotels"
+                                className="text-gold-400 hover:text-gold-300 font-medium"
+                            >
+                                View all hotels
+                            </Link>
+                        </li>
+                    </FooterColumn>
+
+                    {/* Explore */}
+                    <FooterColumn title="Explore">
+                        {EXPLORE_LINKS.map((l) => (
+                            <li key={l.href}>
+                                <Link href={l.href} className="hover:text-gold-400">
+                                    {l.label}
                                 </Link>
                             </li>
-                            <li>
-                                <Link
-                                    href="/military-travel"
-                                    className="hover:text-gold-400"
-                                >
-                                    Military Travel
+                        ))}
+                    </FooterColumn>
+
+                    {/* Plan your stay */}
+                    <FooterColumn title="Plan Your Stay">
+                        {PLAN_LINKS.map((l) => (
+                            <li key={l.href}>
+                                <Link href={l.href} className="hover:text-gold-400">
+                                    {l.label}
                                 </Link>
                             </li>
-                            <li>
-                                <Link href="/groups" className="hover:text-gold-400">
-                                    Groups &amp; Extended Stay
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/local-area" className="hover:text-gold-400">
-                                    Local Area
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/gallery" className="hover:text-gold-400">
-                                    Gallery
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/contact" className="hover:text-gold-400">
-                                    Contact
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
+                        ))}
+                    </FooterColumn>
                 </div>
 
-                <div className="border-navy-600 text-sand-400 mt-10 border-t pt-6 text-xs">
-                    © {new Date().getFullYear()} I44 Hotels. All rights reserved.
+                {/* Property phone numbers */}
+                <div className="border-navy-600 mt-12 grid grid-cols-1 gap-4 border-t pt-8 text-sm sm:grid-cols-3">
+                    {properties
+                        .filter((p) => p.phone)
+                        .map((p) => (
+                            <div key={p.slug}>
+                                <p className="text-sand-100 font-medium">{p.shortName}</p>
+                                <a
+                                    href={telHref(p.phone)}
+                                    className="text-sand-300 hover:text-gold-400"
+                                >
+                                    {p.phone}
+                                </a>
+                            </div>
+                        ))}
+                </div>
+
+                <div className="border-navy-600 text-sand-400 mt-10 flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+                    <p>© {new Date().getFullYear()} I44 Hotels. All rights reserved.</p>
+                    <p>Comfortable Stays Along I-44</p>
                 </div>
             </div>
         </footer>
+    );
+}
+
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+    return (
+        <div>
+            <h2 className="text-sand-400 text-xs font-semibold tracking-wide uppercase">
+                {title}
+            </h2>
+            <ul className="text-sand-200 mt-3 space-y-2 text-sm">{children}</ul>
+        </div>
     );
 }

@@ -10,6 +10,10 @@
     --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
     --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 
+    /* Subtle UI animations (navbar dropdown, mobile drawer) */
+    --animate-dropdown: dropdown-in 0.18s ease-out;
+    --animate-drawer: drawer-in 0.22s ease-out;
+
     /* Navy - primary (text, footer, trust) */
     --color-navy-50: #eef2f8;
     --color-navy-100: #d5deec;
@@ -81,4 +85,37 @@ h3 {
 ::selection {
     background: var(--color-gold-200);
     color: var(--color-navy-900);
+}
+
+@keyframes dropdown-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes drawer-in {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Honor users who prefer reduced motion (CLAUDE.md §9 accessibility) */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
