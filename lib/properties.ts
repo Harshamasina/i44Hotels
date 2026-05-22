@@ -1,16 +1,55 @@
+import type { AmenityKey } from "./amenities";
+
 /**
- * Property data layer (seeded in Phase 1 for the navbar/footer; expanded in Phase 2).
- * Source of truth: PROPERTIES.md. Every component that shows hotel info reads from here,
- * so adding a property is a one-object edit (CLAUDE.md §5).
+ * Property data layer (Phase 2). Source of truth: PROPERTIES.md. Every component
+ * that shows hotel info reads from here, so adding a property is a one-object edit.
  *
- * Fields still TBD per property (address, lat/lng, amenities, rooms, photos, bookingUrl)
- * are optional for now and get filled in during Phase 2 / as the owner provides them.
+ * Honesty note: amenities are PROVISIONAL (based on brand norms) and marked TODO;
+ * addresses, room types, and photos are intentionally empty until the owner
+ * provides them. Booking URLs are TBD (Phase 11).
  */
 
 export type Brand = "Days Inn" | "Comfort Inn" | "Hyatt Select";
 export type BrandParent = "Wyndham" | "Choice" | "Hyatt";
 export type Tier = "economy" | "midscale" | "upscale";
 export type PropertyStatus = "operating" | "coming-soon";
+
+export type PhotoCategory =
+    | "exterior"
+    | "lobby"
+    | "room"
+    | "breakfast"
+    | "pool"
+    | "fitness"
+    | "amenity"
+    | "nearby";
+
+export type PropertyPhoto = {
+    category: PhotoCategory;
+    src: string;
+    alt: string;
+};
+
+export type RoomType = {
+    name: string;
+    sleeps?: number;
+    description?: string;
+    features?: string[];
+};
+
+export type Address = {
+    street: string;
+    zip: string;
+    lat: number;
+    lng: number;
+};
+
+export type Policies = {
+    pets?: string;
+    parking?: string;
+    checkIn?: string;
+    checkOut?: string;
+};
 
 export type Property = {
     slug: string;
@@ -26,8 +65,17 @@ export type Property = {
     phone?: string;
     /** Sits in the Fort Leonard Wood gateway area (St. Robert / Waynesville). */
     nearFLW: boolean;
+    /** Drive time to the FLW gates, when known (TODO: confirm). */
+    distanceToFLWMinutes?: number;
     /** Per-property deep link to the flag's official booking engine (TBD, Phase 11). */
     bookingUrl?: string;
+    address?: Address;
+    /** PROVISIONAL until confirmed per property (see note above). */
+    amenities: AmenityKey[];
+    roomTypes: RoomType[];
+    photos: PropertyPhoto[];
+    policies?: Policies;
+    nearbyAttractions?: string[];
 };
 
 export const properties: Property[] = [
@@ -43,6 +91,10 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-336-5556",
         nearFLW: true,
+        // TODO: confirm amenities from the Wyndham property page.
+        amenities: ["breakfast", "coffee", "wifi", "parking", "petFriendly"],
+        roomTypes: [], // TODO: add room types
+        photos: [], // TODO: add photography
     },
     {
         slug: "comfort-inn-st-robert",
@@ -56,6 +108,18 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-336-3553",
         nearFLW: true,
+        // TODO: confirm amenities from the Choice property page.
+        amenities: [
+            "breakfast",
+            "pool",
+            "fitness",
+            "coffee",
+            "wifi",
+            "parking",
+            "petFriendly",
+        ],
+        roomTypes: [], // TODO
+        photos: [], // TODO
     },
     {
         slug: "comfort-inn-sullivan",
@@ -69,6 +133,18 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-468-7800",
         nearFLW: false,
+        // TODO: confirm amenities from the Choice property page.
+        amenities: [
+            "breakfast",
+            "pool",
+            "fitness",
+            "coffee",
+            "wifi",
+            "parking",
+            "petFriendly",
+        ],
+        roomTypes: [], // TODO
+        photos: [], // TODO
     },
     {
         slug: "hyatt-select-st-robert",
@@ -81,6 +157,10 @@ export const properties: Property[] = [
         city: "St. Robert",
         state: "MO",
         nearFLW: true,
+        // TODO: confirm amenities once the property opens.
+        amenities: ["breakfast", "pool", "fitness", "coffee", "wifi", "parking"],
+        roomTypes: [], // TODO
+        photos: [], // TODO
     },
 ];
 
@@ -94,6 +174,24 @@ export function getOperatingProperties(): Property[] {
 
 export function getPropertyBySlug(slug: string): Property | undefined {
     return properties.find((p) => p.slug === slug);
+}
+
+/** Properties sorted for the Fort Leonard Wood page: near-base first, then by drive time. */
+export function getNearestToFLW(): Property[] {
+    return [...properties].sort((a, b) => {
+        if (a.nearFLW !== b.nearFLW) return a.nearFLW ? -1 : 1;
+        return (
+            (a.distanceToFLWMinutes ?? Infinity) - (b.distanceToFLWMinutes ?? Infinity)
+        );
+    });
+}
+
+export function filterByTier(tier: Tier): Property[] {
+    return properties.filter((p) => p.tier === tier);
+}
+
+export function filterByBrand(brand: Brand): Property[] {
+    return properties.filter((p) => p.brand === brand);
 }
 
 /** Franchise flag logo per brand (transparent assets in /public/brand/flags). */

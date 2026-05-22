@@ -6,10 +6,11 @@
 > 🚧 **Current status: BUILDING — Phases 0 & 1 complete.**
 > **Phase 0:** scaffold + toolchain (Next.js 16, Tailwind v4, tokens, Fraunces/Hanken, OpenNext Cloudflare adapter, favicons, 4-space Prettier). First Cloudflare deploy still needs owner auth (`wrangler login` → `npm run deploy`).
 > **Phase 1:** design system + components — primitives (Button, Card, Badge/TierBadge/FlagBadge/ComingSoonBadge, SectionHeading, Container, RouteDivider) in `components/ui`, lucide icon system, full Header (nav, dropdown w/ flag logos, animated mobile drawer), Footer, sticky mobile booking bar, and a `/styleguide` preview page. Header/hero/footer/FLW-band refactored to use the shared Button. `npm run build` passes (routes: /, /styleguide).
-> **Already started (out of order):** Phase 2 data layer (`lib/properties.ts` seeded with the 4 real properties + helpers) and Phase 3 homepage (Hero + TrustStrip + FlwBand live on `/`).
-> **Next up: Phase 2 — finish the content layer & data model** (full `Property` type: amenities, rooms, photos, addresses; `getNearestToFLW`, filters).
+> **Phase 2:** content layer & data model done — full `Property` type (address, amenities, roomTypes, photos, policies, distanceToFLWMinutes), `AmenityKey` registry w/ lucide icons (`lib/amenities.ts`), helpers (`getNearestToFLW`, `filterByTier`, `filterByBrand`). The 4 real properties load; amenities are PROVISIONAL (marked TODO); roomTypes/photos/addresses empty pending owner. Registry previewed on `/styleguide`.
+> **Already started (out of order):** Phase 3 homepage (Hero + TrustStrip + FlwBand live on `/`).
+> **Next up: Phase 3 — finish the homepage** (amenity highlights, property preview cards, reviews, local-area teaser).
 >
-> Hard external dependencies still open: franchise booking/source URLs + addresses (Phase 2/5/11).
+> Hard external dependencies still open: real per-property amenities, addresses/lat-lng, photos, room types, booking URLs (Phase 2/5/11 fill-ins).
 
 ---
 

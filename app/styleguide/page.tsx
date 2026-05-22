@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge, TierBadge, ComingSoonBadge, FlagBadge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { RouteDivider } from "@/components/ui/route-divider";
+import { AMENITIES } from "@/lib/amenities";
 
 export const metadata: Metadata = {
     title: "Style Guide",
@@ -110,6 +111,20 @@ export default function StyleguidePage() {
                     <FlagBadge brand="Days Inn" />
                     <FlagBadge brand="Comfort Inn" />
                     <FlagBadge brand="Hyatt Select" />
+                </div>
+            </Block>
+
+            <Block title="Amenities (registry)">
+                <div className="flex flex-wrap gap-x-6 gap-y-3">
+                    {Object.values(AMENITIES).map(({ label, Icon }) => (
+                        <span
+                            key={label}
+                            className="text-navy-800 inline-flex items-center gap-2"
+                        >
+                            <Icon className="text-gold-600 size-5" aria-hidden />
+                            <span className="text-sm">{label}</span>
+                        </span>
+                    ))}
                 </div>
             </Block>
 
