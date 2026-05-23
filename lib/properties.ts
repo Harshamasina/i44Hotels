@@ -31,6 +31,7 @@ export type PhotoCategory =
     | "pool"
     | "fitness"
     | "amenity"
+    | "meeting"
     | "nearby";
 
 export type PropertyPhoto = {
@@ -96,6 +97,8 @@ export type Property = {
     bestFor: BestForKey[];
     /** Per-property deep link to the flag's official booking engine (TBD, Phase 11). */
     bookingUrl?: string;
+    /** Google Place ID, used to fetch the live rating + top reviews (Places API New). */
+    googlePlaceId?: string;
     address?: Address;
     /** PROVISIONAL until confirmed per property (see note above). */
     amenities: AmenityKey[];
@@ -123,6 +126,7 @@ export const properties: Property[] = [
         distanceToFLWMinutes: 9,
         distanceToFLWMiles: 4,
         bestFor: ["military", "leisure", "pets", "largeVehicle"],
+        googlePlaceId: "ChIJsdVcjvjm2ocRAm6EGIwc7t0",
         // TODO: verify exact coords (geocoder could not resolve 14125 Hwy Z).
         address: {
             street: "14125 State Hwy Z",
@@ -182,11 +186,137 @@ export const properties: Property[] = [
             ],
         },
         roomTypes: [], // TODO: add room types
+        // Official Wyndham property photos (property 04346), organized by category.
         photos: [
             {
                 category: "exterior",
-                src: "/brand/flags/days_inn.avif",
+                src: "/properties/days-inn-st-robert/exterior/day-1.jpg",
+                alt: "Days Inn by Wyndham St. Robert exterior in daylight",
+            },
+            {
+                category: "exterior",
+                src: "/properties/days-inn-st-robert/exterior/dusk-1.jpg",
                 alt: "Days Inn by Wyndham St. Robert exterior at dusk",
+            },
+            {
+                category: "exterior",
+                src: "/properties/days-inn-st-robert/exterior/day-3.jpg",
+                alt: "Days Inn by Wyndham St. Robert building exterior",
+            },
+            {
+                category: "lobby",
+                src: "/properties/days-inn-st-robert/lobby/view-1.jpg",
+                alt: "Front desk and lobby at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "lobby",
+                src: "/properties/days-inn-st-robert/lobby/view-2.jpg",
+                alt: "Lobby seating at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "lobby",
+                src: "/properties/days-inn-st-robert/lobby/view-3.jpg",
+                alt: "Lobby at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-01.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-02.jpg",
+                alt: "Guest room with two beds at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-03.jpg",
+                alt: "King guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-04.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-05.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-06.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-07.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-08.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-09.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-10.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-11.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-12.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-13.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-14.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/guest-room-15.jpg",
+                alt: "Guest room at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/bath-1.jpg",
+                alt: "Guest bathroom at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/days-inn-st-robert/room/accessible-bath-1.jpg",
+                alt: "Accessible guest bathroom at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "breakfast",
+                src: "/properties/days-inn-st-robert/breakfast/breakfast-1.jpg",
+                alt: "Complimentary breakfast area at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/days-inn-st-robert/amenity/business-center-1.jpg",
+                alt: "Business center at Days Inn by Wyndham St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/days-inn-st-robert/amenity/laundry-1.jpg",
+                alt: "Guest laundry facilities at Days Inn by Wyndham St. Robert",
             },
         ],
     },
@@ -205,6 +335,7 @@ export const properties: Property[] = [
         distanceToFLWMinutes: 6,
         distanceToFLWMiles: 2,
         bestFor: ["military", "business", "leisure", "groups", "pets"],
+        googlePlaceId: "ChIJ-9CGWnzd2ocRG1gF3cGW4EI",
         address: {
             street: "103 Comfort Inn Drive",
             zip: "65584",
@@ -267,11 +398,177 @@ export const properties: Property[] = [
             ],
         },
         roomTypes: [], // TODO
+        // Official Choice property photos (property MO107), organized by category.
         photos: [
             {
                 category: "exterior",
-                src: "/brand/flags/comfort_inn_st_robert.webp",
+                src: "/properties/comfort-inn-st-robert/exterior/MO107exterior1_1.webp",
                 alt: "Comfort Inn St. Robert / Fort Leonard Wood exterior",
+            },
+            {
+                category: "exterior",
+                src: "/properties/comfort-inn-st-robert/exterior/MO107exterior2_1.webp",
+                alt: "Comfort Inn St. Robert / Fort Leonard Wood exterior",
+            },
+            {
+                category: "lobby",
+                src: "/properties/comfort-inn-st-robert/lobby/MO107lobby1_1.avif",
+                alt: "Lobby at Comfort Inn St. Robert",
+            },
+            {
+                category: "lobby",
+                src: "/properties/comfort-inn-st-robert/lobby/MO107lobby2_1.webp",
+                alt: "Front desk and lobby at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnk1_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnk2_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnk3_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnk4_1.avif",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnkone1_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnkone2_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnkone3_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107hnkone4_1.webp",
+                alt: "Accessible guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nk1_1.webp",
+                alt: "King guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nk2_1.webp",
+                alt: "King guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nk3_1.webp",
+                alt: "King guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nk4_1.webp",
+                alt: "King guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nqq1_1.webp",
+                alt: "Two-queen guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nqq2_1.webp",
+                alt: "Two-queen guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nqq3_1.webp",
+                alt: "Two-queen guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107nqq4_1.webp",
+                alt: "Two-queen guest room at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snk1_1.webp",
+                alt: "King suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snk2_1.webp",
+                alt: "King suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snk3_1.webp",
+                alt: "King suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snk4_1.webp",
+                alt: "King suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snqq1_1.webp",
+                alt: "Two-queen suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snqq2_1.webp",
+                alt: "Two-queen suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snqq3_1.webp",
+                alt: "Two-queen suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-st-robert/room/MO107snqq4_1.avif",
+                alt: "Two-queen suite at Comfort Inn St. Robert",
+            },
+            {
+                category: "breakfast",
+                src: "/properties/comfort-inn-st-robert/breakfast/MO107bkfast1_1.webp",
+                alt: "Free hot breakfast area at Comfort Inn St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-st-robert/amenity/MO107pool2_1.avif",
+                alt: "Indoor heated pool at Comfort Inn St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-st-robert/amenity/MO107gym1_1.webp",
+                alt: "Fitness center at Comfort Inn St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-st-robert/amenity/MO107market1_1.avif",
+                alt: "On-site marketplace at Comfort Inn St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-st-robert/amenity/MO107laundry1_1.webp",
+                alt: "Guest laundry at Comfort Inn St. Robert",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-st-robert/amenity/MO107comp1_1.webp",
+                alt: "Guest amenities at Comfort Inn St. Robert",
             },
         ],
     },
@@ -288,6 +585,7 @@ export const properties: Property[] = [
         phone: "573-468-7800",
         nearFLW: false,
         bestFor: ["leisure", "business", "groups", "pets", "largeVehicle"],
+        googlePlaceId: "ChIJ0UrBfMxj2YcRJRTbIWvINhw",
         address: {
             street: "736 South Service Road",
             zip: "63080",
@@ -342,11 +640,272 @@ export const properties: Property[] = [
             ],
         },
         roomTypes: [], // TODO
+        // Official Choice property photos (property MO210), organized by category.
         photos: [
             {
                 category: "exterior",
-                src: "/brand/flags/comfort_inn_sulli.jpeg",
-                alt: "Comfort Inn Sullivan exterior at sunset",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210exterior1.avif",
+                alt: "Comfort Inn Sullivan exterior",
+            },
+            {
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210exterior2.webp",
+                alt: "Comfort Inn Sullivan exterior",
+            },
+            {
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210twilight1.avif",
+                alt: "Comfort Inn Sullivan exterior at twilight",
+            },
+            {
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210twilight2.avif",
+                alt: "Comfort Inn Sullivan exterior at twilight",
+            },
+            {
+                category: "lobby",
+                src: "/properties/comfort-inn-sullivan/lobby/MO210lobby1.webp",
+                alt: "Lobby at Comfort Inn Sullivan",
+            },
+            {
+                category: "lobby",
+                src: "/properties/comfort-inn-sullivan/lobby/MO210lobby2.avif",
+                alt: "Lobby seating at Comfort Inn Sullivan",
+            },
+            {
+                category: "lobby",
+                src: "/properties/comfort-inn-sullivan/lobby/MO210lobby3.avif",
+                alt: "Front desk at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKP-1.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKP-2.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKP-3.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKP-4.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKW-1.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKW-2.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKW-3.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKW-4.webp",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKWP-1.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKWP-2.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKWP-3.avif",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210HNKWP-4.webp",
+                alt: "Accessible guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NK-1.avif",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NK-2.webp",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NK-3.avif",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NK-4.webp",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NKP-1.avif",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NKP-2.avif",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NKP-3.avif",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NKP-4.webp",
+                alt: "King guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQ-1.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQ-2.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQ-3.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQ-4.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQP-1.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQP-2.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQP-3.avif",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210NQQP-4.webp",
+                alt: "Two-queen guest room at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210SNK-1.avif",
+                alt: "King suite at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210SNK-2.webp",
+                alt: "King suite at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210SNK-3.avif",
+                alt: "King suite at Comfort Inn Sullivan",
+            },
+            {
+                category: "room",
+                src: "/properties/comfort-inn-sullivan/room/MO210SNK-4.avif",
+                alt: "King suite at Comfort Inn Sullivan",
+            },
+            {
+                category: "breakfast",
+                src: "/properties/comfort-inn-sullivan/breakfast/MO210bkfast1.avif",
+                alt: "Free hot breakfast area at Comfort Inn Sullivan",
+            },
+            {
+                category: "breakfast",
+                src: "/properties/comfort-inn-sullivan/breakfast/MO210bkfast2.webp",
+                alt: "Breakfast seating at Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210pool1.webp",
+                alt: "Indoor heated pool at Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210pool2.webp",
+                alt: "Indoor heated pool at Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210fitness1.webp",
+                alt: "Fitness center at Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210fitness2.avif",
+                alt: "Fitness center at Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210marketplace1.webp",
+                alt: "On-site marketplace at Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210drone1.avif",
+                alt: "Aerial view of Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210drone2.webp",
+                alt: "Aerial view of Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210drone3.webp",
+                alt: "Aerial view of Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210drone4.webp",
+                alt: "Aerial view of Comfort Inn Sullivan",
+            },
+            {
+                category: "amenity",
+                src: "/properties/comfort-inn-sullivan/amenity/MO210drone5.avif",
+                alt: "Aerial view of Comfort Inn Sullivan",
+            },
+            {
+                category: "meeting",
+                src: "/properties/comfort-inn-sullivan/meeting/MO210meeting1.avif",
+                alt: "Meeting room at Comfort Inn Sullivan",
+            },
+            {
+                category: "meeting",
+                src: "/properties/comfort-inn-sullivan/meeting/MO210meeting2.avif",
+                alt: "Meeting room at Comfort Inn Sullivan",
             },
         ],
     },
@@ -491,9 +1050,7 @@ export function parsePropertyFilters(
     sp: Record<string, string | string[] | undefined>,
 ): PropertyFilters {
     const near = splitParam(sp.near).includes("flw");
-    const tiers = splitParam(sp.tier).filter((t): t is Tier =>
-        TIERS.includes(t as Tier),
-    );
+    const tiers = splitParam(sp.tier).filter((t): t is Tier => TIERS.includes(t as Tier));
     const bestFor = splitParam(sp.for).filter((k): k is BestForKey =>
         BEST_FOR_KEYS.includes(k as BestForKey),
     );
@@ -595,12 +1152,17 @@ export type HeroDestination = { label: string; href: string };
 
 /**
  * Destinations for the homepage hero finder, derived from the live properties:
- * each distinct operating city, plus a "Near Fort Leonard Wood" shortcut.
+ * the Fort Leonard Wood / St. Robert area, plus each remaining operating city.
  * Links carry query params the Phase 4 /hotels page will read.
  */
 export function getHeroDestinations(): HeroDestination[] {
     const cities = Array.from(new Set(getOperatingProperties().map((p) => p.city))).map(
         (city) => ({ label: city, href: `/hotels?city=${slugifyCity(city)}` }),
     );
-    return [...cities, { label: "Near Fort Leonard Wood", href: "/hotels?near=flw" }];
+    const nonFlwCities = cities.filter((city) => city.href !== "/hotels?city=st-robert");
+
+    return [
+        { label: "Ft Leonard Wood / St. Robert", href: "/hotels?near=flw" },
+        ...nonFlwCities,
+    ];
 }
