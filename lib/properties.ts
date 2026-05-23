@@ -51,6 +51,21 @@ export type Policies = {
     checkOut?: string;
 };
 
+/** A labeled list of amenities, as published on the brand's property page. */
+export type AmenityGroup = {
+    title: string;
+    items: string[];
+    /** Footnote shown under the group, e.g. asterisk pricing or a caveat. */
+    note?: string;
+};
+
+/** Full per-property amenity detail (from the brand page) for the Amenities page. */
+export type AmenityDetails = {
+    /** "What this place offers" style intro paragraph. */
+    intro?: string;
+    groups: AmenityGroup[];
+};
+
 export type Property = {
     slug: string;
     name: string;
@@ -73,6 +88,8 @@ export type Property = {
     address?: Address;
     /** PROVISIONAL until confirmed per property (see note above). */
     amenities: AmenityKey[];
+    /** Full amenity lists from the brand page (drives the Amenities page detail). */
+    amenityDetails?: AmenityDetails;
     roomTypes: RoomType[];
     photos: PropertyPhoto[];
     policies?: Policies;
@@ -103,6 +120,55 @@ export const properties: Property[] = [
         },
         // TODO: confirm amenities from the Wyndham property page.
         amenities: ["breakfast", "coffee", "wifi", "parking", "petFriendly"],
+        amenityDetails: {
+            groups: [
+                {
+                    title: "Hotel amenities",
+                    items: [
+                        "24-hour front desk",
+                        "Balconies available",
+                        "Bus & truck parking",
+                        "Business center",
+                        "Coffee / tea maker",
+                        "Concierge",
+                        "Cribs available",
+                        "Daily housekeeping",
+                        "Early check-in available",
+                        "Express check-in",
+                        "Express check-out",
+                        "Flat-screen televisions",
+                        "Free parking",
+                        "Hairdryer",
+                        "Late check-out available",
+                        "On-site guest laundry",
+                        "Park before you fly",
+                        "Pet friendly",
+                        "RV parking",
+                        "Trailer parking",
+                        "Valet parking",
+                        "WiFi available",
+                    ],
+                },
+                {
+                    title: "Accessibility",
+                    items: [
+                        "Accessible car self-park",
+                        'Accessible guest room doorways with 32" clear width',
+                        "Accessible public entrance",
+                        "Accessible route to guestrooms",
+                        "Accessible route to parking",
+                        "Accessible van self-park",
+                        "Accessible van parking",
+                        "Accessible route to the business center",
+                        "Accessible route to food and drink venues",
+                        "Service animals welcome",
+                        "TTY devices for guest use",
+                        "TVs with closed captioning",
+                        "Food and drink venues are wheelchair accessible",
+                    ],
+                },
+            ],
+        },
         roomTypes: [], // TODO: add room types
         photos: [
             {
@@ -142,6 +208,51 @@ export const properties: Property[] = [
             "parking",
             "petFriendly",
         ],
+        amenityDetails: {
+            intro: "Our friendly staff and ample amenities make your stay in St. Robert convenient, so you can focus on your trip, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
+            groups: [
+                {
+                    title: "Hotel amenities",
+                    items: [
+                        "Premium free WiFi",
+                        "Indoor heated pool",
+                        "Pet friendly*",
+                        "Free hot breakfast",
+                        "Sustainable practices",
+                        "Surveillance security",
+                        "Truck parking",
+                        "Exercise room",
+                        "Fitness center",
+                        "Government travelers: FEMA approved",
+                        "Copy machine*",
+                        "Fax machine*",
+                        "Interior corridors",
+                        "Outdoor parking",
+                        "Elevators",
+                        "100% smoke-free hotel",
+                        "Bus parking",
+                        "Free coffee",
+                        "Laundry*",
+                        "Business center*",
+                        "Sun deck",
+                    ],
+                    note: "*May require an additional cost.",
+                },
+                {
+                    title: "Accessibility",
+                    items: [
+                        "Accessible hotel",
+                        "Accessible public entrance",
+                        "Accessible route from public entrance to registration",
+                        "Accessible concierge desk",
+                        "Accessible business center and/or meeting rooms",
+                        "Braille or raised signage",
+                        "Braille elevators",
+                    ],
+                    note: "Amenities may vary by room type.",
+                },
+            ],
+        },
         roomTypes: [], // TODO
         photos: [
             {
@@ -179,6 +290,43 @@ export const properties: Property[] = [
             "parking",
             "petFriendly",
         ],
+        amenityDetails: {
+            intro: "Enjoy a long list of amenities at our smoke-free hotel: free WiFi for all your devices, free hot breakfast, free coffee, a free weekday newspaper, elevators, a fitness center, an indoor heated pool, a hotel safe, laundry facilities, and free parking (with room for buses and trucks). Business travelers can use our copy, print, and fax services and our meeting room. And when the temperature drops, we have cold-weather hook-ups.",
+            groups: [
+                {
+                    title: "Hotel amenities",
+                    items: [
+                        "Premium free WiFi",
+                        "Indoor heated pool",
+                        "Pet friendly*",
+                        "Free hot breakfast",
+                        "Vending machines*",
+                        "Truck parking",
+                        "Exercise room",
+                        "Free weekday newspaper",
+                        "Government travelers: FEMA approved",
+                        "Copy machine*",
+                        "Fax machine*",
+                        "Hotel safe",
+                        "Interior corridors",
+                        "Outdoor parking",
+                        "Elevators",
+                        "100% smoke-free hotel",
+                        "Bus parking",
+                        "Free coffee",
+                        "Laundry*",
+                        "Meeting room*",
+                        "Cold-weather hook-up",
+                    ],
+                    note: "*May require an additional cost.",
+                },
+                {
+                    title: "Accessibility",
+                    items: ["Accessible hotel", "Accessible ramps", "Braille elevators"],
+                    note: "Amenities may vary by room type.",
+                },
+            ],
+        },
         roomTypes: [], // TODO
         photos: [
             {
@@ -305,8 +453,7 @@ export const FLW_MAIN_GATE = {
 
 /** Official Fort Leonard Wood resources (outbound; always open in a new tab). */
 export const FLW_LINKS = {
-    graduationCalendar:
-        "https://home.army.mil/wood/index.php/my-fort/grad/calendar",
+    graduationCalendar: "https://home.army.mil/wood/index.php/my-fort/grad/calendar",
     visitorAccess:
         "https://home.army.mil/wood/Garrison/DES/physical-security/access-control",
 } as const;

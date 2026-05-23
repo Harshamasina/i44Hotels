@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProperties } from "@/lib/properties";
+import { EXPLORE_LINKS } from "@/lib/nav";
 import { FlagBadge, ComingSoonBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Lean primary nav (CLAUDE.md §6). Hotels is a dropdown handled separately;
-// everything else (Amenities, Rooms, Gallery, Local Area) lives in the footer.
+// Primary nav (CLAUDE.md §6). Hotels and Explore are dropdowns handled
+// separately; the Explore links (Amenities, Local Area) also live in the footer.
 const PRIMARY_LINKS = [
     { href: "/military-travel", label: "Military Travel" },
     { href: "/groups", label: "Groups" },
@@ -22,18 +23,24 @@ const allHotels = getAllProperties();
 export function SiteHeader() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [hotelsOpen, setHotelsOpen] = useState(false);
+    const [exploreOpen, setExploreOpen] = useState(false);
     const hotelsRef = useRef<HTMLDivElement>(null);
+    const exploreRef = useRef<HTMLDivElement>(null);
 
-    // Close the desktop Hotels dropdown on outside click or Escape.
+    // Close the desktop dropdowns on outside click or Escape.
     useEffect(() => {
         function onClick(e: MouseEvent) {
             if (hotelsRef.current && !hotelsRef.current.contains(e.target as Node)) {
                 setHotelsOpen(false);
             }
+            if (exploreRef.current && !exploreRef.current.contains(e.target as Node)) {
+                setExploreOpen(false);
+            }
         }
         function onKey(e: KeyboardEvent) {
             if (e.key === "Escape") {
                 setHotelsOpen(false);
+                setExploreOpen(false);
                 setMobileOpen(false);
             }
         }
@@ -132,6 +139,37 @@ export function SiteHeader() {
                             {link.label}
                         </Link>
                     ))}
+
+                    <div className="relative" ref={exploreRef}>
+                        <button
+                            type="button"
+                            aria-haspopup="true"
+                            aria-expanded={exploreOpen}
+                            onClick={() => setExploreOpen((v) => !v)}
+                            className="hover:text-gold-600 flex items-center gap-1 transition-colors"
+                        >
+                            Explore
+                            <Chevron open={exploreOpen} />
+                        </button>
+                        {exploreOpen && (
+                            <div
+                                role="menu"
+                                className="border-sand-200 animate-dropdown absolute top-full left-0 mt-2 w-48 origin-top overflow-hidden rounded-xl border bg-white py-2 shadow-lg"
+                            >
+                                {EXPLORE_LINKS.map((link) => (
+                                    <Link
+                                        key={link.href}
+                                        role="menuitem"
+                                        href={link.href}
+                                        onClick={() => setExploreOpen(false)}
+                                        className="text-navy-800 hover:bg-sand-50 block px-4 py-2"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </nav>
 
                 <div className="flex items-center gap-2">
@@ -198,6 +236,20 @@ export function SiteHeader() {
                     <div className="border-sand-200 my-3 border-t" />
 
                     {PRIMARY_LINKS.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="text-navy-800 hover:bg-sand-100 block rounded-md px-3 py-2 font-medium"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+
+                    <p className="text-sand-600 px-1 pt-3 pb-1 text-xs font-semibold tracking-wide uppercase">
+                        Explore
+                    </p>
+                    {EXPLORE_LINKS.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}

@@ -1,17 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProperties, telHref } from "@/lib/properties";
+import { EXPLORE_LINKS } from "@/lib/nav";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-// Footer acts as the full sitemap: it holds the links demoted from the lean
-// navbar (Amenities, Rooms, Gallery, Local Area) plus the property list.
-const EXPLORE_LINKS = [
-    { href: "/amenities", label: "Amenities" },
-    { href: "/rooms", label: "Rooms" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/local-area", label: "Local Area" },
-];
 
 const PLAN_LINKS = [
     { href: "/military-travel", label: "Military Travel" },
