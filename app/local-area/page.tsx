@@ -11,11 +11,13 @@ import {
     Landmark,
     Ticket,
     ArrowRight,
+    ExternalLink,
     type LucideIcon,
 } from "lucide-react";
 import { getOperatingProperties, formatAddress, directionsHref } from "@/lib/properties";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RouteDivider } from "@/components/ui/route-divider";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -154,6 +156,51 @@ const SULLIVAN_AREA: Spot[] = [
     },
 ];
 
+// Trusted local and regional resources (official tourism and city sites). All
+// open in a new tab. We intentionally do not link competing hotel sites.
+const LOCAL_RESOURCES: { name: string; desc: string; href: string }[] = [
+    {
+        name: "Pulaski County Tourism",
+        desc: "Official visitor guide for the area",
+        href: "https://www.visitpulaskicounty.org/",
+    },
+    {
+        name: "Calendar of Events",
+        desc: "What is happening while you are in town",
+        href: "https://visitpulaskicounty.org/events",
+    },
+    {
+        name: "Scenic Driving Tours",
+        desc: "Self-guided routes you can download",
+        href: "https://visitpulaskicounty.org/digital-downloads/#DrivingTours",
+    },
+    {
+        name: "City of St. Robert",
+        desc: "Town information and services",
+        href: "https://saintrobert.com/",
+    },
+    {
+        name: "City of Waynesville",
+        desc: "Town information and services",
+        href: "https://waynesvillemo.org/",
+    },
+    {
+        name: "Pulaski County",
+        desc: "County government and services",
+        href: "https://www.pulaskicountymo.org/home.html",
+    },
+    {
+        name: "Lebanon Tourism",
+        desc: "Nearby town, west on I-44",
+        href: "https://www.visitlebanonmo.org/",
+    },
+    {
+        name: "Rolla Tourism",
+        desc: "Nearby town, east on I-44",
+        href: "https://www.visitrolla.com/",
+    },
+];
+
 export default function LocalAreaPage() {
     const properties = getOperatingProperties();
 
@@ -167,6 +214,7 @@ export default function LocalAreaPage() {
                         subtitle="From the gates of Fort Leonard Wood to the caves and Route 66 towns along Interstate 44, here is what is around our hotels and how to get here."
                         align="center"
                     />
+                    <RouteDivider className="mt-10" />
                 </Container>
             </section>
 
@@ -325,6 +373,41 @@ export default function LocalAreaPage() {
                             </ul>
                         </div>
                     </div>
+                </Container>
+            </section>
+
+            <section className="bg-white">
+                <Container className="py-16 sm:py-20">
+                    <SectionHeading
+                        eyebrow="Local resources"
+                        title="Plan with local guides"
+                        subtitle="Official tourism and city resources for events, tours, and town information around Fort Leonard Wood and along I-44."
+                    />
+                    <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {LOCAL_RESOURCES.map((r) => (
+                            <li key={r.href}>
+                                <a
+                                    href={r.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group border-sand-200 hover:border-gold-300 flex h-full items-center justify-between gap-3 rounded-xl border bg-white px-4 py-3 shadow-sm transition duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
+                                >
+                                    <span>
+                                        <span className="text-navy-800 group-hover:text-gold-700 block font-medium transition-colors">
+                                            {r.name}
+                                        </span>
+                                        <span className="text-sand-500 block text-xs">
+                                            {r.desc}
+                                        </span>
+                                    </span>
+                                    <ExternalLink
+                                        className="text-gold-600 size-4 shrink-0"
+                                        aria-hidden
+                                    />
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </Container>
             </section>
 

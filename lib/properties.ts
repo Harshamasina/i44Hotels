@@ -14,6 +14,15 @@ export type BrandParent = "Wyndham" | "Choice" | "Hyatt";
 export type Tier = "economy" | "midscale" | "upscale";
 export type PropertyStatus = "operating" | "coming-soon";
 
+/** Audience tags (CLAUDE.md section 3). Drive the card "Best for" line + /hotels filter. */
+export type BestForKey =
+    | "military"
+    | "leisure"
+    | "business"
+    | "groups"
+    | "pets"
+    | "largeVehicle";
+
 export type PhotoCategory =
     | "exterior"
     | "lobby"
@@ -83,6 +92,8 @@ export type Property = {
     /** Approx. drive time + distance to the FLW main gate (St. Robert hotels only). */
     distanceToFLWMinutes?: number;
     distanceToFLWMiles?: number;
+    /** Audience tags this hotel suits (see BestForKey). Used by the /hotels filter + card. */
+    bestFor: BestForKey[];
     /** Per-property deep link to the flag's official booking engine (TBD, Phase 11). */
     bookingUrl?: string;
     address?: Address;
@@ -111,6 +122,7 @@ export const properties: Property[] = [
         nearFLW: true,
         distanceToFLWMinutes: 9,
         distanceToFLWMiles: 4,
+        bestFor: ["military", "leisure", "pets", "largeVehicle"],
         // TODO: verify exact coords (geocoder could not resolve 14125 Hwy Z).
         address: {
             street: "14125 State Hwy Z",
@@ -192,6 +204,7 @@ export const properties: Property[] = [
         nearFLW: true,
         distanceToFLWMinutes: 6,
         distanceToFLWMiles: 2,
+        bestFor: ["military", "business", "leisure", "groups", "pets"],
         address: {
             street: "103 Comfort Inn Drive",
             zip: "65584",
@@ -274,6 +287,7 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-468-7800",
         nearFLW: false,
+        bestFor: ["leisure", "business", "groups", "pets", "largeVehicle"],
         address: {
             street: "736 South Service Road",
             zip: "63080",
@@ -349,6 +363,7 @@ export const properties: Property[] = [
         nearFLW: true,
         distanceToFLWMinutes: 10,
         distanceToFLWMiles: 4,
+        bestFor: ["military", "business"],
         // TODO: verify exact Hyatt Select address - 107 McKinnon St currently
         // lists as the Super 8 (St. Robert); may be a rebrand or provisional lot.
         address: {
@@ -398,6 +413,104 @@ export function filterByTier(tier: Tier): Property[] {
 
 export function filterByBrand(brand: Brand): Property[] {
     return properties.filter((p) => p.brand === brand);
+}
+
+const TIERS: Tier[] = ["economy", "midscale", "upscale"];
+const BEST_FOR_KEYS: BestForKey[] = [
+    "military",
+    "leisure",
+    "business",
+    "groups",
+    "pets",
+    "largeVehicle",
+];
+
+/** The /hotels filter state, mirrored to the URL query string. */
+export type PropertyFilters = {
+    /** Limit to Fort Leonard Wood gateway hotels (?near=flw). */
+    near?: boolean;
+    /** ?tier=economy,midscale */
+    tiers?: Tier[];
+    /** ?for=military,business */
+    bestFor?: BestForKey[];
+    /** Slugified city names, ?city=st-robert,sullivan */
+    cities?: string[];
+};
+
+/**
+ * Distinct operating-hotel towns for the /hotels town filter, in portfolio order.
+ * Derived from the data so adding a hotel in a new town updates the filter.
+ */
+export function getFilterCities(): { slug: string; label: string }[] {
+    const seen = new Set<string>();
+    const out: { slug: string; label: string }[] = [];
+    for (const p of getOperatingProperties()) {
+        const slug = slugifyCity(p.city);
+        if (!seen.has(slug)) {
+            seen.add(slug);
+            out.push({ slug, label: p.city });
+        }
+    }
+    return out;
+}
+
+/**
+ * Filter the portfolio. Within a group the values OR together (any tier matches);
+ * across groups they AND (near AND tier AND bestFor AND city). Empty groups are
+ * ignored, so no filters returns everything.
+ */
+export function filterProperties(f: PropertyFilters): Property[] {
+    return properties.filter((p) => {
+        if (f.near && !p.nearFLW) return false;
+        if (f.tiers?.length && !f.tiers.includes(p.tier)) return false;
+        if (f.bestFor?.length && !f.bestFor.some((k) => p.bestFor.includes(k))) {
+            return false;
+        }
+        if (f.cities?.length && !f.cities.includes(slugifyCity(p.city))) {
+            return false;
+        }
+        return true;
+    });
+}
+
+/** Split a comma-separated query value into a clean string array. */
+function splitParam(value: string | string[] | undefined): string[] {
+    if (value == null) return [];
+    const raw = Array.isArray(value) ? value.join(",") : value;
+    return raw
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+}
+
+/**
+ * Parse the /hotels search params into typed filters, dropping any unknown
+ * values so a hand-edited URL can never break the page.
+ */
+export function parsePropertyFilters(
+    sp: Record<string, string | string[] | undefined>,
+): PropertyFilters {
+    const near = splitParam(sp.near).includes("flw");
+    const tiers = splitParam(sp.tier).filter((t): t is Tier =>
+        TIERS.includes(t as Tier),
+    );
+    const bestFor = splitParam(sp.for).filter((k): k is BestForKey =>
+        BEST_FOR_KEYS.includes(k as BestForKey),
+    );
+    const cityOptions = getFilterCities().map((c) => c.slug);
+    const cities = splitParam(sp.city).filter((c) => cityOptions.includes(c));
+
+    const filters: PropertyFilters = {};
+    if (near) filters.near = true;
+    if (tiers.length) filters.tiers = tiers;
+    if (bestFor.length) filters.bestFor = bestFor;
+    if (cities.length) filters.cities = cities;
+    return filters;
+}
+
+/** True when any filter is active (drives the "Clear all" affordance). */
+export function hasActiveFilters(f: PropertyFilters): boolean {
+    return Boolean(f.near || f.tiers?.length || f.bestFor?.length || f.cities?.length);
 }
 
 /** Franchise flag logo per brand (transparent assets in /public/brand/flags). */
@@ -471,7 +584,7 @@ export function getFLWAreaProperties(): Property[] {
     return getNearestToFLW().filter((p) => p.nearFLW);
 }
 
-function slugifyCity(city: string): string {
+export function slugifyCity(city: string): string {
     return city
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")

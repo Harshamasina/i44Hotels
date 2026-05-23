@@ -5,6 +5,7 @@ import { AMENITIES, type AmenityKey } from "@/lib/amenities";
 import { getOperatingProperties, formatFLWDistance } from "@/lib/properties";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RouteDivider } from "@/components/ui/route-divider";
 import { TierBadge, FlagBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -77,6 +78,7 @@ export default function AmenitiesPage() {
                         subtitle="Each I44 hotel flies a different franchise flag, so the exact amenities vary by property. Here is what to expect across our hotels, and what each one offers."
                         align="center"
                     />
+                    <RouteDivider className="mt-10" />
                 </Container>
             </section>
 

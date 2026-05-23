@@ -6,4 +6,5 @@
 export const EXPLORE_LINKS = [
     { href: "/amenities", label: "Amenities" },
     { href: "/local-area", label: "Local Area" },
+    { href: "/faq", label: "FAQ" },
 ];

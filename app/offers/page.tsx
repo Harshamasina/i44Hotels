@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { getOffers, getFeaturedOffer, type Offer } from "@/lib/offers";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RouteDivider } from "@/components/ui/route-divider";
 import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -30,6 +31,7 @@ export default function OffersPage() {
                         subtitle="We book through each hotel's brand, so the best rates live on the brands' booking pages. Here is how to find the rate you qualify for, then book direct with no middleman markup."
                         align="center"
                     />
+                    <RouteDivider className="mt-10" />
                 </Container>
             </section>
 

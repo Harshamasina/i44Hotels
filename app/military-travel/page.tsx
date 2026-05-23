@@ -36,10 +36,11 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TierBadge, ComingSoonBadge } from "@/components/ui/badge";
+import { PatternBackground } from "@/components/ui/pattern-background";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FlwAreaMap } from "@/components/military/flw-area-map";
-import { FaqAccordion } from "@/components/military/faq-accordion";
+import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { getFeaturedOffer } from "@/lib/offers";
 
 export const metadata: Metadata = {
@@ -140,10 +141,7 @@ function MilitaryRates() {
                             {offer.summary}
                         </p>
                     </div>
-                    <Link
-                        href="/offers"
-                        className={cn(buttonVariants(), "shrink-0")}
-                    >
+                    <Link href="/offers" className={cn(buttonVariants(), "shrink-0")}>
                         See all offers
                         <ArrowRight className="size-4" aria-hidden />
                     </Link>
@@ -236,7 +234,11 @@ function ClosestHotels({
     sullivan?: Property;
 }) {
     return (
-        <section id="hotels-near-base" className="scroll-mt-20 bg-white">
+        <section
+            id="hotels-near-base"
+            className="relative isolate scroll-mt-20 overflow-hidden bg-white"
+        >
+            <PatternBackground />
             <Container className="py-16 sm:py-20">
                 <SectionHeading
                     eyebrow="Hotels near base"
@@ -511,9 +513,9 @@ function PlanYourStay() {
                     {tips.map(({ Icon, title, body }) => (
                         <div
                             key={title}
-                            className="group border-sand-200 rounded-2xl border bg-white p-6 shadow-sm transition duration-200 ease-out hover:-translate-y-1 hover:border-gold-300 hover:shadow-md"
+                            className="group border-sand-200 hover:border-gold-300 rounded-2xl border bg-white p-6 shadow-sm transition duration-200 ease-out hover:-translate-y-1 hover:shadow-md"
                         >
-                            <span className="bg-gold-100 inline-flex size-11 items-center justify-center rounded-xl transition-colors duration-200 group-hover:bg-gold-200">
+                            <span className="bg-gold-100 group-hover:bg-gold-200 inline-flex size-11 items-center justify-center rounded-xl transition-colors duration-200">
                                 <Icon className="text-gold-700 size-5" aria-hidden />
                             </span>
                             <h3 className="text-navy-800 mt-4 text-lg font-semibold">
@@ -592,7 +594,7 @@ function BetweenEvents() {
                             key={title}
                             className="group flex gap-4 rounded-2xl bg-white p-6 shadow-sm transition duration-200 ease-out hover:-translate-y-1 hover:shadow-md"
                         >
-                            <span className="bg-gold-100 inline-flex size-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-200 group-hover:bg-gold-200">
+                            <span className="bg-gold-100 group-hover:bg-gold-200 inline-flex size-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-200">
                                 <Icon className="text-gold-700 size-5" aria-hidden />
                             </span>
                             <div>
@@ -696,7 +698,9 @@ function Faqs() {
                     align="center"
                     className="mb-10"
                 />
-                <FaqAccordion items={FAQS} />
+                <div className="mx-auto max-w-3xl">
+                    <FaqAccordion items={FAQS} />
+                </div>
             </Container>
         </section>
     );

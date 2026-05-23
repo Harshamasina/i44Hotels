@@ -10,6 +10,7 @@ import { isInquiryReason, type InquiryReason } from "@/lib/inquiry";
 import { createFormToken } from "@/lib/inquiry-security";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { RouteDivider } from "@/components/ui/route-divider";
 import { ComingSoonBadge } from "@/components/ui/badge";
 import { InquiryForm } from "@/components/site/inquiry-form";
 
@@ -45,6 +46,7 @@ export default async function ContactPage({
                         subtitle="One message reaches our team. Ask a question, request a group room block, plan an extended stay, or tell us about your Fort Leonard Wood trip, and we will get back to you."
                         align="center"
                     />
+                    <RouteDivider className="mt-10" />
                 </Container>
             </section>
 
