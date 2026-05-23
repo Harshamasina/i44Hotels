@@ -65,8 +65,9 @@ export type Property = {
     phone?: string;
     /** Sits in the Fort Leonard Wood gateway area (St. Robert / Waynesville). */
     nearFLW: boolean;
-    /** Drive time to the FLW gates, when known (TODO: confirm). */
+    /** Approx. drive time + distance to the FLW main gate (St. Robert hotels only). */
     distanceToFLWMinutes?: number;
+    distanceToFLWMiles?: number;
     /** Per-property deep link to the flag's official booking engine (TBD, Phase 11). */
     bookingUrl?: string;
     address?: Address;
@@ -91,6 +92,8 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-336-5556",
         nearFLW: true,
+        distanceToFLWMinutes: 9,
+        distanceToFLWMiles: 4,
         // TODO: verify exact coords (geocoder could not resolve 14125 Hwy Z).
         address: {
             street: "14125 State Hwy Z",
@@ -121,6 +124,8 @@ export const properties: Property[] = [
         state: "MO",
         phone: "573-336-3553",
         nearFLW: true,
+        distanceToFLWMinutes: 6,
+        distanceToFLWMiles: 2,
         address: {
             street: "103 Comfort Inn Drive",
             zip: "65584",
@@ -194,6 +199,10 @@ export const properties: Property[] = [
         city: "St. Robert",
         state: "MO",
         nearFLW: true,
+        distanceToFLWMinutes: 10,
+        distanceToFLWMiles: 4,
+        // TODO: verify exact Hyatt Select address - 107 McKinnon St currently
+        // lists as the Super 8 (St. Robert); may be a rebrand or provisional lot.
         address: {
             street: "107 McKinnon St",
             zip: "65584",
@@ -263,6 +272,56 @@ export function coverPhoto(p: Property): PropertyPhoto | undefined {
 export function telHref(phone?: string): string | undefined {
     if (!phone) return undefined;
     return `tel:${phone.replace(/[^0-9]/g, "")}`;
+}
+
+/** One-line street address, e.g. "103 Comfort Inn Drive, St. Robert, MO 65584". */
+export function formatAddress(p: Property): string | undefined {
+    if (!p.address) return undefined;
+    return `${p.address.street}, ${p.city}, ${p.state} ${p.address.zip}`;
+}
+
+/** Google Maps directions link to the property's precise coordinates. */
+export function directionsHref(p: Property): string | undefined {
+    if (!p.address) return undefined;
+    const { lat, lng } = p.address;
+    return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+}
+
+/**
+ * Fort Leonard Wood Main (North) Gate / Visitor Control Center, the reference
+ * point for distances, the area map, and directions. Coords approximate the
+ * gate at the south end of Missouri Ave; the VCC is open 24/7.
+ */
+export const FLW_MAIN_GATE = {
+    name: "Fort Leonard Wood Main Gate",
+    detail: "Visitor Control Center, Missouri Ave",
+    city: "Fort Leonard Wood",
+    state: "MO",
+    zip: "65473",
+    hours: "Open 24/7",
+    lat: 37.8011,
+    lng: -92.1437,
+} as const;
+
+/** Official Fort Leonard Wood resources (outbound; always open in a new tab). */
+export const FLW_LINKS = {
+    graduationCalendar:
+        "https://home.army.mil/wood/index.php/my-fort/grad/calendar",
+    visitorAccess:
+        "https://home.army.mil/wood/Garrison/DES/physical-security/access-control",
+} as const;
+
+/** Honest, approximate distance label, e.g. "~2 mi / ~6 min to base". Undefined if unknown. */
+export function formatFLWDistance(p: Property): string | undefined {
+    if (p.distanceToFLWMiles == null || p.distanceToFLWMinutes == null) {
+        return undefined;
+    }
+    return `~${p.distanceToFLWMiles} mi / ~${p.distanceToFLWMinutes} min to base`;
+}
+
+/** St. Robert hotels nearest the base, drive-time order (drives the FLW page list + map). */
+export function getFLWAreaProperties(): Property[] {
+    return getNearestToFLW().filter((p) => p.nearFLW);
 }
 
 function slugifyCity(city: string): string {

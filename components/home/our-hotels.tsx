@@ -1,7 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin } from "lucide-react";
-import { getAllProperties, brandLogo, coverPhoto, type Property } from "@/lib/properties";
+import { MapPin, Navigation } from "lucide-react";
+import {
+    getAllProperties,
+    brandLogo,
+    coverPhoto,
+    formatAddress,
+    directionsHref,
+    type Property,
+} from "@/lib/properties";
 import { AMENITIES } from "@/lib/amenities";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -83,9 +90,27 @@ function PropertyCard({ property: p }: { property: Property }) {
                 <h3 className="text-navy-800 font-serif text-lg leading-snug">
                     {p.name}
                 </h3>
-                <p className="text-sand-600 mt-0.5 text-sm">
-                    {p.city}, {p.state}
-                </p>
+                {p.address && (
+                    <div className="mt-1.5 flex items-start gap-2">
+                        <MapPin
+                            className="text-gold-600 mt-0.5 size-4 shrink-0"
+                            aria-hidden
+                        />
+                        <p className="text-sand-600 flex-1 text-sm">
+                            {formatAddress(p)}
+                        </p>
+                        <a
+                            href={directionsHref(p)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Get directions to ${p.shortName}`}
+                            title="Get directions"
+                            className="text-gold-600 hover:bg-gold-100 hover:text-gold-700 -mt-0.5 inline-flex shrink-0 rounded-full p-1.5 transition-colors"
+                        >
+                            <Navigation className="size-4" aria-hidden />
+                        </a>
+                    </div>
+                )}
 
                 {p.amenities.length > 0 && (
                     <div className="text-sand-500 mt-3 flex flex-wrap gap-2.5">
