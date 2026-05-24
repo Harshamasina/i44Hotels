@@ -46,7 +46,9 @@ export function PropertyMap({
             });
             map = m;
             m.on("load", () => {
-                if (!cancelled) setReady(true);
+                if (cancelled) return;
+                m.resize(); // container was deferred; ensure correct canvas size
+                setReady(true);
             });
 
             m.addControl(
@@ -85,7 +87,7 @@ export function PropertyMap({
             className="shadow-navy-900/5 relative h-[360px] w-full overflow-hidden rounded-2xl shadow-md"
             aria-label={`Map showing the location of ${name}`}
         >
-            <div ref={containerRef} className="absolute inset-0" />
+            <div ref={containerRef} className="h-full w-full" />
             <MapSkeleton
                 className={cn(
                     "transition-opacity duration-500",

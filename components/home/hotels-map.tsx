@@ -76,7 +76,9 @@ export function HotelsMap() {
 
             // Highlight the real I-44 route (OpenStreetMap geometry) + fit the pins.
             m.on("load", () => {
-                if (!cancelled) setReady(true);
+                if (cancelled) return;
+                m.resize(); // container was deferred; ensure correct canvas size
+                setReady(true);
                 m.addSource("i44", { type: "geojson", data: "/i44-route.geojson" });
                 m.addLayer({
                     id: "i44-casing",
@@ -111,7 +113,7 @@ export function HotelsMap() {
             className="shadow-navy-900/5 relative h-[420px] w-full overflow-hidden rounded-2xl shadow-md"
             aria-label="Map of I44 Hotels locations along Interstate 44"
         >
-            <div ref={containerRef} className="absolute inset-0" />
+            <div ref={containerRef} className="h-full w-full" />
             <MapSkeleton
                 className={cn(
                     "transition-opacity duration-500",

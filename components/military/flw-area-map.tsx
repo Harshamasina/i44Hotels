@@ -101,7 +101,9 @@ export function FlwAreaMap() {
 
             // Soft halo around the base to read as "the installation," + fit all pins.
             m.on("load", () => {
-                if (!cancelled) setReady(true);
+                if (cancelled) return;
+                m.resize(); // container was deferred; ensure correct canvas size
+                setReady(true);
                 m.addSource("flw-gate", {
                     type: "geojson",
                     data: {
@@ -208,7 +210,7 @@ export function FlwAreaMap() {
             className="shadow-navy-900/5 relative h-[420px] w-full overflow-hidden rounded-2xl shadow-md"
             aria-label="Map of I44 Hotels near the Fort Leonard Wood main gate"
         >
-            <div ref={containerRef} className="absolute inset-0" />
+            <div ref={containerRef} className="h-full w-full" />
             <MapSkeleton
                 className={cn(
                     "transition-opacity duration-500",
