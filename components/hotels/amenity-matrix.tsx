@@ -62,9 +62,9 @@ export function AmenityMatrix({ properties }: { properties: Property[] }) {
     if (properties.length === 0 || rows.length === 0) return null;
 
     return (
-        <div className="border-sand-200 overflow-hidden rounded-2xl border bg-white">
-            <div className="max-h-[30rem] overflow-auto">
-                <table className="w-full min-w-[600px] border-collapse text-left">
+        <div className="border-sand-200 w-full max-w-full overflow-hidden rounded-2xl border bg-white">
+            <div className="max-h-[30rem] w-full overflow-x-auto overflow-y-auto">
+                <table className="w-full border-collapse text-left sm:min-w-150">
                     <caption className="sr-only">
                         Amenities available at each I44 hotel
                     </caption>

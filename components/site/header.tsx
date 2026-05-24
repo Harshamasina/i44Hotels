@@ -53,8 +53,8 @@ export function SiteHeader() {
     }, []);
 
     return (
-        <header className="border-sand-200 bg-sand-50/95 supports-[backdrop-filter]:bg-sand-50/80 sticky top-0 z-40 border-b backdrop-blur">
-            <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <header className="border-sand-200 bg-sand-50/95 supports-[backdrop-filter]:bg-sand-50/80 sticky top-0 z-40 w-full border-b backdrop-blur">
+            <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
                 <Link href="/" aria-label="I44 Hotels home" className="shrink-0">
                     <Image
                         src="/brand/i44-logo.png"

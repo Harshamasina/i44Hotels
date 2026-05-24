@@ -35,7 +35,7 @@ export default async function HotelsPage({
     const results = filterProperties(filters);
 
     return (
-        <>
+        <div className="overflow-x-clip">
             <section className="bg-navy-900 relative isolate overflow-hidden">
                 <Image
                     src="/brand/flags/hyatt_select.webp"
@@ -181,6 +181,6 @@ export default async function HotelsPage({
                     </div>
                 </Container>
             </section>
-        </>
+        </div>
     );
 }

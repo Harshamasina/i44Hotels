@@ -66,9 +66,9 @@ export default function RootLayout({
             lang="en"
             className={`${fraunces.variable} ${hanken.variable} h-full antialiased`}
         >
-            <body className="bg-sand-50 text-sand-800 flex min-h-full flex-col pb-14 md:pb-0">
+            <body className="bg-sand-50 text-sand-800 flex min-h-full w-full flex-col pb-14 md:pb-0">
                 <SiteHeader />
-                <main className="flex-1">{children}</main>
+                <main className="w-full flex-1 overflow-x-clip">{children}</main>
                 <SiteFooter />
                 <MobileBookingBar />
             </body>

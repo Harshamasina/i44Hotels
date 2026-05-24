@@ -8,7 +8,7 @@ import { Hotel, Phone } from "lucide-react";
  */
 export function MobileBookingBar() {
     return (
-        <div className="border-sand-200 bg-sand-50/95 fixed inset-x-0 bottom-0 z-50 border-t backdrop-blur md:hidden">
+        <div className="border-sand-200 bg-sand-50/95 fixed inset-x-0 bottom-0 z-50 max-w-[100vw] border-t backdrop-blur md:hidden">
             <div className="divide-sand-200 grid grid-cols-3 divide-x">
                 <Link
                     href="/hotels"
