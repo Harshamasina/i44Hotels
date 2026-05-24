@@ -13,6 +13,7 @@ import { BEST_FOR } from "@/lib/best-for";
 import { Card } from "@/components/ui/card";
 import { TierBadge, ComingSoonBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { CardRating } from "@/components/hotels/card-rating";
 
 /**
  * Shared portfolio card, used by the homepage "Our Hotels" previews and the
@@ -70,6 +71,7 @@ export function PropertyCard({ property: p }: { property: Property }) {
                 <h3 className="text-navy-800 font-serif text-lg leading-snug">
                     {p.name}
                 </h3>
+                <CardRating placeId={p.googlePlaceId} className="mt-2" />
                 {p.address && (
                     <div className="mt-1.5 flex items-start gap-2">
                         <MapPin
@@ -133,7 +135,7 @@ export function PropertyCard({ property: p }: { property: Property }) {
                                 View hotel
                             </Link>
                             <Link
-                                href={p.bookingUrl ?? `/hotels/${p.slug}`}
+                                href={`/hotels/${p.slug}#book`}
                                 className={buttonVariants({ size: "sm" })}
                             >
                                 Book

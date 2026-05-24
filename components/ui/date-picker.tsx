@@ -58,6 +58,7 @@ export function DatePicker({
     placeholder = "Select a date",
     invalid = false,
     describedBy,
+    compact = false,
 }: {
     name: string;
     id?: string;
@@ -68,6 +69,8 @@ export function DatePicker({
     placeholder?: string;
     invalid?: boolean;
     describedBy?: string;
+    /** Abbreviate the selected-date label (e.g. "Sep 30, 2026") for narrow fields. */
+    compact?: boolean;
 }) {
     const selected = parseISO(value);
     const minDate = parseISO(min);
@@ -192,8 +195,11 @@ export function DatePicker({
     for (let i = 0; i < leading; i++) cells.push(null);
     for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
 
+    const monthLabel = compact
+        ? MONTHS[selected?.getMonth() ?? 0].slice(0, 3)
+        : MONTHS[selected?.getMonth() ?? 0];
     const display = selected
-        ? `${MONTHS[selected.getMonth()]} ${selected.getDate()}, ${selected.getFullYear()}`
+        ? `${monthLabel} ${selected.getDate()}, ${selected.getFullYear()}`
         : placeholder;
 
     const navBtn =

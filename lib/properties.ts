@@ -40,11 +40,15 @@ export type PropertyPhoto = {
     alt: string;
 };
 
+/** Badges shown on a room card. */
+export type RoomTag = "pet-friendly" | "accessible" | "suite";
+
 export type RoomType = {
     name: string;
     sleeps?: number;
     description?: string;
     features?: string[];
+    tags?: RoomTag[];
 };
 
 export type Address = {
@@ -59,6 +63,21 @@ export type Policies = {
     parking?: string;
     checkIn?: string;
     checkOut?: string;
+    smokeFree?: boolean;
+    /** e.g. "Children 18 and under stay free." */
+    children?: string;
+    /** Extra good-to-know notes (deposits, pet-floor rules, etc.). */
+    notes?: string[];
+};
+
+export type NearbyCategory = "dining" | "attraction" | "business";
+
+/** A point of interest near a property, for the "What's nearby" section. */
+export type NearbyPlace = {
+    name: string;
+    category: NearbyCategory;
+    /** Human label as published by the brand, e.g. "2 mi" or "Adjacent". */
+    distance?: string;
 };
 
 /** A labeled list of amenities, as published on the brand's property page. */
@@ -87,7 +106,10 @@ export type Property = {
     status: PropertyStatus;
     city: string;
     state: string;
+    /** Local front-desk line (primary tap-to-call). */
     phone?: string;
+    /** Brand reservations line, shown as a secondary contact. */
+    reservationsPhone?: string;
     /** Sits in the Fort Leonard Wood gateway area (St. Robert / Waynesville). */
     nearFLW: boolean;
     /** Approx. drive time + distance to the FLW main gate (St. Robert hotels only). */
@@ -107,7 +129,7 @@ export type Property = {
     roomTypes: RoomType[];
     photos: PropertyPhoto[];
     policies?: Policies;
-    nearbyAttractions?: string[];
+    nearbyAttractions?: NearbyPlace[];
 };
 
 export const properties: Property[] = [
@@ -127,6 +149,9 @@ export const properties: Property[] = [
         distanceToFLWMiles: 4,
         bestFor: ["military", "leisure", "pets", "largeVehicle"],
         googlePlaceId: "ChIJsdVcjvjm2ocRAm6EGIwc7t0",
+        // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
+        bookingUrl:
+            "https://www.wyndhamhotels.com/days-inn/st-robert-missouri/days-inn-st-robert-waynesville-ft-leonard-wood/overview",
         // TODO: verify exact coords (geocoder could not resolve 14125 Hwy Z).
         address: {
             street: "14125 State Hwy Z",
@@ -185,7 +210,40 @@ export const properties: Property[] = [
                 },
             ],
         },
-        roomTypes: [], // TODO: add room types
+        roomTypes: [
+            {
+                name: "Two Queen Room",
+                sleeps: 4,
+                description:
+                    "Two queen beds with a private balcony, room for the whole family in town for a Fort Leonard Wood graduation. Smoking and non-smoking rooms available.",
+                features: [
+                    "Free WiFi for members",
+                    "Private balcony",
+                    "Mini-refrigerator & microwave",
+                    "In-room climate control",
+                    "HDTV",
+                    "Desk",
+                    "Hair dryer",
+                    "Iron & ironing board",
+                ],
+            },
+            {
+                name: "Accessible King Room",
+                sleeps: 2,
+                description:
+                    "A king room built for mobility access, with a roll-in shower and grab bars throughout.",
+                features: [
+                    "Walk-in shower with grab bars",
+                    "Hand-held shower wand & portable seat",
+                    "Wheelchair-accessible bath & bedroom",
+                    "Raised toilet seat with grab bars",
+                    "TDD telephone",
+                    "Mini-refrigerator & microwave",
+                    "HDTV",
+                ],
+                tags: ["accessible"],
+            },
+        ],
         // Official Wyndham property photos (property 04346), organized by category.
         photos: [
             {
@@ -319,6 +377,26 @@ export const properties: Property[] = [
                 alt: "Guest laundry facilities at Days Inn by Wyndham St. Robert",
             },
         ],
+        // Same St. Robert / Fort Leonard Wood area as Comfort Inn St. Robert.
+        nearbyAttractions: [
+            { name: "Cracker Barrel", category: "dining", distance: "Adjacent" },
+            { name: "Ruby Tuesday", category: "dining", distance: "Adjacent" },
+            { name: "Mama Mia's Authentic Greek", category: "dining", distance: "Adjacent" },
+            { name: "El Jimador", category: "dining", distance: "0 mi" },
+            { name: "Culver's", category: "dining", distance: "0 mi" },
+            { name: "Fort Leonard Wood", category: "attraction", distance: "2 mi" },
+            {
+                name: "Uranus Fudge Factory & Store",
+                category: "attraction",
+                distance: "2 mi",
+            },
+            { name: "Waynesville", category: "attraction", distance: "4.4 mi" },
+            { name: "Roubidoux Springs", category: "attraction", distance: "5 mi" },
+            { name: "John B. Mahaffey Museum", category: "attraction", distance: "5 mi" },
+            { name: "Walmart", category: "business", distance: "1 mi" },
+            { name: "Lowe's", category: "business", distance: "1 mi" },
+            { name: "Drury University", category: "business", distance: "1.5 mi" },
+        ],
     },
     {
         slug: "comfort-inn-st-robert",
@@ -331,11 +409,14 @@ export const properties: Property[] = [
         city: "St. Robert",
         state: "MO",
         phone: "573-336-3553",
+        reservationsPhone: "573-629-1400",
         nearFLW: true,
         distanceToFLWMinutes: 6,
         distanceToFLWMiles: 2,
         bestFor: ["military", "business", "leisure", "groups", "pets"],
         googlePlaceId: "ChIJ-9CGWnzd2ocRG1gF3cGW4EI",
+        // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
+        bookingUrl: "https://www.choicehotels.com/missouri/saint-robert/comfort-inn-hotels/mo107",
         address: {
             street: "103 Comfort Inn Drive",
             zip: "65584",
@@ -397,7 +478,110 @@ export const properties: Property[] = [
                 },
             ],
         },
-        roomTypes: [], // TODO
+        roomTypes: [
+            {
+                name: "King Room",
+                sleeps: 2,
+                description:
+                    "A comfortable king room, with pet-friendly rooms available.",
+                features: [
+                    "Free WiFi",
+                    "Walk-in shower",
+                    "Flat-screen TV",
+                    "Desk",
+                    "Refrigerator",
+                ],
+                tags: ["pet-friendly"],
+            },
+            {
+                name: "Two Queen Room",
+                sleeps: 4,
+                description:
+                    "Two queen beds with room for the family, with pet-friendly rooms available.",
+                features: [
+                    "Free WiFi",
+                    "Flat-screen TV",
+                    "Refrigerator",
+                    "Hair dryer",
+                    "Iron & ironing board",
+                ],
+                tags: ["pet-friendly"],
+            },
+            {
+                name: "King Suite",
+                sleeps: 4,
+                description:
+                    "A one-room king suite with a sofa bed for extra guests.",
+                features: [
+                    "1-room suite",
+                    "King bed + sofa bed",
+                    "Free WiFi",
+                    "Walk-in shower",
+                    "Flat-screen TV",
+                ],
+                tags: ["suite"],
+            },
+            {
+                name: "Queen Suite",
+                sleeps: 6,
+                description:
+                    "A spacious one-room suite with two queen beds plus a sofa bed, our largest layout.",
+                features: [
+                    "1-room suite",
+                    "Two queen beds + sofa bed",
+                    "Free WiFi",
+                    "Flat-screen TV",
+                    "Refrigerator",
+                ],
+                tags: ["suite"],
+            },
+            {
+                name: "Accessible King Room",
+                sleeps: 2,
+                description:
+                    "A ground-floor king room with hearing-accessible and vision-impaired features.",
+                features: [
+                    "Ground floor",
+                    "Hearing accessible",
+                    "Vision-impaired features",
+                    "Walk-in shower",
+                    "Free WiFi",
+                ],
+                tags: ["accessible"],
+            },
+        ],
+        policies: {
+            checkIn: "3:00 PM",
+            checkOut: "11:00 AM",
+            smokeFree: true,
+            children: "Anyone 18 and under at time of booking stays free.",
+            pets: "Dogs only. $30 per pet, per night. No deposit and no limit on number or size. Service animals are welcome at no charge.",
+            parking: "Free on-site parking.",
+        },
+        nearbyAttractions: [
+            { name: "Cracker Barrel", category: "dining", distance: "Adjacent" },
+            { name: "Ruby Tuesday", category: "dining", distance: "Adjacent" },
+            { name: "Mama Mia's Authentic Greek", category: "dining", distance: "Adjacent" },
+            { name: "El Jimador", category: "dining", distance: "0 mi" },
+            { name: "Culver's", category: "dining", distance: "0 mi" },
+            {
+                name: "Uranus Fudge Factory & Store",
+                category: "attraction",
+                distance: "2 mi",
+            },
+            { name: "Fort Leonard Wood", category: "attraction", distance: "2 mi" },
+            { name: "Waynesville", category: "attraction", distance: "4.4 mi" },
+            { name: "Roubidoux Springs", category: "attraction", distance: "5 mi" },
+            { name: "John B. Mahaffey Museum", category: "attraction", distance: "5 mi" },
+            {
+                name: "Waynesville-St. Robert Chamber",
+                category: "business",
+                distance: "0 mi",
+            },
+            { name: "Walmart", category: "business", distance: "1 mi" },
+            { name: "Lowe's", category: "business", distance: "1 mi" },
+            { name: "Drury University", category: "business", distance: "1.5 mi" },
+        ],
         // Official Choice property photos (property MO107), organized by category.
         photos: [
             {
@@ -583,9 +767,12 @@ export const properties: Property[] = [
         city: "Sullivan",
         state: "MO",
         phone: "573-468-7800",
+        reservationsPhone: "573-203-0702",
         nearFLW: false,
         bestFor: ["leisure", "business", "groups", "pets", "largeVehicle"],
         googlePlaceId: "ChIJ0UrBfMxj2YcRJRTbIWvINhw",
+        // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
+        bookingUrl: "https://www.choicehotels.com/missouri/sullivan/comfort-inn-hotels/mo210",
         address: {
             street: "736 South Service Road",
             zip: "63080",
@@ -639,7 +826,77 @@ export const properties: Property[] = [
                 },
             ],
         },
-        roomTypes: [], // TODO
+        roomTypes: [
+            {
+                name: "King Room",
+                sleeps: 2,
+                description:
+                    "A comfortable king room, with pet-friendly rooms available on the first floor.",
+                features: [
+                    "Free WiFi",
+                    "Microwave & mini-refrigerator",
+                    "Desk",
+                    "Hair dryer",
+                    "Iron & ironing board",
+                ],
+                tags: ["pet-friendly"],
+            },
+            {
+                name: "Two Queen Room",
+                sleeps: 4,
+                description:
+                    "Two queen beds with room for the family, with pet-friendly rooms available on the first floor.",
+                features: [
+                    "Free WiFi",
+                    "Microwave & mini-refrigerator",
+                    "Desk",
+                    "Hair dryer",
+                    "Iron & ironing board",
+                ],
+                tags: ["pet-friendly"],
+            },
+            {
+                name: "Accessible King Room",
+                sleeps: 2,
+                description:
+                    "A king room with mobility and hearing accessibility, and connecting rooms available.",
+                features: [
+                    "Mobility & hearing accessible",
+                    "Roll-in shower",
+                    "Visual alarm, doorbell & telephone alerts",
+                    "Connecting rooms available",
+                ],
+                tags: ["accessible"],
+            },
+        ],
+        policies: {
+            checkIn: "3:00 PM",
+            checkOut: "11:00 AM",
+            smokeFree: true,
+            children: "Anyone 18 and under at time of booking stays free.",
+            pets: "$30 per pet, per night, up to 2 pets per room. No deposit and no size limit. Pet-friendly rooms are on the first floor only and are limited. Service animals are welcome at no charge.",
+            parking: "Free on-site parking, with room for buses and trucks.",
+            notes: [
+                "Guests living within 30 miles of Sullivan provide a $250 cash deposit at check-in.",
+                "Housekeeping is provided every other day.",
+            ],
+        },
+        nearbyAttractions: [
+            { name: "Taco Bell", category: "dining", distance: "0 mi" },
+            { name: "Subway", category: "dining", distance: "0 mi" },
+            { name: "Steak 'n Shake", category: "dining", distance: "0 mi" },
+            { name: "McDonald's", category: "dining", distance: "0 mi" },
+            { name: "Jack in the Box", category: "dining", distance: "0 mi" },
+            { name: "Meramec State Park", category: "attraction", distance: "5 mi" },
+            { name: "Meramec River", category: "attraction", distance: "5 mi" },
+            { name: "Jesse James Wax Museum", category: "attraction", distance: "5 mi" },
+            { name: "Onyx Mountain Caverns", category: "attraction", distance: "6 mi" },
+            { name: "Meramec Caverns", category: "attraction", distance: "10 mi" },
+            { name: "The Meramec Group", category: "business", distance: "1 mi" },
+            { name: "Sullivan Precision Metal", category: "business", distance: "1 mi" },
+            { name: "Missouri Baptist Hospital", category: "business", distance: "1 mi" },
+            { name: "Scotch Dye Casting", category: "business", distance: "2 mi" },
+        ],
         // Official Choice property photos (property MO210), organized by category.
         photos: [
             {

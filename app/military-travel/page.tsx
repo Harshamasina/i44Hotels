@@ -34,6 +34,7 @@ import {
 import { AMENITIES } from "@/lib/amenities";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { CardRating } from "@/components/hotels/card-rating";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TierBadge, ComingSoonBadge } from "@/components/ui/badge";
 import { PatternBackground } from "@/components/ui/pattern-background";
@@ -335,6 +336,7 @@ function AreaHotelCard({ property: p }: { property: Property }) {
                 <h3 className="text-navy-800 mt-2 font-serif text-lg leading-snug">
                     {p.name}
                 </h3>
+                <CardRating placeId={p.googlePlaceId} className="mt-2" />
                 {p.address && (
                     <p className="text-sand-600 mt-1.5 text-sm">{formatAddress(p)}</p>
                 )}
@@ -367,7 +369,7 @@ function AreaHotelCard({ property: p }: { property: Property }) {
                                 View hotel
                             </Link>
                             <Link
-                                href={p.bookingUrl ?? `/hotels/${p.slug}`}
+                                href={`/hotels/${p.slug}#book`}
                                 className={buttonVariants({ size: "sm" })}
                             >
                                 Book

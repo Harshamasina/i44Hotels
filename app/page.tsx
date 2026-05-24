@@ -5,6 +5,7 @@ import { FlwBand } from "@/components/home/flw-band";
 import { AmenityHighlights } from "@/components/home/amenity-highlights";
 import { GroupsExtendedStay } from "@/components/home/groups-extended-stay";
 import { WhyBookDirect } from "@/components/home/why-book-direct";
+import { Testimonials } from "@/components/home/testimonials";
 import { LocationsSection } from "@/components/home/locations-section";
 import { ClosingCta } from "@/components/home/closing-cta";
 
@@ -19,6 +20,7 @@ export default function HomePage() {
             <AmenityHighlights />
             <GroupsExtendedStay />
             <WhyBookDirect />
+            <Testimonials />
             <LocationsSection />
             <ClosingCta />
         </>
