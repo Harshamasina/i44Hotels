@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { getAllProperties } from "@/lib/properties";
+import { useInView } from "@/components/hooks/use-in-view";
+import { MapSkeleton } from "@/components/ui/map-skeleton";
+import { cn } from "@/lib/utils";
 
 const GOLD = "#bf8f56"; // gold-500 (passed to the MapLibre JS API, not a CSS class)
 const NAVY = "#0b1e3a"; // navy-800, used as a casing under the gold I-44 line
@@ -18,10 +21,12 @@ const INITIAL_CENTER: [number, number] = [-91.7, 38.0];
  * the I-44 corridor once the map has loaded. No token required.
  */
 export function HotelsMap() {
+    const [wrapRef, inView] = useInView<HTMLDivElement>();
     const containerRef = useRef<HTMLDivElement>(null);
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        if (!inView || !containerRef.current) return;
         let cancelled = false;
         let map: import("maplibre-gl").Map | undefined;
 
@@ -71,6 +76,7 @@ export function HotelsMap() {
 
             // Highlight the real I-44 route (OpenStreetMap geometry) + fit the pins.
             m.on("load", () => {
+                if (!cancelled) setReady(true);
                 m.addSource("i44", { type: "geojson", data: "/i44-route.geojson" });
                 m.addLayer({
                     id: "i44-casing",
@@ -97,12 +103,21 @@ export function HotelsMap() {
             cancelled = true;
             map?.remove();
         };
-    }, []);
+    }, [inView]);
 
     return (
         <div
-            ref={containerRef}
-            className="shadow-navy-900/5 h-[420px] w-full overflow-hidden rounded-2xl shadow-md"
-        />
+            ref={wrapRef}
+            className="shadow-navy-900/5 relative h-[420px] w-full overflow-hidden rounded-2xl shadow-md"
+            aria-label="Map of I44 Hotels locations along Interstate 44"
+        >
+            <div ref={containerRef} className="absolute inset-0" />
+            <MapSkeleton
+                className={cn(
+                    "transition-opacity duration-500",
+                    ready && "pointer-events-none opacity-0",
+                )}
+            />
+        </div>
     );
 }

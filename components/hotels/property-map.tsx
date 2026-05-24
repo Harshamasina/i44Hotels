@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { useInView } from "@/components/hooks/use-in-view";
+import { MapSkeleton } from "@/components/ui/map-skeleton";
+import { cn } from "@/lib/utils";
 
 const GOLD = "#bf8f56"; // gold-500, passed to the MapLibre JS API (not a CSS class)
 // OpenFreeMap: free vector tiles, no key/account. "positron" = light/elegant.
@@ -20,10 +23,12 @@ export function PropertyMap({
     lng: number;
     name: string;
 }) {
+    const [wrapRef, inView] = useInView<HTMLDivElement>();
     const containerRef = useRef<HTMLDivElement>(null);
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        if (!inView || !containerRef.current) return;
         let cancelled = false;
         let map: import("maplibre-gl").Map | undefined;
 
@@ -40,6 +45,9 @@ export function PropertyMap({
                 attributionControl: false,
             });
             map = m;
+            m.on("load", () => {
+                if (!cancelled) setReady(true);
+            });
 
             m.addControl(
                 new maplibregl.NavigationControl({ showCompass: false }),
@@ -69,13 +77,21 @@ export function PropertyMap({
             cancelled = true;
             map?.remove();
         };
-    }, [lat, lng, name]);
+    }, [inView, lat, lng, name]);
 
     return (
         <div
-            ref={containerRef}
-            className="shadow-navy-900/5 h-[360px] w-full overflow-hidden rounded-2xl shadow-md"
+            ref={wrapRef}
+            className="shadow-navy-900/5 relative h-[360px] w-full overflow-hidden rounded-2xl shadow-md"
             aria-label={`Map showing the location of ${name}`}
-        />
+        >
+            <div ref={containerRef} className="absolute inset-0" />
+            <MapSkeleton
+                className={cn(
+                    "transition-opacity duration-500",
+                    ready && "pointer-events-none opacity-0",
+                )}
+            />
+        </div>
     );
 }
