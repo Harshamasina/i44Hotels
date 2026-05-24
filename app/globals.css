@@ -45,8 +45,10 @@
     --color-sand-200: #efe3ce;
     --color-sand-300: #e2cea6;
     --color-sand-400: #c4bdb0;
-    --color-sand-500: #a39a8a;
-    --color-sand-600: #807766;
+    /* 500/600 darkened from #a39a8a/#807766 so muted text clears WCAG AA (4.5:1)
+       on white and the cream #f8efe0 band. Used for text only (no bg/border). */
+    --color-sand-500: #6e6557;
+    --color-sand-600: #5d5446;
     --color-sand-700: #4a4339;
     --color-sand-800: #2b2b2b;
     --color-sand-900: #1c1a16;

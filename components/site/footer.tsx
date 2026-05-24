@@ -44,7 +44,7 @@ export function SiteFooter() {
                                 <li key={p.slug}>
                                     <Link
                                         href={`/hotels/${p.slug}`}
-                                        className="hover:text-gold-400"
+                                        className="hover:text-gold-400 inline-block py-1"
                                     >
                                         {p.shortName}
                                     </Link>
@@ -61,7 +61,7 @@ export function SiteFooter() {
                         <li>
                             <Link
                                 href="/hotels"
-                                className="text-gold-400 hover:text-gold-300 font-medium"
+                                className="text-gold-400 hover:text-gold-300 inline-block py-1 font-medium"
                             >
                                 View all hotels
                             </Link>
@@ -72,7 +72,10 @@ export function SiteFooter() {
                     <FooterColumn title="Explore">
                         {EXPLORE_LINKS.map((l) => (
                             <li key={l.href}>
-                                <Link href={l.href} className="hover:text-gold-400">
+                                <Link
+                                    href={l.href}
+                                    className="hover:text-gold-400 inline-block py-1"
+                                >
                                     {l.label}
                                 </Link>
                             </li>
@@ -83,7 +86,10 @@ export function SiteFooter() {
                     <FooterColumn title="Plan Your Stay">
                         {PLAN_LINKS.map((l) => (
                             <li key={l.href}>
-                                <Link href={l.href} className="hover:text-gold-400">
+                                <Link
+                                    href={l.href}
+                                    className="hover:text-gold-400 inline-block py-1"
+                                >
                                     {l.label}
                                 </Link>
                             </li>
@@ -100,7 +106,7 @@ export function SiteFooter() {
                                 <p className="text-sand-100 font-medium">{p.shortName}</p>
                                 <a
                                     href={telHref(p.phone)}
-                                    className="text-sand-300 hover:text-gold-400"
+                                    className="text-sand-300 hover:text-gold-400 inline-block py-1"
                                 >
                                     {p.phone}
                                 </a>

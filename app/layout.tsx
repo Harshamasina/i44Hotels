@@ -27,6 +27,21 @@ export const metadata: Metadata = {
     },
     description:
         "Comfortable, convenient hotels along Interstate 44 for families, business travelers, and Fort Leonard Wood graduation guests. Book direct with I44 Hotels.",
+    openGraph: {
+        type: "website",
+        siteName: "I44 Hotels",
+        locale: "en_US",
+        url: "/",
+        title: "I44 Hotels | Comfortable Stays Along I-44",
+        description:
+            "Comfortable, convenient hotels along Interstate 44 for families, business travelers, and Fort Leonard Wood graduation guests. Book direct with I44 Hotels.",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "I44 Hotels | Comfortable Stays Along I-44",
+        description:
+            "Comfortable, convenient hotels along Interstate 44, near Fort Leonard Wood. Book direct with I44 Hotels.",
+    },
     icons: {
         icon: [
             { url: "/favicon.ico", sizes: "any" },

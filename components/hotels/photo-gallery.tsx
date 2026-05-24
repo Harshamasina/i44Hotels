@@ -184,7 +184,7 @@ export function PhotoGallery({
                                         : `View photo: ${photo.alt}`
                                 }
                                 className={cn(
-                                    "group relative overflow-hidden",
+                                    "group relative cursor-pointer overflow-hidden",
                                     lead
                                         ? "col-span-4 row-span-2 aspect-3/2 sm:col-span-2 sm:aspect-auto"
                                         : "hidden aspect-3/2 sm:block sm:aspect-auto",
@@ -219,7 +219,7 @@ export function PhotoGallery({
                     <button
                         type="button"
                         onClick={(e) => openModal(e.currentTarget, "grid")}
-                        className="text-navy-800 border-sand-300 hover:border-gold-300 inline-flex items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-semibold transition-colors"
+                        className="text-navy-800 border-sand-300 hover:border-gold-300 inline-flex cursor-pointer items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-semibold transition-colors"
                     >
                         <Images className="size-4" aria-hidden />
                         View all {photos.length} photos

@@ -28,7 +28,14 @@ export function SectionHeading({
             )}
         >
             {eyebrow && (
-                <p className="text-gold-600 mb-3 text-sm font-semibold tracking-[0.14em] uppercase">
+                <p
+                    className={cn(
+                        "mb-3 text-sm font-semibold tracking-[0.14em] uppercase",
+                        // gold-600 fails AA as small text on light; use darker gold on
+                        // light backgrounds and lighter gold on dark (tone="light").
+                        tone === "light" ? "text-gold-400" : "text-gold-700",
+                    )}
+                >
                     {eyebrow}
                 </p>
             )}

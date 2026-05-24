@@ -23,6 +23,7 @@ import {
     getPropertyBySlug,
     formatAddress,
     directionsHref,
+    nearbyHref,
     telHref,
     formatFLWDistance,
     coverPhoto,
@@ -39,12 +40,64 @@ import { PhotoGallery } from "@/components/hotels/photo-gallery";
 import { PropertyMap } from "@/components/hotels/property-map";
 import { BookingWidget } from "@/components/hotels/booking-widget";
 import { OtaLinks } from "@/components/hotels/ota-links";
+import { JsonLd } from "@/components/seo/json-ld";
+import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
 import { Container } from "@/components/ui/container";
 import { TierBadge, ComingSoonBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 
 export function generateStaticParams() {
     return getAllProperties().map((p) => ({ slug: p.slug }));
+}
+
+/**
+ * schema.org Hotel structured data for the detail page (CLAUDE.md SEO bar). Hotel
+ * is a LodgingBusiness subtype, so this covers the per-property Hotel/LocalBusiness
+ * requirement. URLs are absolute (required by Google). We intentionally omit
+ * aggregateRating: the ratings are Google's, and re-emitting third-party ratings
+ * as our own structured data is against Google's rich-results guidelines.
+ */
+function hotelJsonLd(p: Property): Record<string, unknown> {
+    const priceRange = p.tier === "economy" ? "$" : p.tier === "midscale" ? "$$" : "$$$";
+
+    const data: Record<string, unknown> = {
+        "@context": "https://schema.org",
+        "@type": "Hotel",
+        name: p.name,
+        description: metaDescription(p),
+        url: `${SITE_URL}/hotels/${p.slug}`,
+        brand: { "@type": "Brand", name: p.brand },
+        priceRange,
+    };
+
+    if (p.photos.length > 0) {
+        data.image = p.photos.slice(0, 6).map((ph) => `${SITE_URL}${ph.src}`);
+    }
+    if (p.address) {
+        data.address = {
+            "@type": "PostalAddress",
+            streetAddress: p.address.street,
+            addressLocality: p.city,
+            addressRegion: p.state,
+            postalCode: p.address.zip,
+            addressCountry: "US",
+        };
+        data.geo = {
+            "@type": "GeoCoordinates",
+            latitude: p.address.lat,
+            longitude: p.address.lng,
+        };
+    }
+    if (p.phone) data.telephone = p.phone;
+    if (p.policies?.pets) data.petsAllowed = true;
+    if (p.amenities.length > 0) {
+        data.amenityFeature = p.amenities.map((key) => ({
+            "@type": "LocationFeatureSpecification",
+            name: AMENITIES[key].label,
+            value: true,
+        }));
+    }
+    return data;
 }
 
 // TODO: replace with the owner's real per-property descriptions when available.
@@ -67,6 +120,17 @@ export async function generateMetadata({
         title: p.shortName,
         description: metaDescription(p),
         alternates: { canonical: `/hotels/${p.slug}` },
+        openGraph: {
+            type: "website",
+            url: `/hotels/${p.slug}`,
+            title: p.shortName,
+            description: metaDescription(p),
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: p.shortName,
+            description: metaDescription(p),
+        },
     };
 }
 
@@ -139,6 +203,14 @@ export default async function HotelDetailPage({
 
     return (
         <>
+            <JsonLd data={hotelJsonLd(p)} />
+            <JsonLd
+                data={breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Hotels", path: "/hotels" },
+                    { name: p.shortName, path: `/hotels/${p.slug}` },
+                ])}
+            />
             <Container className="pt-6">
                 <Breadcrumb name={p.shortName} />
             </Container>
@@ -212,7 +284,7 @@ export default async function HotelDetailPage({
                             </ul>
                             <Link
                                 href="/amenities"
-                                className="text-gold-700 hover:text-gold-600 mt-4 inline-block text-sm font-semibold"
+                                className="text-gold-700 hover:text-gold-600 mt-4 inline-block text-sm font-semibold underline underline-offset-2"
                             >
                                 See full amenity details
                             </Link>
@@ -357,9 +429,16 @@ export default async function HotelDetailPage({
                                                         {items.map((n) => (
                                                             <li
                                                                 key={n.name}
-                                                                className="text-sand-700 flex justify-between gap-3 text-sm"
+                                                                className="flex justify-between gap-3 text-sm"
                                                             >
-                                                                <span>{n.name}</span>
+                                                                <a
+                                                                    href={nearbyHref(n, p)}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="text-sand-700 hover:text-gold-700 decoration-sand-300 underline underline-offset-2 transition-colors"
+                                                                >
+                                                                    {n.name}
+                                                                </a>
                                                                 {n.distance && (
                                                                     <span className="text-sand-500 shrink-0">
                                                                         {n.distance}
@@ -492,7 +571,10 @@ function Breadcrumb({ name }: { name: string }) {
         <nav aria-label="Breadcrumb" className="text-sand-500 text-sm">
             <ol className="flex flex-wrap items-center gap-1">
                 <li>
-                    <Link href="/hotels" className="hover:text-gold-700 transition-colors">
+                    <Link
+                        href="/hotels"
+                        className="hover:text-gold-700 underline underline-offset-2 transition-colors"
+                    >
                         Hotels
                     </Link>
                 </li>

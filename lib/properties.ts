@@ -78,6 +78,12 @@ export type NearbyPlace = {
     category: NearbyCategory;
     /** Human label as published by the brand, e.g. "2 mi" or "Adjacent". */
     distance?: string;
+    /**
+     * Official site for places where one is genuinely useful (chains, the base,
+     * a university, a named attraction). Omit for local/geographic spots: those
+     * fall back to a Google Maps location search via nearbyHref().
+     */
+    url?: string;
 };
 
 /** A labeled list of amenities, as published on the brand's property page. */
@@ -378,24 +384,52 @@ export const properties: Property[] = [
             },
         ],
         // Same St. Robert / Fort Leonard Wood area as Comfort Inn St. Robert.
+        // Official sites where useful (chains, the base, the attraction, the
+        // university); local spots fall back to a Maps search via nearbyHref().
         nearbyAttractions: [
-            { name: "Cracker Barrel", category: "dining", distance: "Adjacent" },
-            { name: "Ruby Tuesday", category: "dining", distance: "Adjacent" },
+            {
+                name: "Cracker Barrel",
+                category: "dining",
+                distance: "Adjacent",
+                url: "https://www.crackerbarrel.com/",
+            },
+            {
+                name: "Ruby Tuesday",
+                category: "dining",
+                distance: "Adjacent",
+                url: "https://www.rubytuesday.com/",
+            },
             { name: "Mama Mia's Authentic Greek", category: "dining", distance: "Adjacent" },
             { name: "El Jimador", category: "dining", distance: "0 mi" },
-            { name: "Culver's", category: "dining", distance: "0 mi" },
-            { name: "Fort Leonard Wood", category: "attraction", distance: "2 mi" },
+            {
+                name: "Culver's",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.culvers.com/",
+            },
+            {
+                name: "Fort Leonard Wood",
+                category: "attraction",
+                distance: "2 mi",
+                url: "https://home.army.mil/wood/",
+            },
             {
                 name: "Uranus Fudge Factory & Store",
                 category: "attraction",
                 distance: "2 mi",
+                url: "https://www.uranusgeneralstore.com/",
             },
             { name: "Waynesville", category: "attraction", distance: "4.4 mi" },
             { name: "Roubidoux Springs", category: "attraction", distance: "5 mi" },
             { name: "John B. Mahaffey Museum", category: "attraction", distance: "5 mi" },
             { name: "Walmart", category: "business", distance: "1 mi" },
             { name: "Lowe's", category: "business", distance: "1 mi" },
-            { name: "Drury University", category: "business", distance: "1.5 mi" },
+            {
+                name: "Drury University",
+                category: "business",
+                distance: "1.5 mi",
+                url: "https://www.drury.edu/",
+            },
         ],
     },
     {
@@ -558,18 +592,41 @@ export const properties: Property[] = [
             pets: "Dogs only. $30 per pet, per night. No deposit and no limit on number or size. Service animals are welcome at no charge.",
             parking: "Free on-site parking.",
         },
+        // Same St. Robert / Fort Leonard Wood area; official sites where useful,
+        // local spots fall back to a Maps search via nearbyHref().
         nearbyAttractions: [
-            { name: "Cracker Barrel", category: "dining", distance: "Adjacent" },
-            { name: "Ruby Tuesday", category: "dining", distance: "Adjacent" },
+            {
+                name: "Cracker Barrel",
+                category: "dining",
+                distance: "Adjacent",
+                url: "https://www.crackerbarrel.com/",
+            },
+            {
+                name: "Ruby Tuesday",
+                category: "dining",
+                distance: "Adjacent",
+                url: "https://www.rubytuesday.com/",
+            },
             { name: "Mama Mia's Authentic Greek", category: "dining", distance: "Adjacent" },
             { name: "El Jimador", category: "dining", distance: "0 mi" },
-            { name: "Culver's", category: "dining", distance: "0 mi" },
+            {
+                name: "Culver's",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.culvers.com/",
+            },
             {
                 name: "Uranus Fudge Factory & Store",
                 category: "attraction",
                 distance: "2 mi",
+                url: "https://www.uranusgeneralstore.com/",
             },
-            { name: "Fort Leonard Wood", category: "attraction", distance: "2 mi" },
+            {
+                name: "Fort Leonard Wood",
+                category: "attraction",
+                distance: "2 mi",
+                url: "https://home.army.mil/wood/",
+            },
             { name: "Waynesville", category: "attraction", distance: "4.4 mi" },
             { name: "Roubidoux Springs", category: "attraction", distance: "5 mi" },
             { name: "John B. Mahaffey Museum", category: "attraction", distance: "5 mi" },
@@ -577,10 +634,16 @@ export const properties: Property[] = [
                 name: "Waynesville-St. Robert Chamber",
                 category: "business",
                 distance: "0 mi",
+                url: "https://www.waynesville-strobertchamber.com/",
             },
             { name: "Walmart", category: "business", distance: "1 mi" },
             { name: "Lowe's", category: "business", distance: "1 mi" },
-            { name: "Drury University", category: "business", distance: "1.5 mi" },
+            {
+                name: "Drury University",
+                category: "business",
+                distance: "1.5 mi",
+                url: "https://www.drury.edu/",
+            },
         ],
         // Official Choice property photos (property MO107), organized by category.
         photos: [
@@ -881,20 +944,67 @@ export const properties: Property[] = [
                 "Housekeeping is provided every other day.",
             ],
         },
+        // Sullivan, MO area; official sites where useful, local spots and B2B
+        // employers fall back to a Maps search via nearbyHref().
         nearbyAttractions: [
-            { name: "Taco Bell", category: "dining", distance: "0 mi" },
-            { name: "Subway", category: "dining", distance: "0 mi" },
-            { name: "Steak 'n Shake", category: "dining", distance: "0 mi" },
-            { name: "McDonald's", category: "dining", distance: "0 mi" },
-            { name: "Jack in the Box", category: "dining", distance: "0 mi" },
-            { name: "Meramec State Park", category: "attraction", distance: "5 mi" },
+            {
+                name: "Taco Bell",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.tacobell.com/",
+            },
+            {
+                name: "Subway",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.subway.com/",
+            },
+            {
+                name: "Steak 'n Shake",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.steaknshake.com/",
+            },
+            {
+                name: "McDonald's",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.mcdonalds.com/",
+            },
+            {
+                name: "Jack in the Box",
+                category: "dining",
+                distance: "0 mi",
+                url: "https://www.jackinthebox.com/",
+            },
+            {
+                name: "Meramec State Park",
+                category: "attraction",
+                distance: "5 mi",
+                url: "https://mostateparks.com/park/meramec-state-park",
+            },
             { name: "Meramec River", category: "attraction", distance: "5 mi" },
-            { name: "Jesse James Wax Museum", category: "attraction", distance: "5 mi" },
+            {
+                name: "Jesse James Wax Museum",
+                category: "attraction",
+                distance: "5 mi",
+                url: "https://www.americascave.com/jessejames/",
+            },
             { name: "Onyx Mountain Caverns", category: "attraction", distance: "6 mi" },
-            { name: "Meramec Caverns", category: "attraction", distance: "10 mi" },
+            {
+                name: "Meramec Caverns",
+                category: "attraction",
+                distance: "10 mi",
+                url: "https://www.americascave.com/",
+            },
             { name: "The Meramec Group", category: "business", distance: "1 mi" },
             { name: "Sullivan Precision Metal", category: "business", distance: "1 mi" },
-            { name: "Missouri Baptist Hospital", category: "business", distance: "1 mi" },
+            {
+                name: "Missouri Baptist Hospital",
+                category: "business",
+                distance: "1 mi",
+                url: "https://www.bjc.org/locations/missouri-baptist-sullivan-hospital",
+            },
             { name: "Scotch Dye Casting", category: "business", distance: "2 mi" },
         ],
         // Official Choice property photos (property MO210), organized by category.
@@ -1360,6 +1470,16 @@ export function directionsHref(p: Property): string | undefined {
     if (!p.address) return undefined;
     const { lat, lng } = p.address;
     return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+}
+
+/**
+ * Link for a "What's nearby" place: its official site when set, otherwise a
+ * Google Maps location search built from the place name + the hotel's city/state.
+ */
+export function nearbyHref(place: NearbyPlace, p: Property): string {
+    if (place.url) return place.url;
+    const query = `${place.name}, ${p.city}, ${p.state}`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
 /**

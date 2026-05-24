@@ -39,7 +39,7 @@
 | 5 | Property detail pages | 1, 2 | — |
 | 6 | Fort Leonard Wood / Military Travel | 1, 2 | FLW copy/photos |
 | 7 | Groups & Extended Stay + forms | 1, 2, 9-forms | Form recipient/routing |
-| 8 | Supporting pages (Amenities, Rooms, Local Area, Offers, Gallery, Reviews) | 1, 2 | Content/photos |
+| 8 | Supporting pages (Amenities, Local Area, Offers, FAQ) | 1, 2 | Content/photos |
 | 9 | Contact + forms infrastructure | 1 | Form handler choice, recipients |
 | 10 | SEO, performance & accessibility hardening | 3–9 | — |
 | 11 | Booking integration (swap placeholders) | 5 | **Real per-property booking URLs** |
@@ -92,8 +92,9 @@
 
 ### Phase 8 — Supporting pages
 **Goal:** Round out the IA.
-**Deliverables:** Amenities overview (light/global), Rooms overview (light/global), Local Area (attractions/dining/airports/directions + local SEO), Offers (structure now, content later), Gallery (categorized), Reviews (trust themes, populated when available).
-**Done when:** All nav links resolve to real pages; placeholders clearly marked.
+**Deliverables:** Amenities overview (light/global), Local Area (attractions/dining/airports/directions + local SEO), Offers (structure now, content later), FAQ.
+**Dropped (decision):** the global **Rooms**, **Gallery**, and **Reviews** pages were cut, not deferred. Rooms and Gallery are per-property (the source of truth per CLAUDE.md §5/§6 — every detail page already has its room types and a full photo gallery), so global versions added duplication without value. Reviews live per-property (Google reviews on each detail page, with attribution) plus a pooled homepage carousel, so a separate Reviews page is unnecessary. None of these appear in the nav (see `lib/nav.ts`), so nothing 404s.
+**Done when:** All nav links resolve to real pages; placeholders clearly marked. ✅ Met.
 
 ### Phase 9 — Contact + forms infrastructure
 **Goal:** Reliable inquiry capture.

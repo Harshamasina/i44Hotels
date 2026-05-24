@@ -53,7 +53,7 @@ export function ReviewsSection({
                         href={googlePlaceUrl(placeId)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gold-700 hover:text-gold-600 text-sm font-semibold"
+                        className="text-gold-700 hover:text-gold-600 text-sm font-semibold underline underline-offset-2"
                     >
                         See all reviews on Google
                     </a>

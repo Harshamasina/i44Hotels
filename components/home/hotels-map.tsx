@@ -58,8 +58,8 @@ export function HotelsMap() {
                 }).setHTML(
                     `<div style="min-width:160px">
                         <div style="font-weight:600;color:#0b1e3a">${p.shortName}</div>
-                        <div style="font-size:12px;color:#807766">${p.brand} · ${p.city}, ${p.state}</div>
-                        <a href="/hotels/${p.slug}" style="display:inline-block;margin-top:6px;font-size:13px;font-weight:600;color:#8a6232">View hotel →</a>
+                        <div style="font-size:12px;color:#5d5446">${p.brand} · ${p.city}, ${p.state}</div>
+                        <a href="/hotels/${p.slug}" style="display:inline-block;margin-top:6px;font-size:13px;font-weight:600;color:#8a6232;text-decoration:underline">View hotel →</a>
                     </div>`,
                 );
                 new maplibregl.Marker({ color: GOLD })

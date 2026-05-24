@@ -130,7 +130,7 @@ export function TestimonialsCarousel({
                         <ChevronLeft className="size-4" aria-hidden />
                     </button>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                         {reviews.map((_, i) => (
                             <button
                                 key={i}
@@ -138,13 +138,17 @@ export function TestimonialsCarousel({
                                 onClick={() => setIndex(i)}
                                 aria-label={`Go to review ${i + 1}`}
                                 aria-current={i === index}
-                                className={cn(
-                                    "h-2 rounded-full transition-all",
-                                    i === index
-                                        ? "bg-gold-500 w-6"
-                                        : "bg-sand-300 hover:bg-sand-400 w-2",
-                                )}
-                            />
+                                className="group flex h-6 items-center justify-center px-2"
+                            >
+                                <span
+                                    className={cn(
+                                        "block h-2 rounded-full transition-all",
+                                        i === index
+                                            ? "bg-gold-500 w-6"
+                                            : "bg-sand-300 group-hover:bg-sand-400 w-2",
+                                    )}
+                                />
+                            </button>
                         ))}
                     </div>
 

@@ -137,8 +137,9 @@ Defined as numbered ramps; these are the **single source of truth** in the Tailw
 **Warm neutral — surfaces, text, borders (taupe, NOT cold gray)**
 ```
 50 #FCFAF5  100 #F8EFE0 ★(cream)  200 #EFE3CE  300 #E2CEA6 ★(sand)  400 #C4BDB0
-500 #A39A8A 600 #807766 700 #4A4339 800 #2B2B2B(charcoal text) 900 #1C1A16
+500 #6E6557 600 #5D5446 700 #4A4339 800 #2B2B2B(charcoal text) 900 #1C1A16
 ```
+(500/600 were darkened from #A39A8A/#807766 so muted text clears WCAG AA on white + cream; they are used for text only, never surfaces/borders.)
 **Semantic — muted, never neon (mainly form validation)**
 ```
 Success #4F7A5B / bg #E7F0E9   Error #B23A36 / bg #F7E7E6

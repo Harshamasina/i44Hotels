@@ -15,7 +15,7 @@ export function Hero() {
     return (
         <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden">
             <Image
-                src="/hero_bg.jpg"
+                src="/hero_bg.PNG"
                 alt=""
                 fill
                 priority
@@ -64,7 +64,7 @@ export function Hero() {
 
                 <Link
                     href="/military-travel"
-                    className="text-gold-300 hover:text-gold-400 mt-6 inline-flex items-center gap-1.5 font-semibold transition-colors"
+                    className="text-gold-300 hover:text-gold-400 mt-6 inline-flex items-center gap-1.5 font-semibold underline underline-offset-2 transition-colors"
                 >
                     Here for a Fort Leonard Wood graduation? See military travel
                     <ArrowRight className="size-4" aria-hidden />
