@@ -15,6 +15,8 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Freq }[]
     { path: "/offers", priority: 0.6, changeFrequency: "weekly" },
     { path: "/amenities", priority: 0.5, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.5, changeFrequency: "monthly" },
+    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
 ];
 
 /** Sitemap built from the data layer so new properties appear automatically. */

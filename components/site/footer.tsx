@@ -116,7 +116,14 @@ export function SiteFooter() {
 
                 <div className="border-navy-600 text-sand-400 mt-10 flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between">
                     <p>© {new Date().getFullYear()} I44 Hotels. All rights reserved.</p>
-                    <p>Comfortable Stays Along I-44</p>
+                    <nav aria-label="Legal" className="flex items-center gap-4">
+                        <Link href="/privacy" className="hover:text-gold-400 inline-block py-1">
+                            Privacy Policy
+                        </Link>
+                        <Link href="/terms" className="hover:text-gold-400 inline-block py-1">
+                            Terms of Use
+                        </Link>
+                    </nav>
                 </div>
             </div>
         </footer>
