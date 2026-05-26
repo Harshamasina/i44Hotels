@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Reusable section header: gold eyebrow + Fraunces title + optional subtitle.
+ * Reusable section header: gold eyebrow + Hanken Grotesk title + optional subtitle.
  * `tone="light"` for use on dark/navy backgrounds.
  */
 export function SectionHeading({

@@ -23,7 +23,7 @@ export async function Testimonials() {
                     subtitle="Real reviews from travelers and Fort Leonard Wood families staying with us along Interstate 44."
                 />
                 <TestimonialsCarousel
-                    reviews={reviews.slice(0, 9)}
+                    reviews={reviews.slice(0, 10)}
                     averageRating={averageRating}
                     totalCount={totalCount}
                 />

@@ -56,9 +56,11 @@ export default function StyleguidePage() {
             </Block>
 
             <Block title="Typography">
-                <h1 className="text-navy-800 text-5xl font-semibold">Fraunces heading</h1>
+                <h1 className="text-navy-800 text-5xl font-semibold">
+                    Hanken Grotesk heading
+                </h1>
                 <h2 className="text-navy-800 mt-3 text-3xl font-semibold">
-                    Fraunces subheading
+                    Hanken Grotesk subheading
                 </h2>
                 <p className="text-sand-800 mt-4 max-w-2xl">
                     Body copy is set in Hanken Grotesk. Welcoming, convenient hotels for

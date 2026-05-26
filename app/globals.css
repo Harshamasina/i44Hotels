@@ -6,9 +6,11 @@
  * Never hard-code hex in components - use these tokens.
  */
 @theme {
-    /* Brand fonts - wired to next/font CSS variables in app/layout.tsx */
+    /* Brand font - single family (Hanken Grotesk), wired to next/font in app/layout.tsx.
+       --font-serif is kept as a token but now maps to Hanken too, so every existing
+       `font-serif` heading utility across the app renders Hanken (Fraunces retired). */
     --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
-    --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+    --font-serif: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
 
     /* Subtle UI animations (navbar dropdown, mobile drawer) */
     --animate-dropdown: dropdown-in 0.18s ease-out;
@@ -84,7 +86,7 @@
         font-family: var(--font-sans);
     }
 
-    /* Headings in the display serif, navy (large sizes only - see CLAUDE.md §7) */
+    /* Headings in Hanken Grotesk, navy (large sizes only - see CLAUDE.md §7) */
     h1,
     h2,
     h3 {

@@ -154,7 +154,7 @@ const FAQ_SECTIONS: { heading: string; items: Faq[] }[] = [
             },
             {
                 q: "Can I get early check-in or late checkout?",
-                a: "Often, yes, which helps around early graduation ceremonies. Days Inn lists early check-in and late checkout options, and at any hotel you can ask the front desk and we will do our best to accommodate your schedule.",
+                a: "Often, yes, which helps around early graduation ceremonies. Our hotels list early check-in and late checkout, which may carry a small fee, and you can always ask the front desk and we will do our best to accommodate your schedule.",
             },
             {
                 q: "Are your hotels good for business travelers?",

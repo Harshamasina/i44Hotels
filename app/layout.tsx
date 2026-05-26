@@ -1,18 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Hanken_Grotesk } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { MobileBookingBar } from "@/components/site/mobile-booking-bar";
 
-// Display serif for headings (CLAUDE.md §7)
-const fraunces = Fraunces({
-    variable: "--font-fraunces",
-    subsets: ["latin"],
-    display: "swap",
-});
-
-// Clean sans for body / UI (CLAUDE.md §7)
+// Single brand family for headings + body / UI (Fraunces retired, CLAUDE.md §7)
 const hanken = Hanken_Grotesk({
     variable: "--font-hanken",
     subsets: ["latin"],
@@ -64,7 +57,7 @@ export default function RootLayout({
     return (
         <html
             lang="en"
-            className={`${fraunces.variable} ${hanken.variable} h-full antialiased`}
+            className={`${hanken.variable} h-full antialiased`}
         >
             <body className="bg-sand-50 text-sand-800 flex min-h-full w-full flex-col pb-14 md:pb-0">
                 <SiteHeader />

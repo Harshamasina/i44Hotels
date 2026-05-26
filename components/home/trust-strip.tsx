@@ -1,9 +1,10 @@
 import { Heart, Route, PawPrint, Coffee, MapPin, type LucideIcon } from "lucide-react";
-import { getOperatingProperties } from "@/lib/properties";
+import { getAllProperties } from "@/lib/properties";
 
 /** Quick credibility strip directly under the hero (CLAUDE.md §8). */
 export function TrustStrip() {
-    const count = getOperatingProperties().length;
+    // Counts all hotels, including the coming-soon Hyatt Select.
+    const count = getAllProperties().length;
     const items: { label: string; Icon: LucideIcon }[] = [
         { label: "Family-owned", Icon: Heart },
         { label: `${count} hotels along I-44`, Icon: Route },

@@ -33,8 +33,9 @@ export function Hero() {
                 <p className="text-gold-300 mb-4 text-sm font-semibold tracking-[0.14em] uppercase">
                     Family-owned · Along Interstate 44
                 </p>
-                <h1 className="text-5xl font-semibold text-white sm:text-6xl">
-                    Comfortable Stays Along I-44
+                <h1 className="font-sans text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                    Comfortable Stays Along{" "}
+                    <span className="whitespace-nowrap sm:block">I-44</span>
                 </h1>
                 <p className="text-sand-200 mx-auto mt-5 max-w-xl text-lg">
                     Welcoming, convenient hotels for families, business travelers, and

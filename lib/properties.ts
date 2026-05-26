@@ -138,7 +138,7 @@ export type Property = {
     nearbyAttractions?: NearbyPlace[];
 };
 
-export const properties: Property[] = [
+const propertyData: Property[] = [
     {
         slug: "days-inn-st-robert",
         name: "Days Inn by Wyndham St. Robert / Ft. Leonard Wood",
@@ -168,33 +168,33 @@ export const properties: Property[] = [
         // TODO: confirm amenities from the Wyndham property page.
         amenities: ["breakfast", "coffee", "wifi", "parking", "petFriendly"],
         amenityDetails: {
+            intro: "Recognized with the President's Award three years in a row, our Days Inn welcomes Fort Leonard Wood families and I-44 travelers with friendly service just minutes from the gates. Wake up to a free hot breakfast and 24-hour coffee in the lobby, with free WiFi, free parking, and room for larger vehicles.",
             groups: [
                 {
                     title: "Hotel amenities",
                     items: [
                         "24-hour front desk",
+                        "24-hour coffee in lobby",
                         "Balconies available",
-                        "Bus & truck parking",
+                        "Bus parking",
                         "Business center",
-                        "Coffee / tea maker",
-                        "Concierge",
+                        "Copy / Fax service*",
                         "Cribs available",
-                        "Daily housekeeping",
-                        "Early check-in available",
+                        "Early check-in available*",
                         "Express check-in",
                         "Express check-out",
                         "Flat-screen televisions",
                         "Free parking",
+                        "Government travelers: FEMA approved",
+                        "Guest laundry*",
                         "Hairdryer",
-                        "Late check-out available",
-                        "On-site guest laundry",
-                        "Park before you fly",
+                        "Late check-out available*",
                         "Pet friendly",
                         "RV parking",
-                        "Trailer parking",
-                        "Valet parking",
-                        "WiFi available",
+                        "Surveillance security cameras",
+                        "Sustainable practices",
                     ],
+                    note: "*May require an additional cost.",
                 },
                 {
                     title: "Accessibility",
@@ -290,7 +290,7 @@ export const properties: Property[] = [
             {
                 category: "room",
                 src: "/properties/days-inn-st-robert/room/guest-room-02.webp",
-                alt: "Guest room with two beds at Days Inn by Wyndham St. Robert",
+                alt: "King guest room at Days Inn by Wyndham St. Robert",
             },
             {
                 category: "room",
@@ -320,17 +320,17 @@ export const properties: Property[] = [
             {
                 category: "room",
                 src: "/properties/days-inn-st-robert/room/guest-room-08.webp",
-                alt: "Guest room at Days Inn by Wyndham St. Robert",
+                alt: "Two queen guest room at Days Inn by Wyndham St. Robert",
             },
             {
                 category: "room",
                 src: "/properties/days-inn-st-robert/room/guest-room-09.webp",
-                alt: "Guest room at Days Inn by Wyndham St. Robert",
+                alt: "Two queen guest room at Days Inn by Wyndham St. Robert",
             },
             {
                 category: "room",
                 src: "/properties/days-inn-st-robert/room/guest-room-10.webp",
-                alt: "Guest room at Days Inn by Wyndham St. Robert",
+                alt: "Two queen guest room at Days Inn by Wyndham St. Robert",
             },
             {
                 category: "room",
@@ -473,26 +473,34 @@ export const properties: Property[] = [
                 {
                     title: "Hotel amenities",
                     items: [
-                        "Premium free WiFi",
-                        "Indoor heated pool",
-                        "Pet friendly*",
+                        "24-hour front desk",
                         "Free hot breakfast",
-                        "Sustainable practices",
-                        "Surveillance security",
-                        "Truck parking",
-                        "Exercise room",
+                        "Indoor heated pool",
                         "Fitness center",
+                        "Exercise room",
+                        "Coffee / tea maker",
+                        "Cribs available",
+                        "Pet friendly*",
+                        "Early check-in available*",
+                        "Express check-in",
+                        "Express check-out",
+                        "Late check-out available*",
+                        "Flat-screen televisions",
+                        "Hairdryer",
+                        "Hotel safe",
+                        "Free parking",
+                        "RV parking",
+                        "Bus parking",
+                        "Copy / Fax service*",
+                        "Business center*",
+                        "Guest laundry*",
+                        "Marketplace",
                         "Government travelers: FEMA approved",
-                        "Copy machine*",
-                        "Fax machine*",
+                        "Surveillance security cameras",
+                        "Sustainable practices",
                         "Interior corridors",
-                        "Outdoor parking",
                         "Elevators",
                         "100% smoke-free hotel",
-                        "Bus parking",
-                        "Free coffee",
-                        "Laundry*",
-                        "Business center*",
                         "Sun deck",
                     ],
                     note: "*May require an additional cost.",
@@ -649,12 +657,12 @@ export const properties: Property[] = [
         photos: [
             {
                 category: "exterior",
-                src: "/properties/comfort-inn-st-robert/exterior/MO107exterior1_1.webp",
+                src: "/properties/comfort-inn-st-robert/exterior/MO107exterior2_1.webp",
                 alt: "Comfort Inn St. Robert / Fort Leonard Wood exterior",
             },
             {
                 category: "exterior",
-                src: "/properties/comfort-inn-st-robert/exterior/MO107exterior2_1.webp",
+                src: "/properties/comfort-inn-st-robert/exterior/MO107exterior1_1.webp",
                 alt: "Comfort Inn St. Robert / Fort Leonard Wood exterior",
             },
             {
@@ -837,7 +845,7 @@ export const properties: Property[] = [
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl: "https://www.choicehotels.com/missouri/sullivan/comfort-inn-hotels/mo210",
         address: {
-            street: "736 South Service Road",
+            street: "736 South Service Road West",
             zip: "63080",
             lat: 38.2096659,
             lng: -91.1725207,
@@ -853,32 +861,37 @@ export const properties: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "Enjoy a long list of amenities at our smoke-free hotel: free WiFi for all your devices, free hot breakfast, free coffee, a free weekday newspaper, elevators, a fitness center, an indoor heated pool, a hotel safe, laundry facilities, and free parking (with room for buses and trucks). Business travelers can use our copy, print, and fax services and our meeting room. And when the temperature drops, we have cold-weather hook-ups.",
+            intro: "Enjoy a long list of amenities at our smoke-free hotel: free hot breakfast, 24-hour coffee in the lobby, an indoor heated pool, a fitness center, guest laundry, an on-site marketplace, and free parking (with room for buses). Business travelers can use our copy and fax service and our meeting room.",
             groups: [
                 {
                     title: "Hotel amenities",
                     items: [
-                        "Premium free WiFi",
-                        "Indoor heated pool",
-                        "Pet friendly*",
+                        "24-hour front desk",
                         "Free hot breakfast",
-                        "Vending machines*",
-                        "Truck parking",
+                        "Indoor heated pool",
                         "Exercise room",
-                        "Free weekday newspaper",
+                        "Coffee / tea maker",
+                        "Cribs available",
+                        "Pet friendly*",
+                        "Early check-in available*",
+                        "Express check-in",
+                        "Express check-out",
+                        "Late check-out available*",
+                        "Flat-screen televisions",
+                        "Hairdryer",
+                        "Free parking",
+                        "RV parking",
+                        "Bus parking",
+                        "Copy / Fax service*",
+                        "Meeting room*",
+                        "Guest laundry*",
+                        "Marketplace",
                         "Government travelers: FEMA approved",
-                        "Copy machine*",
-                        "Fax machine*",
-                        "Hotel safe",
+                        "Surveillance security cameras",
+                        "Sustainable practices",
                         "Interior corridors",
-                        "Outdoor parking",
                         "Elevators",
                         "100% smoke-free hotel",
-                        "Bus parking",
-                        "Free coffee",
-                        "Laundry*",
-                        "Meeting room*",
-                        "Cold-weather hook-up",
                     ],
                     note: "*May require an additional cost.",
                 },
@@ -1011,6 +1024,11 @@ export const properties: Property[] = [
         photos: [
             {
                 category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210twilight1.avif",
+                alt: "Comfort Inn Sullivan exterior at twilight",
+            },
+            {
+                category: "exterior",
                 src: "/properties/comfort-inn-sullivan/exterior/MO210exterior1.avif",
                 alt: "Comfort Inn Sullivan exterior",
             },
@@ -1018,11 +1036,6 @@ export const properties: Property[] = [
                 category: "exterior",
                 src: "/properties/comfort-inn-sullivan/exterior/MO210exterior2.webp",
                 alt: "Comfort Inn Sullivan exterior",
-            },
-            {
-                category: "exterior",
-                src: "/properties/comfort-inn-sullivan/exterior/MO210twilight1.avif",
-                alt: "Comfort Inn Sullivan exterior at twilight",
             },
             {
                 category: "exterior",
@@ -1310,6 +1323,28 @@ export const properties: Property[] = [
         ],
     },
 ];
+
+/** Premium-to-budget tier order for site-wide display (upscale shown first). */
+const TIER_DISPLAY_RANK: Record<Tier, number> = {
+    upscale: 0,
+    midscale: 1,
+    economy: 2,
+};
+
+/**
+ * Site-wide display order: open hotels before coming-soon, then premium to
+ * budget by tier (the midscale Comfort Inns ahead of the economy Days Inn),
+ * keeping source-array order within a tier as a stable tiebreaker (so Comfort
+ * Inn St. Robert stays ahead of Comfort Inn Sullivan). The Fort Leonard Wood
+ * views sort by drive-time to base instead (see getNearestToFLW).
+ */
+function byDisplayOrder(a: Property, b: Property): number {
+    if (a.status !== b.status) return a.status === "operating" ? -1 : 1;
+    return TIER_DISPLAY_RANK[a.tier] - TIER_DISPLAY_RANK[b.tier];
+}
+
+/** Properties in site-wide display order. Source of truth is propertyData above. */
+export const properties: Property[] = [...propertyData].sort(byDisplayOrder);
 
 export function getAllProperties(): Property[] {
     return properties;

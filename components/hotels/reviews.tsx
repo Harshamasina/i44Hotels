@@ -16,7 +16,7 @@ export function RatingInline({ data }: { data: GoogleReviewsData }) {
     );
 }
 
-/** Full reviews section: rating summary + up to five review cards, with Google attribution. */
+/** Full reviews section: rating summary + up to ten review cards, with Google attribution. */
 export function ReviewsSection({
     data,
     placeId,

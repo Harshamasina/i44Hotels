@@ -44,8 +44,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     const footer = "Book direct / i44hotels.com";
     const text = heading + tierLabel + sub + footer;
 
-    const [serif, sans, logo] = await Promise.all([
-        loadGoogleFont("Fraunces", 600, text),
+    const [bold, sans, logo] = await Promise.all([
+        loadGoogleFont("Hanken Grotesk", 700, text),
         loadGoogleFont("Hanken Grotesk", 500, text),
         p ? logoDataUrl(p.brand) : Promise.resolve(null),
     ]);
@@ -81,7 +81,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                     ) : (
                         <div
                             style={{
-                                fontFamily: "Fraunces",
+                                fontFamily: "Hanken Grotesk",
+                                fontWeight: 700,
                                 fontSize: 40,
                                 color: "#D8B878",
                             }}
@@ -108,7 +109,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                     ) : null}
                     <div
                         style={{
-                            fontFamily: "Fraunces",
+                            fontFamily: "Hanken Grotesk",
+                            fontWeight: 700,
                             fontSize: 76,
                             color: "#F8EFE0",
                             lineHeight: 1.05,
@@ -142,7 +144,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         {
             ...size,
             fonts: [
-                { name: "Fraunces", data: serif, weight: 600, style: "normal" },
+                { name: "Hanken Grotesk", data: bold, weight: 700, style: "normal" },
                 { name: "Hanken Grotesk", data: sans, weight: 500, style: "normal" },
             ],
         },

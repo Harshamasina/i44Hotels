@@ -12,8 +12,8 @@ export default async function Image() {
     const sub = "Near Fort Leonard Wood / St. Robert, Missouri";
     const text = title + tagline + sub;
 
-    const [serif, sans] = await Promise.all([
-        loadGoogleFont("Fraunces", 600, text),
+    const [bold, sans] = await Promise.all([
+        loadGoogleFont("Hanken Grotesk", 700, text),
         loadGoogleFont("Hanken Grotesk", 500, text),
     ]);
 
@@ -33,7 +33,14 @@ export default async function Image() {
                 <div
                     style={{ width: 96, height: 6, background: "#D8B878", marginBottom: 40 }}
                 />
-                <div style={{ fontFamily: "Fraunces", fontSize: 92, color: "#F8EFE0" }}>
+                <div
+                    style={{
+                        fontFamily: "Hanken Grotesk",
+                        fontWeight: 700,
+                        fontSize: 92,
+                        color: "#F8EFE0",
+                    }}
+                >
                     {title}
                 </div>
                 <div
@@ -61,7 +68,7 @@ export default async function Image() {
         {
             ...size,
             fonts: [
-                { name: "Fraunces", data: serif, weight: 600, style: "normal" },
+                { name: "Hanken Grotesk", data: bold, weight: 700, style: "normal" },
                 { name: "Hanken Grotesk", data: sans, weight: 500, style: "normal" },
             ],
         },
