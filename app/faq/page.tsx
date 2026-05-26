@@ -134,7 +134,7 @@ const FAQ_SECTIONS: { heading: string; items: Faq[] }[] = [
         items: [
             {
                 q: "Do your hotels include free breakfast and Wi-Fi?",
-                a: "Yes. Every operating hotel offers a free hot breakfast, free Wi-Fi, and free parking. The Comfort Inns also have an indoor heated pool and a fitness center.",
+                a: "Our Comfort Inns serve a free hot breakfast, and every hotel offers free Wi-Fi and free parking. The Comfort Inns also have an indoor heated pool and a fitness center.",
                 links: [{ label: "All amenities", href: "/amenities" }],
             },
             {
@@ -211,9 +211,14 @@ function propertyFaqs(p: Property): Faq[] {
         links: [{ label: "Amenities by hotel", href: "/amenities" }],
     });
 
+    const hasBreakfast = p.amenities.includes("breakfast");
     faqs.push({
-        q: `Does ${p.shortName} include free breakfast and Wi-Fi?`,
-        a: `Yes. ${p.shortName} offers a free hot breakfast and free Wi-Fi for guests, along with free parking.`,
+        q: hasBreakfast
+            ? `Does ${p.shortName} include free breakfast and Wi-Fi?`
+            : `Does ${p.shortName} include free Wi-Fi?`,
+        a: hasBreakfast
+            ? `Yes. ${p.shortName} offers a free hot breakfast and free Wi-Fi for guests, along with free parking.`
+            : `Yes. ${p.shortName} offers free Wi-Fi and free parking for guests, plus 24-hour coffee and tea in the lobby. This hotel does not serve breakfast.`,
         links: [{ label: "All amenities", href: "/amenities" }],
     });
 

@@ -166,15 +166,15 @@ const propertyData: Property[] = [
             lng: -92.142,
         },
         // TODO: confirm amenities from the Wyndham property page.
-        amenities: ["breakfast", "coffee", "wifi", "parking", "petFriendly"],
+        amenities: ["coffee", "wifi", "parking", "petFriendly"],
         amenityDetails: {
-            intro: "Recognized with the President's Award three years in a row, our Days Inn welcomes Fort Leonard Wood families and I-44 travelers with friendly service just minutes from the gates. Wake up to a free hot breakfast and 24-hour coffee in the lobby, with free WiFi, free parking, and room for larger vehicles.",
+            intro: "Recognized with the President's Award three years in a row, our Days Inn welcomes Fort Leonard Wood families and I-44 travelers with friendly service just minutes from the gates. Start your day with 24-hour coffee and tea in the lobby, and enjoy free WiFi, free parking, and room for larger vehicles.",
             groups: [
                 {
                     title: "Hotel amenities",
                     items: [
                         "24-hour front desk",
-                        "24-hour coffee in lobby",
+                        "24-hour coffee/tea in lobby",
                         "Balconies available",
                         "Bus parking",
                         "Business center",
@@ -468,17 +468,19 @@ const propertyData: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "Our friendly staff and ample amenities make your stay in St. Robert convenient, so you can focus on your trip, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
+            intro: "A Choice Hotels Gold Award winner, our Comfort Inn pairs recognized service with ample amenities to make your stay in St. Robert convenient, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
             groups: [
                 {
                     title: "Hotel amenities",
                     items: [
                         "24-hour front desk",
+                        "24-hour coffee/tea in lobby",
                         "Free hot breakfast",
                         "Indoor heated pool",
                         "Fitness center",
                         "Exercise room",
-                        "Coffee / tea maker",
+                        "Coffee / tea maker in rooms",
+                        "Fresh lemon water in lobby",
                         "Cribs available",
                         "Pet friendly*",
                         "Early check-in available*",
@@ -501,7 +503,7 @@ const propertyData: Property[] = [
                         "Interior corridors",
                         "Elevators",
                         "100% smoke-free hotel",
-                        "Sun deck",
+                        "Back patio / gazebo",
                     ],
                     note: "*May require an additional cost.",
                 },
@@ -615,14 +617,10 @@ const propertyData: Property[] = [
                 distance: "Adjacent",
                 url: "https://www.rubytuesday.com/",
             },
-            { name: "Mama Mia's Authentic Greek", category: "dining", distance: "Adjacent" },
+            { name: "Pappo's Pizzeria & Pub", category: "dining" },
             { name: "El Jimador", category: "dining", distance: "0 mi" },
-            {
-                name: "Culver's",
-                category: "dining",
-                distance: "0 mi",
-                url: "https://www.culvers.com/",
-            },
+            { name: "Route 66 Diner", category: "dining" },
+            { name: "Route 66 Neon Park", category: "attraction" },
             {
                 name: "Uranus Fudge Factory & Store",
                 category: "attraction",
@@ -861,16 +859,18 @@ const propertyData: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "Enjoy a long list of amenities at our smoke-free hotel: free hot breakfast, 24-hour coffee in the lobby, an indoor heated pool, a fitness center, guest laundry, an on-site marketplace, and free parking (with room for buses). Business travelers can use our copy and fax service and our meeting room.",
+            intro: "Enjoy a long list of amenities at our smoke-free hotel: free hot breakfast, 24-hour coffee and tea plus fresh lemon water in the lobby, an indoor heated pool, a fitness center, guest laundry, an on-site marketplace, and free parking (with room for buses). Business travelers can use our copy and fax service and our meeting room.",
             groups: [
                 {
                     title: "Hotel amenities",
                     items: [
                         "24-hour front desk",
+                        "24-hour coffee/tea in lobby",
                         "Free hot breakfast",
                         "Indoor heated pool",
-                        "Exercise room",
-                        "Coffee / tea maker",
+                        "Fitness center",
+                        "Coffee / tea maker in rooms",
+                        "Fresh lemon water in lobby",
                         "Cribs available",
                         "Pet friendly*",
                         "Early check-in available*",
@@ -904,45 +904,99 @@ const propertyData: Property[] = [
         },
         roomTypes: [
             {
-                name: "King Room",
+                name: "King Room, Upper Floor",
                 sleeps: 2,
                 description:
-                    "A comfortable king room, with pet-friendly rooms available on the first floor.",
+                    "A smoke-free king room on an upper floor, with a work desk and refrigerator.",
                 features: [
-                    "Free WiFi",
-                    "Microwave & mini-refrigerator",
+                    "Upper floor",
                     "Desk",
+                    "Refrigerator",
                     "Hair dryer",
                     "Iron & ironing board",
                 ],
-                tags: ["pet-friendly"],
             },
             {
-                name: "Two Queen Room",
+                name: "Two Queen Room, Upper Floor",
                 sleeps: 4,
                 description:
-                    "Two queen beds with room for the family, with pet-friendly rooms available on the first floor.",
+                    "Two queen beds on an upper floor, smoke-free, with room for the whole family.",
                 features: [
-                    "Free WiFi",
-                    "Microwave & mini-refrigerator",
+                    "Upper floor",
                     "Desk",
+                    "Refrigerator",
                     "Hair dryer",
                     "Iron & ironing board",
                 ],
+            },
+            {
+                name: "King Room, Pet-Friendly",
+                sleeps: 2,
+                description:
+                    "A smoke-free, pet-friendly king room with free WiFi, a microwave, and a mini-fridge.",
+                features: ["Free WiFi", "Microwave", "Mini-fridge"],
                 tags: ["pet-friendly"],
             },
             {
-                name: "Accessible King Room",
+                name: "Two Queen Room, Pet-Friendly",
+                sleeps: 4,
+                description:
+                    "Two queen beds, pet-friendly and smoke-free, with free WiFi, a microwave, and a mini-fridge.",
+                features: ["Free WiFi", "Microwave", "Mini-fridge"],
+                tags: ["pet-friendly"],
+            },
+            {
+                name: "Accessible King Room, Mobility & Hearing",
                 sleeps: 2,
                 description:
-                    "A king room with mobility and hearing accessibility, and connecting rooms available.",
+                    "A king room with mobility and hearing accessibility and an accessible tub, with connecting rooms available.",
                 features: [
+                    "Free WiFi",
                     "Mobility & hearing accessible",
-                    "Roll-in shower",
+                    "Accessible tub",
                     "Visual alarm, doorbell & telephone alerts",
                     "Connecting rooms available",
                 ],
                 tags: ["accessible"],
+            },
+            {
+                name: "Accessible King Room, Pet-Friendly",
+                sleeps: 2,
+                description:
+                    "A pet-friendly king room with mobility and hearing accessibility, an accessible tub, and connecting rooms available.",
+                features: [
+                    "Mobility & hearing accessible",
+                    "Accessible tub",
+                    "Visual alarm, doorbell & telephone alerts",
+                    "Connecting rooms available",
+                ],
+                tags: ["accessible", "pet-friendly"],
+            },
+            {
+                name: "Accessible King Room, Roll-In Shower",
+                sleeps: 2,
+                description:
+                    "A first-floor, pet-friendly king room with mobility and hearing accessibility and a roll-in shower.",
+                features: [
+                    "First floor",
+                    "Mobility & hearing accessible",
+                    "Roll-in shower",
+                    "Visual alarm, doorbell & telephone alerts",
+                ],
+                tags: ["accessible", "pet-friendly"],
+            },
+            {
+                name: "King Suite",
+                sleeps: 4,
+                description:
+                    "A one-room king suite on an upper floor, with a sofa bed and a two-person whirlpool.",
+                features: [
+                    "1-room suite",
+                    "Upper floor",
+                    "Sofa bed",
+                    "2-person whirlpool",
+                ],
+                tags: ["suite"],
             },
         ],
         policies: {
