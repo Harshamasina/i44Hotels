@@ -157,6 +157,10 @@ const propertyData: Property[] = [
         distanceToFLWMiles: 4,
         bestFor: ["military", "leisure", "pets", "largeVehicle"],
         googlePlaceId: "ChIJsdVcjvjm2ocRAm6EGIwc7t0",
+        award: {
+            src: "/president_award.png",
+            alt: "President's Award winner",
+        },
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl:
             "https://www.wyndhamhotels.com/days-inn/st-robert-missouri/days-inn-st-robert-waynesville-ft-leonard-wood/overview",
@@ -451,10 +455,6 @@ const propertyData: Property[] = [
         distanceToFLWMiles: 2,
         bestFor: ["military", "business", "leisure", "groups", "pets"],
         googlePlaceId: "ChIJ-9CGWnzd2ocRG1gF3cGW4EI",
-        award: {
-            src: "/president_award.png",
-            alt: "President's Award winner",
-        },
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl: "https://www.choicehotels.com/missouri/saint-robert/comfort-inn-hotels/mo107",
         address: {
@@ -474,7 +474,7 @@ const propertyData: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "A President's Award winner, our Comfort Inn pairs recognized service with ample amenities to make your stay in St. Robert convenient, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
+            intro: "A Choice Hotels Gold Award winner, our Comfort Inn pairs recognized service with ample amenities to make your stay in St. Robert convenient, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
             groups: [
                 {
                     title: "Hotel amenities",
