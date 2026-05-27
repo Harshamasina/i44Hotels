@@ -11,7 +11,7 @@ import type { AmenityKey } from "./amenities";
 
 export type Brand = "Days Inn" | "Comfort Inn" | "Hyatt Select";
 export type BrandParent = "Wyndham" | "Choice" | "Hyatt";
-export type Tier = "economy" | "midscale" | "upscale";
+export type Tier = "economy" | "upper-midscale";
 export type PropertyStatus = "operating" | "coming-soon";
 
 /** Audience tags (CLAUDE.md section 3). Drive the card "Best for" line + /hotels filter. */
@@ -132,6 +132,8 @@ export type Property = {
     amenities: AmenityKey[];
     /** Full amenity lists from the brand page (drives the Amenities page detail). */
     amenityDetails?: AmenityDetails;
+    /** Optional award badge image shown below the description on the detail page. */
+    award?: { src: string; alt: string };
     roomTypes: RoomType[];
     photos: PropertyPhoto[];
     policies?: Policies;
@@ -438,7 +440,7 @@ const propertyData: Property[] = [
         shortName: "Comfort Inn, St. Robert",
         brand: "Comfort Inn",
         brandParent: "Choice",
-        tier: "midscale",
+        tier: "upper-midscale",
         status: "operating",
         city: "St. Robert",
         state: "MO",
@@ -449,6 +451,10 @@ const propertyData: Property[] = [
         distanceToFLWMiles: 2,
         bestFor: ["military", "business", "leisure", "groups", "pets"],
         googlePlaceId: "ChIJ-9CGWnzd2ocRG1gF3cGW4EI",
+        award: {
+            src: "/president_award.png",
+            alt: "President's Award winner",
+        },
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl: "https://www.choicehotels.com/missouri/saint-robert/comfort-inn-hotels/mo107",
         address: {
@@ -468,7 +474,7 @@ const propertyData: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "A Choice Hotels Gold Award winner, our Comfort Inn pairs recognized service with ample amenities to make your stay in St. Robert convenient, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
+            intro: "A President's Award winner, our Comfort Inn pairs recognized service with ample amenities to make your stay in St. Robert convenient, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
             groups: [
                 {
                     title: "Hotel amenities",
@@ -830,7 +836,7 @@ const propertyData: Property[] = [
         shortName: "Comfort Inn, Sullivan",
         brand: "Comfort Inn",
         brandParent: "Choice",
-        tier: "midscale",
+        tier: "upper-midscale",
         status: "operating",
         city: "Sullivan",
         state: "MO",
@@ -1306,28 +1312,28 @@ const propertyData: Property[] = [
                 alt: "On-site marketplace at Comfort Inn Sullivan",
             },
             {
-                category: "amenity",
-                src: "/properties/comfort-inn-sullivan/amenity/MO210drone1.avif",
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210drone1.avif",
                 alt: "Aerial view of Comfort Inn Sullivan",
             },
             {
-                category: "amenity",
-                src: "/properties/comfort-inn-sullivan/amenity/MO210drone2.webp",
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210drone2.webp",
                 alt: "Aerial view of Comfort Inn Sullivan",
             },
             {
-                category: "amenity",
-                src: "/properties/comfort-inn-sullivan/amenity/MO210drone3.webp",
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210drone3.webp",
                 alt: "Aerial view of Comfort Inn Sullivan",
             },
             {
-                category: "amenity",
-                src: "/properties/comfort-inn-sullivan/amenity/MO210drone4.webp",
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210drone4.webp",
                 alt: "Aerial view of Comfort Inn Sullivan",
             },
             {
-                category: "amenity",
-                src: "/properties/comfort-inn-sullivan/amenity/MO210drone5.avif",
+                category: "exterior",
+                src: "/properties/comfort-inn-sullivan/exterior/MO210drone5.avif",
                 alt: "Aerial view of Comfort Inn Sullivan",
             },
             {
@@ -1348,7 +1354,7 @@ const propertyData: Property[] = [
         shortName: "Hyatt Select, St. Robert",
         brand: "Hyatt Select",
         brandParent: "Hyatt",
-        tier: "upscale",
+        tier: "upper-midscale",
         status: "coming-soon",
         city: "St. Robert",
         state: "MO",
@@ -1377,16 +1383,15 @@ const propertyData: Property[] = [
     },
 ];
 
-/** Premium-to-budget tier order for site-wide display (upscale shown first). */
+/** Premium-to-budget tier order for site-wide display. */
 const TIER_DISPLAY_RANK: Record<Tier, number> = {
-    upscale: 0,
-    midscale: 1,
-    economy: 2,
+    "upper-midscale": 0,
+    economy: 1,
 };
 
 /**
  * Site-wide display order: open hotels before coming-soon, then premium to
- * budget by tier (the midscale Comfort Inns ahead of the economy Days Inn),
+ * budget by tier (the upper-midscale Comfort Inns ahead of the economy Days Inn),
  * keeping source-array order within a tier as a stable tiebreaker (so Comfort
  * Inn St. Robert stays ahead of Comfort Inn Sullivan). The Fort Leonard Wood
  * views sort by drive-time to base instead (see getNearestToFLW).
@@ -1429,7 +1434,7 @@ export function filterByBrand(brand: Brand): Property[] {
     return properties.filter((p) => p.brand === brand);
 }
 
-const TIERS: Tier[] = ["economy", "midscale", "upscale"];
+const TIERS: Tier[] = ["economy", "upper-midscale"];
 const BEST_FOR_KEYS: BestForKey[] = [
     "military",
     "leisure",

@@ -10,7 +10,7 @@ import { TestimonialsCarousel } from "./testimonials-carousel";
  * itself gracefully if Google returns nothing.
  */
 export async function Testimonials() {
-    const { reviews, averageRating, totalCount } = await getPooledReviews(4);
+    const { reviews, averageRating, totalCount } = await getPooledReviews();
     if (reviews.length === 0) return null;
 
     return (

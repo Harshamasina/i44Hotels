@@ -124,7 +124,7 @@ const FAQ_SECTIONS: { heading: string; items: Faq[] }[] = [
             },
             {
                 q: "What are the most affordable, best-value hotels near the base?",
-                a: "Days Inn is our economy option in St. Robert, while the Comfort Inns offer midscale comfort with pools and fitness centers. Booking direct on the brand site is the true best-rate channel, with no third-party markup.",
+                a: "Days Inn is our economy option in St. Robert, while the Comfort Inns offer upper-midscale comfort with pools and fitness centers. Booking direct on the brand site is the true best-rate channel, with no third-party markup.",
                 links: [{ label: "Compare amenities", href: "/amenities" }],
             },
         ],

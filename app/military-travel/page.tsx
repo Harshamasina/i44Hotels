@@ -353,6 +353,12 @@ function AreaHotelCard({ property: p }: { property: Property }) {
                 )}
 
                 <div className="mt-auto pt-5">
+                    <Link
+                        href="/groups"
+                        className="text-navy-700 bg-sand-100 hover:bg-sand-200 mb-3 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors"
+                    >
+                        Groups &amp; extended stay
+                    </Link>
                     {comingSoon ? (
                         <p className="text-sand-500 text-sm">
                             Opening soon. Details to follow.

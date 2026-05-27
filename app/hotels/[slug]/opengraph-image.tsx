@@ -35,7 +35,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     const p = getPropertyBySlug(slug);
 
     const heading = p?.shortName ?? "I44 Hotels";
-    const tierLabel = p ? p.tier[0].toUpperCase() + p.tier.slice(1) : "";
+    const tierLabel = p ? (p.tier === "economy" ? "Economy" : "Upper-Midscale") : "";
     const sub = p
         ? p.nearFLW
             ? "Minutes from Fort Leonard Wood"

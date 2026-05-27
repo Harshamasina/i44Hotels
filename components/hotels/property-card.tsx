@@ -25,7 +25,14 @@ export function PropertyCard({ property: p }: { property: Property }) {
     const comingSoon = p.status === "coming-soon";
     const cover = coverPhoto(p);
     return (
-        <Card interactive className="flex flex-col overflow-hidden">
+        <Card interactive className="relative flex flex-col overflow-hidden">
+            {/* Stretched link: the whole card navigates to the hotel; the inner
+                links/buttons sit above it (relative z-20) and keep their own actions. */}
+            <Link
+                href={`/hotels/${p.slug}`}
+                aria-label={`View ${p.name}`}
+                className="absolute inset-0 z-10 cursor-pointer rounded-2xl"
+            />
             <div className="from-navy-700 to-navy-900 relative h-44 overflow-hidden bg-linear-to-br">
                 {cover && (
                     <Image
@@ -87,7 +94,7 @@ export function PropertyCard({ property: p }: { property: Property }) {
                             rel="noopener noreferrer"
                             aria-label={`Get directions to ${p.shortName}`}
                             title="Get directions"
-                            className="text-gold-600 hover:bg-gold-100 hover:text-gold-700 -mt-0.5 inline-flex shrink-0 rounded-full p-1.5 transition-colors"
+                            className="text-gold-600 hover:bg-gold-100 hover:text-gold-700 relative z-20 -mt-0.5 inline-flex shrink-0 cursor-pointer rounded-full p-1.5 transition-colors"
                         >
                             <Navigation className="size-4" aria-hidden />
                         </a>
@@ -105,18 +112,25 @@ export function PropertyCard({ property: p }: { property: Property }) {
                     </div>
                 )}
 
-                {p.bestFor.length > 0 && (
-                    <ul className="mt-3 flex flex-wrap gap-1.5">
-                        {p.bestFor.slice(0, 3).map((key) => (
-                            <li
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                    {p.bestFor
+                        .filter((key) => key !== "groups")
+                        .slice(0, 3)
+                        .map((key) => (
+                            <span
                                 key={key}
                                 className="text-navy-700 bg-sand-100 inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium"
                             >
                                 {BEST_FOR[key].label}
-                            </li>
+                            </span>
                         ))}
-                    </ul>
-                )}
+                    <Link
+                        href="/groups"
+                        className="text-navy-700 bg-sand-100 hover:bg-sand-200 relative z-20 inline-flex cursor-pointer items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors"
+                    >
+                        Groups &amp; extended stay
+                    </Link>
+                </div>
 
                 <div className="mt-auto pt-5">
                     {comingSoon ? (
@@ -127,16 +141,16 @@ export function PropertyCard({ property: p }: { property: Property }) {
                         <div className="flex flex-wrap gap-2">
                             <Link
                                 href={`/hotels/${p.slug}`}
-                                className={buttonVariants({
+                                className={`${buttonVariants({
                                     variant: "outline",
                                     size: "sm",
-                                })}
+                                })} relative z-20`}
                             >
                                 View hotel
                             </Link>
                             <Link
                                 href={`/hotels/${p.slug}#book`}
-                                className={buttonVariants({ size: "sm" })}
+                                className={`${buttonVariants({ size: "sm" })} relative z-20`}
                             >
                                 Book
                             </Link>

@@ -24,17 +24,15 @@ export function Badge({
 
 const TIER_STYLES: Record<Tier, string> = {
     economy: "bg-sand-200 text-navy-800",
-    midscale: "bg-navy-100 text-navy-800",
-    upscale: "bg-gold-100 text-gold-700",
+    "upper-midscale": "bg-navy-100 text-navy-800",
 };
 
 const TIER_LABELS: Record<Tier, string> = {
     economy: "Economy",
-    midscale: "Midscale",
-    upscale: "Upscale",
+    "upper-midscale": "Upper-Midscale",
 };
 
-/** Price-tier tag (economy / midscale / upscale). */
+/** Price-tier tag (economy / upper-midscale). */
 export function TierBadge({ tier }: { tier: Tier }) {
     return <Badge className={TIER_STYLES[tier]}>{TIER_LABELS[tier]}</Badge>;
 }

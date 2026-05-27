@@ -351,7 +351,7 @@ export function PhotoGallery({
                                             setMode("single");
                                             setZoom(false);
                                         }}
-                                        className="group relative block w-full overflow-hidden rounded-xl"
+                                        className="group relative block w-full cursor-pointer overflow-hidden rounded-xl"
                                     >
                                         <Image
                                             src={photo.src}
@@ -370,7 +370,7 @@ export function PhotoGallery({
                         active && (
                             <div className="flex flex-1 flex-col overflow-hidden">
                                 <div
-                                    className="relative flex flex-1 items-center justify-center px-4"
+                                    className="relative flex min-h-0 flex-1 items-center justify-center px-4"
                                     onTouchStart={onTouchStart}
                                     onTouchEnd={onTouchEnd}
                                 >
@@ -387,7 +387,7 @@ export function PhotoGallery({
                                         type="button"
                                         onClick={() => setZoom((z) => !z)}
                                         aria-label={zoom ? "Zoom out" : "Zoom in"}
-                                        className="flex max-h-[74vh] max-w-5xl cursor-zoom-in items-center justify-center"
+                                        className="flex h-full max-w-5xl cursor-zoom-in items-center justify-center"
                                     >
                                         {/* Plain img so the border radius clips the actual
                                             (object-contain) photo, not its letterbox box.
@@ -396,7 +396,7 @@ export function PhotoGallery({
                                             src={active.src}
                                             alt={active.alt}
                                             className={cn(
-                                                "max-h-[74vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-transform duration-300",
+                                                "max-h-full w-auto max-w-full rounded-2xl object-contain shadow-2xl transition-transform duration-300",
                                                 zoom && "scale-150 cursor-zoom-out",
                                             )}
                                         />
@@ -429,7 +429,7 @@ export function PhotoGallery({
                                             }}
                                             aria-label={`Go to photo ${i + 1}`}
                                             className={cn(
-                                                "relative h-14 w-20 shrink-0 overflow-hidden rounded-md ring-2 transition",
+                                                "relative h-14 w-20 shrink-0 cursor-pointer overflow-hidden rounded-md ring-2 transition",
                                                 i === index
                                                     ? "ring-gold-500"
                                                     : "opacity-60 ring-transparent hover:opacity-100",

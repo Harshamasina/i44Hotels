@@ -104,8 +104,7 @@ export default function StyleguidePage() {
             <Block title="Badges">
                 <div className="flex flex-wrap items-center gap-3">
                     <TierBadge tier="economy" />
-                    <TierBadge tier="midscale" />
-                    <TierBadge tier="upscale" />
+                    <TierBadge tier="upper-midscale" />
                     <ComingSoonBadge />
                     <Badge className="bg-success-bg text-success">Available</Badge>
                 </div>

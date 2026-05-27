@@ -12,8 +12,7 @@ import { cn } from "@/lib/utils";
 
 const TIER_CHIPS: { value: Tier; label: string }[] = [
     { value: "economy", label: "Economy" },
-    { value: "midscale", label: "Midscale" },
-    { value: "upscale", label: "Upscale" },
+    { value: "upper-midscale", label: "Upper-Midscale" },
 ];
 
 const BEST_FOR_CHIPS: BestForKey[] = [

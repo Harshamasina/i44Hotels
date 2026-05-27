@@ -39,7 +39,6 @@ import { ReviewsSection, RatingInline } from "@/components/hotels/reviews";
 import { PhotoGallery } from "@/components/hotels/photo-gallery";
 import { PropertyMap } from "@/components/hotels/property-map";
 import { BookingWidget } from "@/components/hotels/booking-widget";
-import { OtaLinks } from "@/components/hotels/ota-links";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
 import { Container } from "@/components/ui/container";
@@ -58,7 +57,7 @@ export function generateStaticParams() {
  * as our own structured data is against Google's rich-results guidelines.
  */
 function hotelJsonLd(p: Property): Record<string, unknown> {
-    const priceRange = p.tier === "economy" ? "$" : p.tier === "midscale" ? "$$" : "$$$";
+    const priceRange = p.tier === "economy" ? "$" : "$$";
 
     const data: Record<string, unknown> = {
         "@context": "https://schema.org",
@@ -249,11 +248,22 @@ export default async function HotelDetailPage({
                 placed in the right column on desktop. */}
             <Container className="grid gap-10 py-12 lg:grid-cols-3">
                 <div className="order-2 space-y-12 lg:order-none lg:col-span-2 lg:col-start-1 lg:row-start-1">
-                    {overview && (
+                    {(overview || p.award) && (
                         <section>
-                            <p className="text-sand-700 max-w-2xl text-lg leading-relaxed">
-                                {overview}
-                            </p>
+                            {overview && (
+                                <p className="text-sand-700 max-w-2xl text-lg leading-relaxed">
+                                    {overview}
+                                </p>
+                            )}
+                            {p.award && (
+                                <Image
+                                    src={p.award.src}
+                                    alt={p.award.alt}
+                                    width={120}
+                                    height={120}
+                                    className="mt-5"
+                                />
+                            )}
                         </section>
                     )}
 
@@ -457,8 +467,6 @@ export default async function HotelDetailPage({
                     )}
 
                     {p.policies && <Policies policies={p.policies} />}
-
-                    <OtaLinks property={p} />
                 </div>
 
                 {/* Sticky booking / facts sidebar */}
