@@ -341,7 +341,7 @@ export function PhotoGallery({
                     {/* Body */}
                     {mode === "grid" ? (
                         <div className="flex-1 overflow-y-auto px-4 pb-10 sm:px-6">
-                            <div className="columns-2 gap-3 sm:columns-3 lg:columns-4 [&>button]:mb-3">
+                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
                                 {list.map((photo, i) => (
                                     <button
                                         key={photo.src}
@@ -351,16 +351,15 @@ export function PhotoGallery({
                                             setMode("single");
                                             setZoom(false);
                                         }}
-                                        className="group relative block w-full cursor-pointer overflow-hidden rounded-xl"
+                                        className="group relative aspect-3/2 w-full cursor-pointer overflow-hidden rounded-xl"
                                     >
                                         <Image
                                             src={photo.src}
                                             alt={photo.alt}
-                                            width={600}
-                                            height={400}
+                                            fill
                                             loading="lazy"
                                             sizes="(min-width:1024px) 25vw, (min-width:640px) 33vw, 50vw"
-                                            className="h-auto w-full transition-transform duration-300 group-hover:scale-105"
+                                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                                         />
                                     </button>
                                 ))}
