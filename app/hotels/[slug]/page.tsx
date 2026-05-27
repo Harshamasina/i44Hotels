@@ -251,9 +251,16 @@ export default async function HotelDetailPage({
                     {(overview || p.award) && (
                         <section>
                             {overview && (
-                                <p className="text-sand-700 max-w-2xl text-lg leading-relaxed">
-                                    {overview}
-                                </p>
+                                <div className="max-w-2xl space-y-4">
+                                    {overview.split("\n\n").map((para, i) => (
+                                        <p
+                                            key={i}
+                                            className="text-sand-700 text-lg leading-relaxed"
+                                        >
+                                            {para}
+                                        </p>
+                                    ))}
+                                </div>
                             )}
                             {p.award && (
                                 <Image

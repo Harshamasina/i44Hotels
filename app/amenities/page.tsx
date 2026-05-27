@@ -139,9 +139,18 @@ export default function AmenitiesPage() {
                                     {p.amenityDetails ? (
                                         <>
                                             {p.amenityDetails.intro && (
-                                                <p className="text-sand-700 mt-4 max-w-3xl">
-                                                    {p.amenityDetails.intro}
-                                                </p>
+                                                <div className="mt-4 max-w-3xl space-y-3">
+                                                    {p.amenityDetails.intro
+                                                        .split("\n\n")
+                                                        .map((para, i) => (
+                                                            <p
+                                                                key={i}
+                                                                className="text-sand-700"
+                                                            >
+                                                                {para}
+                                                            </p>
+                                                        ))}
+                                                </div>
                                             )}
                                             <div className="mt-6 space-y-6">
                                                 {p.amenityDetails.groups.map((group) => (

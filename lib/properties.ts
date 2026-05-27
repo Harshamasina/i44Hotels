@@ -455,6 +455,10 @@ const propertyData: Property[] = [
         distanceToFLWMiles: 2,
         bestFor: ["military", "business", "leisure", "groups", "pets"],
         googlePlaceId: "ChIJ-9CGWnzd2ocRG1gF3cGW4EI",
+        award: {
+            src: "/gold_award.png",
+            alt: "Gold Award winner",
+        },
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl: "https://www.choicehotels.com/missouri/saint-robert/comfort-inn-hotels/mo107",
         address: {
@@ -474,7 +478,7 @@ const propertyData: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "A Choice Hotels Gold Award winner, our Comfort Inn pairs recognized service with ample amenities to make your stay in St. Robert convenient, whether you are here for work or fun. Start each morning with a free hot breakfast, then unwind in the evening in the indoor heated pool. We also offer an on-site fitness center.",
+            intro: "Welcome to the Comfort Inn® St. Robert/Fort Leonard Wood, conveniently located just off Interstate 44 (Exit 161) along historic Route 66. Whether you are stopping for a relaxing night during a road trip, attending Basic Training, AIT, or OSUT graduations at Fort Leonard Wood, visiting family and friends, or traveling for business or contractor work, our hotel offers the comfort and convenience you need.\n\nAt our St. Robert hotel, guests can enjoy modern accommodations designed for a restful stay. Start your morning with our complimentary hot breakfast and unwind after a long day in our indoor heated pool. Our friendly, award-winning staff is dedicated to making every guest feel welcome and at home.\n\nSt. Robert and the surrounding area offer a variety of unique attractions and outdoor activities. Visit the famous Uranus Fudge Factory for sweet treats and unforgettable humor, or explore the iconic Frog Rock in nearby Waynesville. Nature lovers can enjoy the scenic beauty of Roubidoux Spring, take a cave diving tour, stroll the downtown walking trail, or spend the day floating or fishing on the Roubidoux River. Guests can also explore local antique shops and area attractions including the Trail of Tears Memorial, Waynesville Walking Trail, Fort Leonard Wood John B. Mahaffey Museum Complex, Waynesville-St. Robert Regional Airport, and General Leonard Wood Army Community Hospital (GLWACH).\n\nWhether you are visiting Fort Leonard Wood, exploring the charm of historic Missouri, or simply looking for a comfortable overnight stop along I-44, the Comfort Inn St. Robert/Fort Leonard Wood offers exceptional service, modern amenities, and a welcoming atmosphere for every traveler.",
             groups: [
                 {
                     title: "Hotel amenities",
@@ -864,7 +868,7 @@ const propertyData: Property[] = [
             "petFriendly",
         ],
         amenityDetails: {
-            intro: "Enjoy a long list of amenities at our smoke-free hotel: free hot breakfast, 24-hour coffee and tea plus fresh lemon water in the lobby, an indoor heated pool, a fitness center, guest laundry, an on-site marketplace, and free parking (with room for buses). Business travelers can use our copy and fax service and our meeting room.",
+            intro: "Stay just off Interstate 44 near Meramec State Park at the Comfort Inn Sullivan, where guests enjoy convenient access to local attractions and essential amenities. Our hotel offers free WiFi, free hot breakfast, free parking, an indoor heated pool, and a fitness center.\n\nEach guest room includes premium bedding, a microwave and refrigerator, coffee maker, flat-screen TV, and a full private bathroom.\n\nExplore nearby favorites such as Meramec Caverns, Fisher Cave, Onondaga Cave Park, Caveman Zipline, and local parks including City Lake Park and Sunny Jim Bottomley City Park. Golfers can also visit Sullivan Golf Club.",
             groups: [
                 {
                     title: "Hotel amenities",
