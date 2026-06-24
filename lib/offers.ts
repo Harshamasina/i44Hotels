@@ -115,13 +115,13 @@ export const offers: Offer[] = [
     },
     {
         slug: "aarp-rate",
-        title: "AARP & 50+ rate",
-        audience: "AARP members and travelers 50+",
+        title: "AARP & senior rate",
+        audience: "AARP members 50+ and seniors 65+",
         appliesTo: "All I44 Hotels",
         summary:
-            "AARP members and guests 50 and older can look for the AARP or senior rate on our brands' booking pages.",
+            "AARP members can look for the AARP rate on our brands' booking pages, and guests 65 and older can look for the senior rate.",
         body: [
-            "Our hotel brands offer an AARP member rate and, on many rooms, a senior rate for travelers 50 and older.",
+            "Our hotel brands offer an AARP member rate for AARP members, who can join from age 50. On many rooms, a separate senior rate is available to guests 65 and older.",
             "Choose the AARP or senior rate when you book on the brand's booking page, and bring your membership or a valid ID to check-in.",
         ],
         Icon: BadgePercent,

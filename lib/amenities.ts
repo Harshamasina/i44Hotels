@@ -1,6 +1,7 @@
 import {
     Croissant,
     Waves,
+    Bath,
     Dumbbell,
     Coffee,
     PawPrint,
@@ -17,6 +18,7 @@ import {
 export type AmenityKey =
     | "breakfast"
     | "pool"
+    | "hotTub"
     | "fitness"
     | "coffee"
     | "petFriendly"
@@ -31,6 +33,7 @@ export type AmenityKey =
 export const AMENITIES: Record<AmenityKey, { label: string; Icon: LucideIcon }> = {
     breakfast: { label: "Free hot breakfast", Icon: Croissant },
     pool: { label: "Indoor heated pool", Icon: Waves },
+    hotTub: { label: "Indoor hot tub", Icon: Bath },
     fitness: { label: "Fitness center", Icon: Dumbbell },
     coffee: { label: "24-hour coffee/tea in lobby", Icon: Coffee },
     petFriendly: { label: "Pet-friendly rooms", Icon: PawPrint },

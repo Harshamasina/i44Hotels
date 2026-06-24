@@ -49,6 +49,12 @@ export type RoomType = {
     description?: string;
     features?: string[];
     tags?: RoomTag[];
+    /**
+     * Explicit room-card photo (a `src` from this property's `photos`). Overrides
+     * the alt-text image matcher when a specific shot is wanted, e.g. a carpet-free
+     * version of a king or pet-friendly room.
+     */
+    imageSrc?: string;
 };
 
 export type Address = {
@@ -185,7 +191,7 @@ const propertyData: Property[] = [
                         "Bus parking",
                         "Business center",
                         "Copy / Fax service*",
-                        "Cribs available",
+                        "Cribs (subject to availability)",
                         "Early check-in available*",
                         "Express check-in",
                         "Express check-out",
@@ -405,13 +411,13 @@ const propertyData: Property[] = [
                 distance: "Adjacent",
                 url: "https://www.rubytuesday.com/",
             },
-            { name: "Mama Mia's Authentic Greek", category: "dining", distance: "Adjacent" },
+            { name: "Colton's Steak House & Grill", category: "dining", distance: "Adjacent" },
             { name: "El Jimador", category: "dining", distance: "0 mi" },
             {
-                name: "Culver's",
+                name: "McDonald's",
                 category: "dining",
                 distance: "0 mi",
-                url: "https://www.culvers.com/",
+                url: "https://www.mcdonalds.com/",
             },
             {
                 name: "Fort Leonard Wood",
@@ -488,7 +494,6 @@ const propertyData: Property[] = [
                         "Free hot breakfast",
                         "Indoor heated pool",
                         "Fitness center",
-                        "Exercise room",
                         "Coffee / tea maker in rooms",
                         "Fresh lemon water in lobby",
                         "Cribs (subject to availability)",
@@ -861,6 +866,7 @@ const propertyData: Property[] = [
         amenities: [
             "breakfast",
             "pool",
+            "hotTub",
             "fitness",
             "coffee",
             "wifi",
@@ -877,10 +883,11 @@ const propertyData: Property[] = [
                         "24-hour coffee/tea in lobby",
                         "Free hot breakfast",
                         "Indoor heated pool",
+                        "Indoor hot tub",
                         "Fitness center",
                         "Coffee / tea maker in rooms",
                         "Fresh lemon water in lobby",
-                        "Cribs available",
+                        "Cribs (subject to availability)",
                         "Pet friendly*",
                         "Early check-in available*",
                         "Express check-in",
@@ -945,6 +952,7 @@ const propertyData: Property[] = [
                     "A smoke-free, pet-friendly king room with free WiFi, a microwave, and a mini-fridge.",
                 features: ["Free WiFi", "Microwave", "Mini-fridge"],
                 tags: ["pet-friendly"],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210HNKWP-2.avif",
             },
             {
                 name: "Two Queen Room, Pet-Friendly",
@@ -953,6 +961,7 @@ const propertyData: Property[] = [
                     "Two queen beds, pet-friendly and smoke-free, with free WiFi, a microwave, and a mini-fridge.",
                 features: ["Free WiFi", "Microwave", "Mini-fridge"],
                 tags: ["pet-friendly"],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210NQQP-1.avif",
             },
             {
                 name: "Accessible King Room, Mobility & Hearing",
@@ -1036,12 +1045,6 @@ const propertyData: Property[] = [
                 url: "https://www.subway.com/",
             },
             {
-                name: "Steak 'n Shake",
-                category: "dining",
-                distance: "0 mi",
-                url: "https://www.steaknshake.com/",
-            },
-            {
                 name: "McDonald's",
                 category: "dining",
                 distance: "0 mi",
@@ -1060,12 +1063,6 @@ const propertyData: Property[] = [
                 url: "https://mostateparks.com/park/meramec-state-park",
             },
             { name: "Meramec River", category: "attraction", distance: "5 mi" },
-            {
-                name: "Jesse James Wax Museum",
-                category: "attraction",
-                distance: "5 mi",
-                url: "https://www.americascave.com/jessejames/",
-            },
             { name: "Onyx Mountain Caverns", category: "attraction", distance: "6 mi" },
             {
                 name: "Meramec Caverns",

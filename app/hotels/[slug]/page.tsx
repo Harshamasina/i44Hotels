@@ -142,6 +142,10 @@ export async function generateMetadata({
 function roomImage(p: Property, room: RoomType): PropertyPhoto | undefined {
     const rooms = p.photos.filter((ph) => ph.category === "room");
     if (rooms.length === 0) return undefined;
+    if (room.imageSrc) {
+        const explicit = rooms.find((ph) => ph.src === room.imageSrc);
+        if (explicit) return explicit;
+    }
     const name = room.name.toLowerCase();
     const wantSuite = name.includes("suite");
     const wantQueen = name.includes("queen");

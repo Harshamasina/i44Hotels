@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AMENITIES, type AmenityKey } from "@/lib/amenities";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -37,6 +38,19 @@ export function AmenityHighlights() {
                         );
                     })}
                 </div>
+                <p className="text-sand-500 mt-8 max-w-3xl text-sm">
+                    Amenities vary by hotel and may differ by room type, season, and
+                    availability. The features above are offered at one or more of our
+                    hotels, not at every location, and are not guaranteed for any
+                    individual stay. For exactly what a hotel offers, see{" "}
+                    <Link
+                        href="/hotels"
+                        className="text-gold-700 hover:text-gold-600 font-semibold underline underline-offset-2"
+                    >
+                        each hotel&apos;s page
+                    </Link>{" "}
+                    or call the front desk before you book.
+                </p>
             </Container>
         </section>
     );
