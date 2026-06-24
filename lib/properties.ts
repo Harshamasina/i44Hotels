@@ -931,6 +931,7 @@ const propertyData: Property[] = [
                     "Hair dryer",
                     "Iron & ironing board",
                 ],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210NK-1.avif",
             },
             {
                 name: "Two Queen Room, Upper Floor",
@@ -944,6 +945,7 @@ const propertyData: Property[] = [
                     "Hair dryer",
                     "Iron & ironing board",
                 ],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210NQQ-1.avif",
             },
             {
                 name: "King Room, Pet-Friendly",
@@ -976,6 +978,7 @@ const propertyData: Property[] = [
                     "Connecting rooms available",
                 ],
                 tags: ["accessible"],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210HNKW-1.avif",
             },
             {
                 name: "Accessible King Room, Pet-Friendly",
@@ -989,6 +992,7 @@ const propertyData: Property[] = [
                     "Connecting rooms available",
                 ],
                 tags: ["accessible", "pet-friendly"],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210HNKP-1.avif",
             },
             {
                 name: "Accessible King Room, Roll-In Shower",
@@ -1002,6 +1006,7 @@ const propertyData: Property[] = [
                     "Visual alarm, doorbell & telephone alerts",
                 ],
                 tags: ["accessible", "pet-friendly"],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210HNKWP-1.avif",
             },
             {
                 name: "King Suite",
@@ -1015,6 +1020,7 @@ const propertyData: Property[] = [
                     "2-person whirlpool",
                 ],
                 tags: ["suite"],
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210SNK-1.avif",
             },
         ],
         policies: {
