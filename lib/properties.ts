@@ -1039,28 +1039,28 @@ const propertyData: Property[] = [
         // employers fall back to a Maps search via nearbyHref().
         nearbyAttractions: [
             {
-                name: "Taco Bell",
+                name: "Cracker Barrel",
                 category: "dining",
-                distance: "0 mi",
-                url: "https://www.tacobell.com/",
+                distance: "0.3 mi",
+                url: "https://www.crackerbarrel.com/",
             },
             {
-                name: "Subway",
+                name: "Silo Restaurant",
                 category: "dining",
-                distance: "0 mi",
-                url: "https://www.subway.com/",
+                distance: "0.5 mi",
+                url: "https://silorestaurant.com/",
             },
             {
-                name: "McDonald's",
+                name: "Rich's Famous Burgers",
                 category: "dining",
-                distance: "0 mi",
-                url: "https://www.mcdonalds.com/",
+                distance: "0.6 mi",
+                url: "https://sullivan.richsfamousburgers.com/",
             },
             {
-                name: "Jack in the Box",
+                name: "Applebee's",
                 category: "dining",
-                distance: "0 mi",
-                url: "https://www.jackinthebox.com/",
+                distance: "1.4 mi",
+                url: "https://restaurants.applebees.com/en-us/mo/sullivan/314-south-service-road-east-81033",
             },
             {
                 name: "Meramec State Park",
