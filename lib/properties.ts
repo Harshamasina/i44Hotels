@@ -170,12 +170,12 @@ const propertyData: Property[] = [
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl:
             "https://www.wyndhamhotels.com/days-inn/st-robert-missouri/days-inn-st-robert-waynesville-ft-leonard-wood/overview",
-        // TODO: verify exact coords (geocoder could not resolve 14125 Hwy Z).
+        // Coords verified against the Google Place (Places API), Jun 2026.
         address: {
             street: "14125 State Hwy Z",
             zip: "65584",
-            lat: 37.829,
-            lng: -92.142,
+            lat: 37.8334068,
+            lng: -92.0990664,
         },
         // TODO: confirm amenities from the Wyndham property page.
         amenities: ["coffee", "wifi", "parking", "petFriendly"],
@@ -467,11 +467,12 @@ const propertyData: Property[] = [
         },
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl: "https://www.choicehotels.com/missouri/saint-robert/comfort-inn-hotels/mo107",
+        // Coords verified against the Google Place (Places API), Jun 2026.
         address: {
             street: "103 Comfort Inn Drive",
             zip: "65584",
-            lat: 37.823965,
-            lng: -92.148186,
+            lat: 37.8247308,
+            lng: -92.1481814,
         },
         // TODO: confirm amenities from the Choice property page.
         amenities: [
@@ -856,11 +857,12 @@ const propertyData: Property[] = [
         googlePlaceId: "ChIJ0UrBfMxj2YcRJRTbIWvINhw",
         // TODO (Phase 11): swap for the flag's deep booking link; brand page for now.
         bookingUrl: "https://www.choicehotels.com/missouri/sullivan/comfort-inn-hotels/mo210",
+        // Coords verified against the Google Place (Places API), Jun 2026.
         address: {
             street: "736 South Service Road West",
             zip: "63080",
-            lat: 38.2096659,
-            lng: -91.1725207,
+            lat: 38.2096871,
+            lng: -91.1725737,
         },
         // TODO: confirm amenities from the Choice property page.
         amenities: [
@@ -1565,8 +1567,17 @@ export function formatAddress(p: Property): string | undefined {
     return `${p.address.street}, ${p.city}, ${p.state} ${p.address.zip}`;
 }
 
-/** Google Maps directions link to the property's precise coordinates. */
+/**
+ * Google Maps directions link. Prefers the property's Google Place ID, which
+ * points directions at the exact business listing (independent of coordinate
+ * precision), with the street address as the required destination text. Falls
+ * back to raw coordinates for properties without a Place ID (e.g. coming-soon).
+ */
 export function directionsHref(p: Property): string | undefined {
+    if (p.googlePlaceId) {
+        const dest = formatAddress(p) ?? `${p.city}, ${p.state}`;
+        return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}&destination_place_id=${p.googlePlaceId}`;
+    }
     if (!p.address) return undefined;
     const { lat, lng } = p.address;
     return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
