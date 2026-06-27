@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage, LegalSection } from "@/components/site/legal-page";
+import { pageMetadata } from "@/lib/seo";
 
 // TODO(owner): have counsel review before launch. Reflects how the site actually
 // works: informational marketing site; reservations complete on the brands' own
 // booking engines; Google reviews via the Places API; governed by Missouri law.
 const LAST_UPDATED = "May 24, 2026";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Terms of Use",
     description:
         "The terms for using i44hotels.com, including how reservations are completed on each hotel's official brand website (Wyndham, Choice, or Hyatt).",
-    alternates: { canonical: "/terms" },
-};
+    path: "/terms",
+});
 
 const linkClass =
     "text-gold-700 hover:text-gold-600 underline underline-offset-2 font-medium";

@@ -40,7 +40,7 @@ import { PhotoGallery } from "@/components/hotels/photo-gallery";
 import { PropertyMap } from "@/components/hotels/property-map";
 import { BookingWidget } from "@/components/hotels/booking-widget";
 import { JsonLd } from "@/components/seo/json-ld";
-import { SITE_URL, breadcrumbJsonLd } from "@/lib/seo";
+import { SITE_URL, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/container";
 import { TierBadge, ComingSoonBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -115,22 +115,11 @@ export async function generateMetadata({
     const { slug } = await params;
     const p = getPropertyBySlug(slug);
     if (!p) return { title: "Hotel not found" };
-    return {
+    return pageMetadata({
         title: p.shortName,
         description: metaDescription(p),
-        alternates: { canonical: `/hotels/${p.slug}` },
-        openGraph: {
-            type: "website",
-            url: `/hotels/${p.slug}`,
-            title: p.shortName,
-            description: metaDescription(p),
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: p.shortName,
-            description: metaDescription(p),
-        },
-    };
+        path: `/hotels/${p.slug}`,
+    });
 }
 
 /**

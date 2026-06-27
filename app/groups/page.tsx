@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -20,13 +19,14 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Group Room Blocks & Extended Stays",
     description:
         "One team to coordinate room blocks across I44 Hotels along Interstate 44. Fort Leonard Wood graduation families, sports teams, work crews, family gatherings, and extended stays. Request a group block today.",
-    alternates: { canonical: "/groups" },
-};
+    path: "/groups",
+});
 
 const AUDIENCES: { Icon: LucideIcon; title: string; blurb: string }[] = [
     {

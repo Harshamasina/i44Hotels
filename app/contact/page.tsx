@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { MapPin, Phone, Clock } from "lucide-react";
 import {
     getAllProperties,
@@ -13,13 +12,14 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { RouteDivider } from "@/components/ui/route-divider";
 import { ComingSoonBadge } from "@/components/ui/badge";
 import { InquiryForm } from "@/components/site/inquiry-form";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Contact Us",
     description:
         "Get in touch with I44 Hotels. Send a general question, request a group room block, ask about extended stays, or plan a Fort Leonard Wood graduation trip. Hotel addresses and phone numbers along Interstate 44.",
-    alternates: { canonical: "/contact" },
-};
+    path: "/contact",
+});
 
 export default async function ContactPage({
     searchParams,
@@ -41,6 +41,7 @@ export default async function ContactPage({
             <section className="bg-sand-100">
                 <Container className="py-16 sm:py-20">
                     <SectionHeading
+                        as="h1"
                         eyebrow="Contact"
                         title="We are glad to help"
                         subtitle="One message reaches our team. Ask a question, request a group room block, plan an extended stay, or tell us about your Fort Leonard Wood trip, and we will get back to you."

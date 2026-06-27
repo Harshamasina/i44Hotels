@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -43,13 +42,15 @@ import { cn } from "@/lib/utils";
 import { FlwAreaMap } from "@/components/military/flw-area-map";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { getFeaturedOffer } from "@/lib/offers";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, faqPageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Hotels Near Fort Leonard Wood (St. Robert & Waynesville, MO)",
     description:
         "Comfortable hotels minutes from the Fort Leonard Wood gates in St. Robert, MO. Built for graduation families: distance to base, group room blocks, and easy direct booking. Stay close, feel welcome.",
-    alternates: { canonical: "/military-travel" },
-};
+    path: "/military-travel",
+});
 
 // Outbound official-resource link styling (always opens in a new tab).
 const officialLink =
@@ -86,23 +87,16 @@ export default function MilitaryTravelPage() {
     const areaHotels = getFLWAreaProperties();
     const sullivan = getOperatingProperties().find((p) => !p.nearFLW);
 
-    const faqJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: FAQS.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-    };
-
     const gateDirections = `https://www.google.com/maps/dir/?api=1&destination=${FLW_MAIN_GATE.lat},${FLW_MAIN_GATE.lng}`;
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            <JsonLd data={faqPageJsonLd(FAQS)} />
+            <JsonLd
+                data={breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Military Travel", path: "/military-travel" },
+                ])}
             />
 
             <Hero />

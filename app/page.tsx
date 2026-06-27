@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/json-ld";
-import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo";
+import {
+    organizationJsonLd,
+    webSiteJsonLd,
+    hotelsItemListJsonLd,
+} from "@/lib/seo";
+import { getAllProperties } from "@/lib/properties";
 import { Hero } from "@/components/home/hero";
 import { TrustStrip } from "@/components/home/trust-strip";
 import { OurHotels } from "@/components/home/our-hotels";
@@ -22,6 +27,7 @@ export default function HomePage() {
         <>
             <JsonLd data={organizationJsonLd()} />
             <JsonLd data={webSiteJsonLd()} />
+            <JsonLd data={hotelsItemListJsonLd(getAllProperties())} />
             <Hero />
             <TrustStrip />
             <OurHotels />

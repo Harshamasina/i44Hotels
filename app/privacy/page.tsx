@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage, LegalSection } from "@/components/site/legal-page";
+import { pageMetadata } from "@/lib/seo";
 
 // TODO(owner): have counsel review before launch. Tailored to this site's actual
 // data use: contact forms emailed via Resend, Google reviews via the Places API,
 // Cloudflare Turnstile spam protection. No analytics, advertising, or tracking.
 const LAST_UPDATED = "May 24, 2026";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Privacy Policy",
     description:
         "How I44 Hotels handles the information you send through our contact forms, plus the Google reviews shown on our hotel pages. We do not use analytics, advertising, or tracking cookies.",
-    alternates: { canonical: "/privacy" },
-};
+    path: "/privacy",
+});
 
 const linkClass =
     "text-gold-700 hover:text-gold-600 underline underline-offset-2 font-medium";

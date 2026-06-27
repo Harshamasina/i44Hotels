@@ -22,7 +22,12 @@ export function LegalPage({
         <>
             <section className="bg-sand-100">
                 <Container className="py-14 sm:py-20">
-                    <SectionHeading eyebrow="Legal" title={title} subtitle={subtitle} />
+                    <SectionHeading
+                        as="h1"
+                        eyebrow="Legal"
+                        title={title}
+                        subtitle={subtitle}
+                    />
                     <p className="text-sand-600 mt-5 text-sm">
                         Last updated: {lastUpdated}
                     </p>

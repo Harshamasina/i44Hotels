@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { getOperatingProperties, type Property } from "@/lib/properties";
 import { Container } from "@/components/ui/container";
@@ -6,13 +5,15 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { RouteDivider } from "@/components/ui/route-divider";
 import { FaqAccordion, type Faq } from "@/components/ui/faq-accordion";
 import { buttonVariants } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
+import { faqPageJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Fort Leonard Wood Hotels FAQ",
     description:
         "Answers about hotels near Fort Leonard Wood: where to stay for basic training graduation and Family Day, distance to the main gate, base access passes, military and government rates, pet-friendly and extended-stay options, airports, and booking tips for St. Robert, Waynesville, and the I-44 corridor.",
-    alternates: { canonical: "/faq" },
-};
+    path: "/faq",
+});
 
 // Authoritative outbound resources (open in a new tab, marked external).
 const FLW_VISITOR_ACCESS = "https://home.army.mil/wood/my-fort/visitors-access";
@@ -235,26 +236,15 @@ export default function FaqPage() {
         ...FAQ_SECTIONS.flatMap((s) => s.items),
         ...propertyGroups.flatMap((g) => g.items),
     ];
-    const faqJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: allFaqs.map((f) => ({
-            "@type": "Question",
-            name: f.q,
-            acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-    };
 
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-            />
+            <JsonLd data={faqPageJsonLd(allFaqs)} />
 
             <section className="bg-sand-100">
                 <Container className="py-16 sm:py-20">
                     <SectionHeading
+                        as="h1"
                         eyebrow="FAQ"
                         title="Fort Leonard Wood hotel questions, answered"
                         subtitle="Everything families, military travelers, and road-trippers ask about staying near Fort Leonard Wood and along Interstate 44. Still not sure? Reach out and we will help."

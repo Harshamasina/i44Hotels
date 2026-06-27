@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -9,13 +8,14 @@ import { RouteDivider } from "@/components/ui/route-divider";
 import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Offers & Rates",
     description:
         "Ways to save across I44 Hotels: military and government rates, AAA and AARP rates, and Wyndham Rewards, Choice Privileges, and World of Hyatt loyalty programs. Book direct for the best rate near Fort Leonard Wood and along Interstate 44.",
-    alternates: { canonical: "/offers" },
-};
+    path: "/offers",
+});
 
 export default function OffersPage() {
     const featured = getFeaturedOffer();
@@ -26,6 +26,7 @@ export default function OffersPage() {
             <section className="bg-sand-100">
                 <Container className="py-16 sm:py-20">
                     <SectionHeading
+                        as="h1"
                         eyebrow="Offers & Rates"
                         title="Ways to save with I44 Hotels"
                         subtitle="We book through each hotel's brand, so the best rates live on the brands' booking pages. Here is how to find the rate you qualify for, then book direct with no middleman markup."

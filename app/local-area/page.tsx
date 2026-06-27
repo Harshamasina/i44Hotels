@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
     GraduationCap,
@@ -20,13 +19,15 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { RouteDivider } from "@/components/ui/route-divider";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Local Area: Fort Leonard Wood, St. Robert & the I-44 Corridor",
     description:
         "What to do around our hotels: Fort Leonard Wood and St. Robert / Waynesville, historic Route 66, rivers and state parks, the caves near Sullivan, plus airports and directions along Interstate 44 in Missouri.",
-    alternates: { canonical: "/local-area" },
-};
+    path: "/local-area",
+});
 
 type Spot = { Icon: LucideIcon; title: string; blurb: string };
 
@@ -206,9 +207,16 @@ export default function LocalAreaPage() {
 
     return (
         <>
+            <JsonLd
+                data={breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Local Area", path: "/local-area" },
+                ])}
+            />
             <section className="bg-sand-100">
                 <Container className="py-16 sm:py-20">
                     <SectionHeading
+                        as="h1"
                         eyebrow="Local Area"
                         title="Your guide to the I-44 corridor"
                         subtitle="From the gates of Fort Leonard Wood to the caves and Route 66 towns along Interstate 44, here is what is around our hotels and how to get here."

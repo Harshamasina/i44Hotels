@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -15,13 +14,15 @@ import { PropertyCard } from "@/components/hotels/property-card";
 import { FilterBar } from "@/components/hotels/filter-bar";
 import { AmenityMatrix } from "@/components/hotels/amenity-matrix";
 import { HotelsMap } from "@/components/home/hotels-map";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, hotelsItemListJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Our Hotels Along I-44",
     description:
         "Browse I44 Hotels along Interstate 44 in Missouri, including three in St. Robert minutes from the Fort Leonard Wood gates. Filter by tier, location, and who each hotel is best for, then book direct.",
-    alternates: { canonical: "/hotels" },
-};
+    path: "/hotels",
+});
 
 export default async function HotelsPage({
     searchParams,
@@ -36,6 +37,13 @@ export default async function HotelsPage({
 
     return (
         <div className="overflow-x-clip">
+            <JsonLd
+                data={breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Hotels", path: "/hotels" },
+                ])}
+            />
+            <JsonLd data={hotelsItemListJsonLd(all)} />
             <section className="bg-navy-900 relative isolate overflow-hidden">
                 <Image
                     src="/brand/flags/hyatt_select.webp"

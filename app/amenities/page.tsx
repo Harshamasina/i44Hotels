@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { AMENITIES } from "@/lib/amenities";
@@ -8,13 +7,14 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { RouteDivider } from "@/components/ui/route-divider";
 import { TierBadge, FlagBadge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
     title: "Hotel Amenities",
     description:
         "Free hot breakfast, indoor pools, fitness centers, free Wi-Fi and parking, pet-friendly rooms, and more across I44 Hotels along Interstate 44 and near Fort Leonard Wood. See what each hotel offers.",
-    alternates: { canonical: "/amenities" },
-};
+    path: "/amenities",
+});
 
 export default function AmenitiesPage() {
     const properties = getOperatingProperties();
@@ -24,6 +24,7 @@ export default function AmenitiesPage() {
             <section className="bg-sand-100">
                 <Container className="py-16 sm:py-20">
                     <SectionHeading
+                        as="h1"
                         eyebrow="Amenities"
                         title="Comfortable by design, at every stop"
                         subtitle="Each I44 hotel flies a different franchise flag, so the exact amenities vary by property. Here is what to expect across our hotels, and what each one offers."
