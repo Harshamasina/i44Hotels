@@ -24,6 +24,8 @@ import { CardRating } from "@/components/hotels/card-rating";
 export function PropertyCard({ property: p }: { property: Property }) {
     const comingSoon = p.status === "coming-soon";
     const cover = coverPhoto(p);
+    const petFriendly = p.amenities.includes("petFriendly");
+    const PetIcon = BEST_FOR.pets.Icon;
     return (
         <Card interactive className="relative flex flex-col overflow-hidden">
             {/* Stretched link: the whole card navigates to the hotel; the inner
@@ -113,9 +115,15 @@ export function PropertyCard({ property: p }: { property: Property }) {
                 )}
 
                 <div className="mt-3 flex flex-wrap gap-1.5">
+                    {petFriendly && (
+                        <span className="text-navy-700 bg-sand-100 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium">
+                            <PetIcon className="text-gold-600 size-3.5" aria-hidden />
+                            {BEST_FOR.pets.label}
+                        </span>
+                    )}
                     {p.bestFor
-                        .filter((key) => key !== "groups")
-                        .slice(0, 3)
+                        .filter((key) => key !== "groups" && key !== "pets")
+                        .slice(0, 2)
                         .map((key) => (
                             <span
                                 key={key}
