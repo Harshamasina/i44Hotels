@@ -4,12 +4,13 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "npm run reviews:fetch && next build",
         "start": "next start",
         "lint": "eslint",
         "format": "prettier --write .",
-        "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-        "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+        "reviews:fetch": "tsx scripts/fetch-reviews.ts",
+        "preview": "npm run reviews:fetch && opennextjs-cloudflare build && opennextjs-cloudflare preview",
+        "deploy": "npm run reviews:fetch && opennextjs-cloudflare build && opennextjs-cloudflare deploy",
         "cf-typegen": "wrangler types"
     },
     "dependencies": {
@@ -34,6 +35,7 @@
         "prettier": "^3.8.3",
         "prettier-plugin-tailwindcss": "^0.8.0",
         "tailwindcss": "^4",
+        "tsx": "^4.20.6",
         "typescript": "^5",
         "wrangler": "^4.94.0"
     }

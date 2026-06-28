@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 
 /**
  * Compact "[star] 4.3 (512)" Google rating for hotel cards. Async server component
- * that fetches its own rating, so any card can drop it in without threading props.
- * The fetch is the same 24h-cached call the detail pages and homepage carousel use,
- * so this adds no API cost. Renders nothing when there's no rating yet (coming-soon
- * hotels, or if Google returns nothing) so cards stay clean.
+ * that reads its own rating from the build-time reviews snapshot, so any card can
+ * drop it in without threading props and it adds no per-request API cost. Renders
+ * nothing when there's no rating yet (coming-soon hotels, or a place missing from the
+ * snapshot) so cards stay clean.
  */
 export async function CardRating({
     placeId,
