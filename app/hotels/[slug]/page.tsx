@@ -16,6 +16,7 @@ import {
     PawPrint,
     Accessibility,
     Sparkles,
+    Rotate3d,
     type LucideIcon,
 } from "lucide-react";
 import {
@@ -38,6 +39,10 @@ import { getGoogleReviews } from "@/lib/reviews";
 import { ReviewsSection, RatingInline } from "@/components/hotels/reviews";
 import { PhotoGallery } from "@/components/hotels/photo-gallery";
 import { PropertyMap } from "@/components/hotels/property-map";
+import {
+    RoomTourButton,
+    VirtualTourViewer,
+} from "@/components/hotels/virtual-tour";
 import { BookingWidget } from "@/components/hotels/booking-widget";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SITE_URL, breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -192,6 +197,9 @@ export default async function HotelDetailPage({
     const distance = formatFLWDistance(p);
     const directions = directionsHref(p);
     const overview = p.amenityDetails?.intro;
+    const tourIds = new Set(
+        (p.virtualTours ?? []).map((t) => t.id).filter(Boolean),
+    );
 
     return (
         <>
@@ -209,6 +217,17 @@ export default async function HotelDetailPage({
 
             <Container className="pt-4">
                 <PhotoGallery photos={p.photos} hotelName={p.shortName} />
+                {p.virtualTours && p.virtualTours.length > 0 && (
+                    <div className="mt-3 flex justify-end">
+                        <a
+                            href="#virtual-tours"
+                            className="text-gold-700 hover:text-gold-600 inline-flex items-center gap-1.5 text-sm font-semibold"
+                        >
+                            <Rotate3d className="size-4" aria-hidden />
+                            Explore the hotel in 360
+                        </a>
+                    </div>
+                )}
             </Container>
 
             {/* Title block */}
@@ -337,6 +356,12 @@ export default async function HotelDetailPage({
                                                 />
                                                 {room.name}
                                             </h3>
+                                            {room.tourId && tourIds.has(room.tourId) && (
+                                                <RoomTourButton
+                                                    tourId={room.tourId}
+                                                    roomName={room.name}
+                                                />
+                                            )}
                                         </div>
                                         <div className="mt-2 flex flex-wrap items-center gap-2">
                                             {room.sleeps && (
@@ -393,6 +418,30 @@ export default async function HotelDetailPage({
                             <p className="text-sand-500 mt-4 text-sm">
                                 Room types and rates are confirmed when you book direct.
                             </p>
+                        </section>
+                    )}
+
+                    {p.virtualTours && p.virtualTours.length > 0 && (
+                        <section
+                            id="virtual-tours"
+                            aria-labelledby="tour-heading"
+                            className="scroll-mt-24"
+                        >
+                            <h2
+                                id="tour-heading"
+                                className="text-navy-800 font-serif text-2xl"
+                            >
+                                Explore in 360
+                            </h2>
+                            <p className="text-sand-700 mt-2 max-w-2xl">
+                                Take a look around before you arrive.
+                            </p>
+                            <div className="mt-5">
+                                <VirtualTourViewer
+                                    tours={p.virtualTours}
+                                    hotelName={p.shortName}
+                                />
+                            </div>
                         </section>
                     )}
 

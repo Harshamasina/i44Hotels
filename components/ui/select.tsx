@@ -20,6 +20,9 @@ export function Select({
     placeholder = "Select an option",
     invalid = false,
     describedBy,
+    className,
+    triggerClassName,
+    menuClassName,
 }: {
     name: string;
     id?: string;
@@ -29,6 +32,9 @@ export function Select({
     placeholder?: string;
     invalid?: boolean;
     describedBy?: string;
+    className?: string;
+    triggerClassName?: string;
+    menuClassName?: string;
 }) {
     const [open, setOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -105,7 +111,7 @@ export function Select({
     }
 
     return (
-        <div ref={rootRef} className="relative">
+        <div ref={rootRef} className={cn("relative", className)}>
             <input type="hidden" name={name} value={value} />
             <button
                 ref={triggerRef}
@@ -127,6 +133,7 @@ export function Select({
                         : open
                           ? "border-gold-400"
                           : "border-sand-300",
+                    triggerClassName,
                 )}
             >
                 <span className={selected ? "text-navy-800" : "text-sand-500"}>
@@ -145,7 +152,10 @@ export function Select({
                 <ul
                     id={listId}
                     role="listbox"
-                    className="border-sand-200 animate-dropdown absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-xl border bg-white p-1.5 shadow-lg"
+                    className={cn(
+                        "border-sand-200 animate-dropdown absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-xl border bg-white p-1.5 shadow-lg",
+                        menuClassName,
+                    )}
                 >
                     {options.map((opt, i) => {
                         const isSelected = opt.value === value;

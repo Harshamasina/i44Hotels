@@ -40,6 +40,20 @@ export type PropertyPhoto = {
     alt: string;
 };
 
+/**
+ * A 360 Street View / photosphere walkthrough of the property. `embedUrl` must be
+ * the iframe src from Google Maps "Share > Embed a map" (https://www.google.com/
+ * maps/embed?pb=...); plain share links (maps.app.goo.gl) refuse to load in an
+ * iframe and will not work.
+ */
+export type VirtualTour = {
+    /** What the view shows, e.g. "Lobby". Falls back to "View N" when omitted. */
+    label?: string;
+    /** Stable slug for deep links from room cards (#tour-<id>). */
+    id?: string;
+    embedUrl: string;
+};
+
 /** Badges shown on a room card. */
 export type RoomTag = "pet-friendly" | "accessible" | "suite";
 
@@ -55,6 +69,11 @@ export type RoomType = {
      * version of a king or pet-friendly room.
      */
     imageSrc?: string;
+    /**
+     * Matching `VirtualTour.id` from the property's virtualTours. Renders a
+     * "360" jump link on the room card. Rooms of the same type share one tour.
+     */
+    tourId?: string;
 };
 
 export type Address = {
@@ -142,6 +161,8 @@ export type Property = {
     award?: { src: string; alt: string };
     roomTypes: RoomType[];
     photos: PropertyPhoto[];
+    /** Google Street View / photosphere 360 embeds shown on the detail page. */
+    virtualTours?: VirtualTour[];
     policies?: Policies;
     nearbyAttractions?: NearbyPlace[];
 };
@@ -934,6 +955,7 @@ const propertyData: Property[] = [
                     "Iron & ironing board",
                 ],
                 imageSrc: "/properties/comfort-inn-sullivan/room/MO210NK-1.avif",
+                tourId: "king-upper-floor",
             },
             {
                 name: "Two Queen Room, Upper Floor",
@@ -948,6 +970,7 @@ const propertyData: Property[] = [
                     "Iron & ironing board",
                 ],
                 imageSrc: "/properties/comfort-inn-sullivan/room/MO210NQQ-1.avif",
+                tourId: "two-queen-room",
             },
             {
                 name: "King Room, Pet-Friendly",
@@ -956,7 +979,7 @@ const propertyData: Property[] = [
                     "A smoke-free, pet-friendly king room with free WiFi, a microwave, and a mini-fridge.",
                 features: ["Free WiFi", "Microwave", "Mini-fridge"],
                 tags: ["pet-friendly"],
-                imageSrc: "/properties/comfort-inn-sullivan/room/MO210HNKWP-2.avif",
+                imageSrc: "/properties/comfort-inn-sullivan/room/MO210NKP-1.avif",
             },
             {
                 name: "Two Queen Room, Pet-Friendly",
@@ -1009,6 +1032,7 @@ const propertyData: Property[] = [
                 ],
                 tags: ["accessible", "pet-friendly"],
                 imageSrc: "/properties/comfort-inn-sullivan/room/MO210HNKWP-1.avif",
+                tourId: "accessible-king-roll-in",
             },
             {
                 name: "King Suite",
@@ -1023,6 +1047,7 @@ const propertyData: Property[] = [
                 ],
                 tags: ["suite"],
                 imageSrc: "/properties/comfort-inn-sullivan/room/MO210SNK-1.avif",
+                tourId: "king-suite-bedroom",
             },
         ],
         policies: {
@@ -1354,6 +1379,120 @@ const propertyData: Property[] = [
                 category: "meeting",
                 src: "/properties/comfort-inn-sullivan/meeting/MO210meeting2.avif",
                 alt: "Meeting room at Comfort Inn Sullivan",
+            },
+        ],
+        // Owner-provided Google 360 embeds, Jul 2026, ordered as a walk-through:
+        // arrival, entrance, lobby, amenities, rooms. Labels verified against
+        // rendered panoramas. Some older-decor views kept per owner's send.
+        virtualTours: [
+            {
+                label: "Arrival",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409852530!6m8!1m7!1st7YM94uel-UhFqBQoX4ncQ!2m2!1d38.20983052197126!2d-91.17230910052822!3f235.37401!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Front entrance",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409980440!6m8!1m7!1sCAoSHENJQUJJaERhUXZxbWpsa1hLSjRuaVR6YTBNaVQ.!2m2!1d38.20980044339483!2d-91.172620932413!3f180!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Entrance canopy",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409930210!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREM4YS1XaEFF!2m2!1d38.20970805051264!2d-91.17251036957258!3f20!4f20!5f0.7820865974627469",
+            },
+            {
+                label: "Entrance canopy",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409997970!6m8!1m7!1sCAoSHENJQUJJaEJRdHdfS1FsVDVSVE8zQWhqWG4waE4.!2m2!1d38.20976118271184!2d-91.17259294364771!3f260!4f20!5f0.7820865974627469",
+            },
+            {
+                label: "Lobby & marketplace",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409714912!6m8!1m7!1sCAoSHENJQUJJaEF5VHlrZWNRcmNMYmpLd3FtSUMwSDg.!2m2!1d38.20972299072618!2d-91.17256275683289!3f180!4f10!5f0.7820865974627469",
+            },
+            {
+                label: "Marketplace & front desk",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409886939!6m8!1m7!1sCAoSHENJQUJJaEFVYmxfRkFUakpFZFpuYnJvQzRwZmQ.!2m2!1d38.20969532405809!2d-91.17260781725625!3f320!4f20!5f0.7820865974627469",
+            },
+            {
+                label: "Entrance & front desk",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409748070!6m8!1m7!1sCAoSHENJQUJJaEM1YnRkSDZHUVQ0alNLZG15bGVMVkI.!2m2!1d38.20969175217577!2d-91.17252165297694!3f0!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Front desk & lobby",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409948999!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREM4YS1XUmc.!2m2!1d38.20967448604181!2d-91.17253308292213!3f180!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Lobby seating",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409917420!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREM4YS1DZkE.!2m2!1d38.2096844896495!2d-91.17257982849976!3f300!4f10!5f0.7820865974627469",
+            },
+            {
+                label: "Lobby lounge",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409876200!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREM4YV9VX2dF!2m2!1d38.20964146993932!2d-91.17255733493157!3f300!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Breakfast area",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409767061!6m8!1m7!1sCAoSHENJQUJJaEJVNGRoMXRzc1hGQUx5MDRvbC01N1k.!2m2!1d38.20968054780603!2d-91.17257132929993!3f100!4f20!5f0.7820865974627469",
+            },
+            {
+                label: "Indoor pool",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409788361!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREM4YS1sNGdF!2m2!1d38.20963677641227!2d-91.17251916183545!3f40!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Fitness center",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409811550!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREM4YS1XTEE.!2m2!1d38.20963413759976!2d-91.17249300485886!3f40!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Meeting room",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409735111!6m8!1m7!1sCAoSHENJQUJJaEFYM3lLd1hLY2RjODFURm1EZmR3OEM.!2m2!1d38.20964081990705!2d-91.17254172865198!3f20!4f20!5f0.7820865974627469",
+            },
+            {
+                label: "Guest hallway",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409962759!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREM4YS05TGc.!2m2!1d38.20963620473043!2d-91.1724875829666!3f180!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Two queen room",
+                id: "two-queen-room",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409832430!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREM4YS1XR2c.!2m2!1d38.20965780951694!2d-91.1725014307739!3f60!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "Accessible king room with hard-surface floor",
+                id: "accessible-king-roll-in",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784410025862!6m8!1m7!1sCAoSHENJQUJJaERIRkc1bHZSSzBtX1lXLWlLYkZGcVc.!2m2!1d38.20970170732785!2d-91.17256517470803!3f120!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "King room, upper floor",
+                id: "king-upper-floor",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784410048294!6m8!1m7!1sCAoSHENJQUJJaEI1V0ktTlA5cmpYTDVrN1lVZHN3ME8.!2m2!1d38.20965305029806!2d-91.17255081399713!3f20!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "King suite, bedroom and kitchenette",
+                id: "king-suite-bedroom",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784410063781!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJREM4YV9kVVE.!2m2!1d38.20963856628904!2d-91.1724687528868!3f100!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "King room, older decor",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784410240085!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREM4YV9CendF!2m2!1d38.20964754784655!2d-91.17251300725125!3f280!4f0!5f0.7820865974627469",
+            },
+            {
+                label: "King suite, sitting area",
+                embedUrl:
+                    "https://www.google.com/maps/embed?pb=!4v1784409901270!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREM4YS1GdUFF!2m2!1d38.20966642235659!2d-91.17250179711806!3f140!4f0!5f0.7820865974627469",
             },
         ],
     },
